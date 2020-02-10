@@ -6,7 +6,7 @@
     <div class="w-full">
       <div class="px-12">
         <h1 class="text-2xl font-semibold">
-          {{ _('Welcome to Frappe Books') }}
+          {{ _('Welcome to Small BM') }}
         </h1>
         <p class="text-gray-600 text-base" v-if="!showFiles">
           {{
@@ -140,7 +140,7 @@ export default {
   },
   mounted() {
     this.files = config.get('files', []);
-    this.showFiles = this.files.length > 0;
+    this.showFiles = false;//this.files.length > 0;
   },
   methods: {
     async newDatabase() {

@@ -6,6 +6,7 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib';
+
 import theme from '@/theme';
 import { getMainWindowSize } from './screenSize';
 

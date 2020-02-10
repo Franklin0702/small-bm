@@ -79,6 +79,20 @@ const config = {
       ]
     },
     {
+      title: _('Inventory'),
+      icon: getIcon('reports'),
+      action() {
+        router.push('/inventory/items')
+      },
+      items: [
+        {
+          label: _('Items'),
+          route: '/inventory/items',
+          doctype: 'Item'
+        }
+      ]
+    },
+    {
       title: _('Reports'),
       icon: getIcon('reports'),
       action() {
