@@ -1,5 +1,5 @@
 const theme = require('@/theme');
-const fontManager = require('font-manager'); 
+const fontManager = require('font-manager');
 const uniq = require('lodash/uniq');
 let fonts = [];
 

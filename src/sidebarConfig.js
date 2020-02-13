@@ -11,127 +11,117 @@ const config = {
   },
   groups: [
     {
-      title: _('Get Started'),
+      title: _('Iniciar'),
       route: '/get-started',
       icon: getIcon('general', '24', '5')
     },
     {
-      title: _('Dashboard'),
+      title: _('Resumen'),
       route: '/',
       icon: getIcon('dashboard')
     },
     {
-      title: _('Sales'),
+      title: _('Ventas'),
       icon: getIcon('sales'),
       action() {
         router.push('/list/SalesInvoice');
       },
       items: [
         {
-          label: _('Invoices'),
+          label: _('Facturas'),
           route: '/list/SalesInvoice',
           doctype: 'SalesInvoice'
         },
         {
-          label: _('Customers'),
+          label: _('Clientes'),
           route: '/list/Customer',
           doctype: 'Customer'
         },
         {
-          label: _('Items'),
+          label: _('Productos'),
           route: '/list/Item',
           doctype: 'Item'
         },
         {
-          label: _('Journal Entry'),
+          label: _('Entrada de diario'),
           route: '/list/JournalEntry',
           doctype: 'JournalEntry'
         }
       ]
     },
     {
-      title: _('Purchases'),
+      title: _('Compras'),
       icon: getIcon('purchase'),
       action() {
         router.push('/list/PurchaseInvoice');
       },
       items: [
         {
-          label: _('Bills'),
+          label: _('Facturas'),
           route: '/list/PurchaseInvoice',
           doctype: 'PurchaseInvoice'
         },
         {
-          label: _('Suppliers'),
+          label: _('Proveedores'),
           route: '/list/Supplier',
           doctype: 'Supplier'
         },
         {
-          label: _('Items'),
+          label: _('Productos'),
           route: '/list/Item',
           doctype: 'Item'
         },
         {
-          label: _('Journal Entry'),
+          label: _('Entrada de diario'),
           route: '/list/JournalEntry',
           doctype: 'JournalEntry'
         }
       ]
     },
     {
-      title: _('Inventory'),
-      icon: getIcon('reports'),
-      action() {
-        router.push('/inventory/items')
-      },
-      items: [
-        {
-          label: _('Items'),
-          route: '/inventory/items',
-          doctype: 'Item'
-        }
-      ]
-    },
-    {
-      title: _('Reports'),
+      title: _('Reportes'),
       icon: getIcon('reports'),
       action() {
         router.push('/report/general-ledger');
       },
       items: [
         {
-          label: _('General Ledger'),
+          label: _('Inventario'),
+          route: '/report/stock'
+        },
+        {
+          label: _('Libro Mayor'),
           route: '/report/general-ledger'
         },
         {
-          label: _('Profit And Loss'),
+          label: _('Ganancias y Pérdidas'),
           route: '/report/profit-and-loss'
         },
         {
-          label: _('Balance Sheet'),
+          label: _('Hoja de balance'),
           route: '/report/balance-sheet'
         },
         {
-          label: _('Trial Balance'),
+          label: _('Balanza de comprobación'),
           route: '/report/trial-balance'
         }
       ]
     },
     {
-      title: _('Setup'),
+      title: _('Configurar'),
       icon: getIcon('settings'),
       items: [
         {
-          label: _('Chart of Accounts'),
+          label: _('Gráficos de cuentas'),
           route: '/chart-of-accounts'
         },
         {
-          label: _('Taxes'),
+          label: _('Impuestos'),
           route: '/list/Tax',
           doctype: 'Tax'
         },
         {
-          label: _('Settings'),
+          label: _('General'),
           action() {
             openSettings();
           }

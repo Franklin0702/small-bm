@@ -9,6 +9,7 @@ const BankReconciliation = require('./BankReconciliation/BankReconciliation');
 const GSTR1 = require('./GoodsAndServiceTax/GSTR1');
 const GSTR2 = require('./GoodsAndServiceTax/GSTR2');
 const AccountsReceivablePayable = require('./AccountsReceivablePayable/AccountsReceivablePayable');
+const stock = require('./Stock/Stock');
 
 // called on server side
 function registerReportMethods() {
@@ -48,6 +49,10 @@ function registerReportMethods() {
     {
       method: 'gstr-2',
       class: GSTR2
+    },
+    {
+      method: 'stock',
+      class: stock
     }
   ];
 

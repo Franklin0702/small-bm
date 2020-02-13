@@ -86,7 +86,7 @@ export default {
         this.activeScreen = 'Settings';
       } else {
         this.activeScreen = 'Desk';
-       // this.checkForUpdates();
+        // this.checkForUpdates();
       }
       if (resetRoute) {
         this.$router.replace('/');

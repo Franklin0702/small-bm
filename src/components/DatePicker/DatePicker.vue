@@ -101,6 +101,7 @@ export default {
     },
     datesAsWeeks() {
       let datesAsWeeks = [];
+      console.log('this.dates:\n', this.dates);
       let dates = this.dates.slice();
       while (dates.length) {
         let week = dates.splice(0, 7);
@@ -207,7 +208,8 @@ export default {
 
     getDate(...args) {
       let d = new Date(...args);
-      return new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+      return d;
+      //return new Date(d.getTime() - d.getTimezoneOffset() * 60000);
     }
   }
 };

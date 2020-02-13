@@ -140,7 +140,7 @@ export default {
   },
   mounted() {
     this.files = config.get('files', []);
-    this.showFiles = false;//this.files.length > 0;
+    this.showFiles = false; //this.files.length > 0;
   },
   methods: {
     async newDatabase() {
