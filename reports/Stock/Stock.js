@@ -33,7 +33,8 @@ class Stock {
         filters.periodicity = periodicityMap[periodicity];
       else filters.periodicity = 0;
 
-      toDate = fromDate + filters.periodicity == 0 ? filters.periodicity : toDate;
+      toDate =
+        fromDate + filters.periodicity == 0 ? filters.periodicity : toDate;
     }
 
     filters.submitted = 1;
