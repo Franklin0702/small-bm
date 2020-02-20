@@ -12,7 +12,7 @@ const viewConfig = {
         { label: 'Sales Invoice', value: 'SalesInvoice' },
         { label: 'Purchase Invoice', value: 'PurchaseInvoice' },
         { label: 'Payment', value: 'Payment' },
-        { label: 'Journal Entry', value: 'JournalEntry' }
+        { label: 'Entrada de Diario', value: 'JournalEntry' }
       ],
       size: 'small',
       label: 'Reference Type',

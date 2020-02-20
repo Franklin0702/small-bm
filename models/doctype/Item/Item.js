@@ -9,39 +9,39 @@ module.exports = {
   fields: [
     {
       fieldname: 'name',
-      label: 'Item Name',
+      label: 'Nombre del artículo',
       fieldtype: 'Data',
-      placeholder: 'Item Name',
+      placeholder: 'Nombre del artículo',
       required: 1
     },
     {
       fieldname: 'image',
-      label: 'Image',
+      label: 'Imagén',
       fieldtype: 'AttachImage'
     },
     {
       fieldname: 'description',
-      label: 'Description',
+      label: 'Descripción',
       fieldtype: 'Text'
     },
     {
       fieldname: 'unit',
-      label: 'Unit Type',
+      label: 'Unidad',
       fieldtype: 'Select',
       default: 'Unit',
-      options: ['Unit', 'Kg', 'Gram', 'Hour', 'Day']
+      options: ['Libras', '25-Libras', '50-Libras', '100-Libras', 'Unidad']
     },
     {
       fieldname: 'itemType',
-      label: 'Type',
+      label: 'Tipo',
       placeholder: 'Sales',
       fieldtype: 'Select',
-      default: 'Product',
-      options: ['Product', 'Service']
+      default: 'Producto',
+      options: ['Producto', 'Servicio']
     },
     {
       fieldname: 'incomeAccount',
-      label: 'Income',
+      label: 'Cuenta de Ingresos',
       fieldtype: 'Link',
       target: 'Account',
       placeholder: 'Sales',
@@ -55,20 +55,20 @@ module.exports = {
       },
       formulaDependsOn: ['itemType'],
       formula(doc) {
-        if (doc.itemType === 'Product') {
+        if (doc.itemType === 'Producto') {
           return 'Sales';
         }
-        if (doc.itemType === 'Service') {
+        if (doc.itemType === 'Servicio') {
           return 'Service';
         }
       }
     },
     {
       fieldname: 'expenseAccount',
-      label: 'Expense',
+      label: 'Cuenta de Gastos',
       fieldtype: 'Link',
       target: 'Account',
-      placeholder: 'Select Account',
+      placeholder: 'Seleccione un cuenta',
       required: 1,
       disableCreation: true,
       getFilters: () => {
@@ -84,29 +84,42 @@ module.exports = {
     },
     {
       fieldname: 'tax',
-      label: 'Tax',
+      label: 'Impuesto',
       fieldtype: 'Link',
       target: 'Tax',
       placeholder: 'GST'
     },
     {
       fieldname: 'rate',
-      label: 'Rate',
+      label: 'Precio',
       fieldtype: 'Currency',
       placeholder: '0.00',
       validate(value) {
         if (!value) {
           throw new frappe.errors.ValidationError(
-            'Rate must be greater than 0'
+            'Precio debe ser mayor que 0'
+          );
+        }
+      }
+    },
+    {
+      fieldname: 'min',
+      label: 'Mínimo',
+      fieldtype: 'Int',
+      placeholder: '0',
+      validate(value) {
+        if (value && value <= 0) {
+          throw new frappe.errors.ValidationError(
+            'Mínimo debe ser mayor que cero'
           );
         }
       }
     }
   ],
-  quickEditFields: ['rate', 'unit', 'itemType', 'tax', 'description'],
+  quickEditFields: ['rate', 'unit', 'itemType', 'tax', 'min', 'description'],
   actions: [
     {
-      label: _('New Invoice'),
+      label: _('Vender'),
       condition: doc => !doc.isNew(),
       action: async (doc, router) => {
         const invoice = await frappe.getNewDoc('SalesInvoice');
@@ -119,7 +132,7 @@ module.exports = {
       }
     },
     {
-      label: _('New Bill'),
+      label: _('Comprar'),
       condition: doc => !doc.isNew(),
       action: async (doc, router) => {
         const invoice = await frappe.getNewDoc('PurchaseInvoice');

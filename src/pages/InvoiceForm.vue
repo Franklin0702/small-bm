@@ -62,8 +62,8 @@
               {{
                 doc._notInserted
                   ? doc.doctype === 'SalesInvoice'
-                    ? _('New Invoice')
-                    : _('New Bill')
+                    ? _('Venta')
+                    : _('Compra')
                   : doc.name
               }}
             </h1>
@@ -79,23 +79,36 @@
                   @new-doc="party => doc.set(partyField.fieldname, party.name)"
                   :read-only="doc.submitted"
                 />
+
                 <FormControl
                   class="mt-2 text-base"
                   input-class="bg-gray-100 px-3 py-2 text-base"
                   :df="meta.getField('account')"
                   :value="doc.account"
-                  :placeholder="'Account'"
+                  :placeholder="'Cuenta Contable'"
                   @change="value => doc.set('account', value)"
                   :read-only="doc.submitted"
                 />
               </div>
               <div class="w-1/3">
                 <FormControl
-                  input-class="bg-gray-100 px-3 py-2 text-base text-right"
+                  class="text-base"
+                  input-class="bg-gray-100 px-2 text-base text-right"
                   :df="meta.getField('date')"
                   :value="doc.date"
-                  :placeholder="'Date'"
+                  :placeholder="'Fecha'"
                   @change="value => doc.set('date', value)"
+                  :read-only="doc.submitted"
+                />
+
+                <FormControl
+                  v-if="doc.doctype === 'SalesInvoice'"
+                  class="mt-2 text-base"
+                  input-class="bg-gray-100 px-3 py-2 text-base text-right"
+                  :df="meta.getField('voucherType')"
+                  :value="doc.voucherType"
+                  :placeholder="'Tipo de Comprobante'"
+                  @change="value => doc.set('voucherType', value)"
                   :read-only="doc.submitted"
                 />
               </div>
@@ -169,6 +182,7 @@ import BackLink from '@/components/BackLink';
 import { openSettings } from '@/utils';
 import {
   handleErrorWithDialog,
+  checkStockWithDialog,
   getActionsForDocument,
   showMessageDialog
 } from '@/utils';
@@ -249,19 +263,22 @@ export default {
     onSubmitClick() {
       let message =
         this.doctype === 'SalesInvoice'
-          ? this._('Are you sure you want to submit this invoice?')
-          : this._('Are you sure you want to submit this bill?');
+          ? this._('¿Seguro que desea registrar esta venta?')
+          : this._('¿Seguro que desea registrar esta compra?');
       showMessageDialog({
         message,
         buttons: [
           {
-            label: this._('Submit'),
+            label: this._('Registrar'),
             action: () => {
-              this.doc.submit().catch(this.handleError);
+              this.doc
+                .submit()
+                .then(this.CheckStock)
+                .catch(this.handleError);
             }
           },
           {
-            label: this._('Cancel'),
+            label: this._('Cancelar'),
             action() {}
           }
         ]
@@ -269,6 +286,9 @@ export default {
     },
     handleError(e) {
       handleErrorWithDialog(e, this.doc);
+    },
+    checkStock(e) {
+      checkStockWithDialog(e, this.doc);
     },
     openInvoiceSettings() {
       openSettings('Invoice');

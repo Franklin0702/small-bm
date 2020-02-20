@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-gray-600 text-sm mb-1" v-if="showLabel">
+    <div class="text-gray-600 text-sm mb-1" v-if="true">
       {{ df.label }}
     </div>
     <Row :ratio="ratio" class="border-b px-2 text-gray-600 w-full">
@@ -43,7 +43,7 @@
           'px-3 py-4': size !== 'small'
         }"
       >
-        {{ _('Add Row') }}
+        {{ _('Agregar') }}
       </div>
       <div v-for="i in ratio.slice(3).length" :key="i"></div>
       <div
@@ -123,6 +123,7 @@ export default {
     },
     tableFields() {
       let meta = frappe.getMeta(this.df.childtype);
+      console.log(meta.tableFields.map(fieldname => meta.getField(fieldname)));
       return meta.tableFields.map(fieldname => meta.getField(fieldname));
     }
   }

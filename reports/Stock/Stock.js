@@ -6,22 +6,6 @@ class Stock {
 
     let filters = {};
 
-    if (item) {
-      filters.item = item;
-    }
-
-    if (fromDate && toDate) {
-      filters.date = ['>=', fromDate, '<=', toDate];
-    } else if (fromDate) {
-      filters.date = ['>=', fromDate];
-    } else if (toDate) {
-      filters.date = ['<=', toDate];
-    } else {
-      toDate = new Date();
-      fromDate = toDate - 30;
-      filters.date = ['>=', fromDate, '<=', toDate];
-    }
-
     if (periodicity) {
       let periodicityMap = {
         Mensual: 30,
@@ -32,9 +16,31 @@ class Stock {
       if (periodicityMap[periodicity])
         filters.periodicity = periodicityMap[periodicity];
       else filters.periodicity = 0;
+    }
 
-      toDate =
-        fromDate + filters.periodicity == 0 ? filters.periodicity : toDate;
+    if (item) {
+      filters.item = item;
+    }
+
+    if (fromDate && toDate) {
+      filters.date = ['>=', fromDate, '<=', toDate];
+    } else if (fromDate) {
+      if (filters.periodicity != 0) {
+        toDate = fromDate + filters.periodicity;
+        filters.date = ['>=', fromDate, '<=', toDate];
+      }
+      filters.date = ['>=', fromDate];
+    } else if (toDate) {
+      if (filters.periodicity != 0) {
+        fromDate = toDate - filters.periodicity;
+        filters.date = ['>=', fromDate, '<=', toDate];
+      }
+      filters.date = ['<=', toDate];
+    } else {
+      let today = new Date();
+      fromDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      toDate = fromDate + 30;
+      filters.date = ['>=', fromDate, '<=', toDate];
     }
 
     filters.submitted = 1;
@@ -43,7 +49,8 @@ class Stock {
       doctype: 'SalesInvoice',
       fields: ['name', 'date', 'customer', 'account', 'netTotal', 'grandTotal'],
       filters: {
-        date: filters.date
+        date: filters.date,
+        submitted: filters.submitted
       },
       orderBy: 'date',
       order: 'desc'
@@ -65,7 +72,8 @@ class Stock {
       doctype: 'PurchaseInvoice',
       fields: ['name', 'date', 'supplier', 'account', 'netTotal', 'grandTotal'],
       filters: {
-        date: filters.date
+        date: filters.date,
+        submitted: filters.submitted
       },
       orderBy: 'date',
       order: 'desc'

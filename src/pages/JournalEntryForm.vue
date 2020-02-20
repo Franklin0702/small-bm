@@ -34,7 +34,7 @@
         <div>
           <div class="mt-8 px-6">
             <h1 class="text-2xl font-semibold">
-              {{ doc._notInserted ? _('New Journal Entry') : doc.name }}
+              {{ doc._notInserted ? _('Nueva Entrada de Diario') : doc.name }}
             </h1>
             <div class="flex justify-between mt-2">
               <div class="w-1/3">

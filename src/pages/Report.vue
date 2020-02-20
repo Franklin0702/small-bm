@@ -23,7 +23,8 @@
     </div>
     <div class="px-8 mt-4">
       <div>
-        <div ref="header" class="overflow-hidden">
+        <!-- <div ref="header" class="overflow-hidden" > -->
+        <div ref="header" class="">
           <Row gap="2rem" :grid-template-columns="gridTemplateColumns">
             <div
               class="text-base truncate py-4"

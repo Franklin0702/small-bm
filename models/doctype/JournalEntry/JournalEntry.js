@@ -2,7 +2,7 @@ const { ledgerLink } = require('../../../accounting/utils');
 const { DateTime } = require('luxon');
 
 module.exports = {
-  label: 'Journal Entry',
+  label: 'Entrada de diario',
   name: 'JournalEntry',
   doctype: 'DocType',
   isSubmittable: 1,
@@ -14,7 +14,7 @@ module.exports = {
       fieldtype: 'Select',
       placeholder: 'Entry Type',
       options: [
-        'Journal Entry',
+        'Entrada de Diario',
         'Bank Entry',
         'Cash Entry',
         'Credit Card Entry',

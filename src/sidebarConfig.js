@@ -82,7 +82,7 @@ const config = {
       title: _('Reportes'),
       icon: getIcon('reports'),
       action() {
-        router.push('/report/general-ledger');
+        router.push('/report/stock');
       },
       items: [
         {

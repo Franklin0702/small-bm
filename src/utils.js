@@ -25,16 +25,16 @@ export function createNewDatabase() {
           if (fs.existsSync(filePath)) {
             showMessageDialog({
               // prettier-ignore
-              message: _('A file exists with the same name and it will be overwritten. Are you sure you want to continue?'),
+              message: _('Un archivo existe con el mismo nombre, se va a sobreescribir. ¿Seguro que desea continuar?'),
               buttons: [
                 {
-                  label: _('Overwrite'),
+                  label: _('Sí, sobreescribir'),
                   action() {
                     fs.unlinkSync(filePath);
                     resolve(filePath);
                   }
                 },
-                { label: _('Cancel'), action() {} }
+                { label: _('Cancelar'), action() {} }
               ]
             });
           } else {
@@ -51,7 +51,7 @@ export function loadExistingDatabase() {
     remote.dialog.showOpenDialog(
       remote.getCurrentWindow(),
       {
-        title: _('Select file'),
+        title: _('Seleccione un archivo'),
         properties: ['openFile'],
         filters: [{ name: 'SQLite DB File', extensions: ['db'] }]
       },
@@ -201,6 +201,56 @@ export function handleErrorWithDialog(e, doc) {
   let errorMessage = getErrorMessage(e, doc);
   showMessageDialog({ message: errorMessage });
   throw e;
+}
+
+export function checkStockWithDialog(e, doc) {
+  const frappe = require('frappejs');
+
+  let sItems = {};
+
+  frappe.db
+    .getAll({
+      doctype: 'SalesInvoiceItem',
+      fields: ['quantity', 'item', 'parent'],
+      filters: {
+        parenttype: 'SalesInvoice',
+        parent: doc.name
+      },
+      orderBy: 'name'
+    })
+    .then(res => (sItems = res))
+    .catch(err => console.error(err));
+
+  console.log(sItems[0]); 
+  let pItems = {};
+  frappe.db
+    .getAll({
+      doctype: 'PurchaseInvoiceItem',
+      fields: ['quantity', 'item', 'parent'],
+      filters: {
+        parenttype: 'PurchaseInvoice',
+        parent: doc.name
+      },
+      orderBy: 'name'
+    })
+    .then(res => (pItems = res))
+    .catch(err => console.error(err));
+
+  let itemNames = pItems.map(p => p.item);
+
+  let Items = {};
+  frappe.db
+    .getAll({
+      doctype: 'Item',
+      fields: ['min'],
+      filters: {
+        name: ['in', itemNames]
+      }
+    })
+    .then(res => (Items = res))
+    .catch(err => console.error(err));
+
+  console.log('ITEMS: \n', Items);
 }
 
 export function makePDF(html, destination) {

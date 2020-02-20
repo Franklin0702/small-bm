@@ -122,6 +122,18 @@ module.exports = {
       fieldname: 'terms',
       label: 'Terms',
       fieldtype: 'Text'
+    },
+    {
+      fieldname: 'voucherType',
+      label: 'Tipo de Comprobante',
+      fieldtype: 'Select',
+      default: 'Consumidor Final',
+      options: [
+        'Consumidor Final',
+        'Crédito Fiscal',
+        'Gubernamental',
+        'Regimenes Especiales'
+      ]
     }
   ],
 
