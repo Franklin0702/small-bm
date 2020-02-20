@@ -221,7 +221,7 @@ export function checkStockWithDialog(e, doc) {
     .then(res => (sItems = res))
     .catch(err => console.error(err));
 
-  console.log(sItems[0]); 
+  console.log(sItems[0]);
   let pItems = {};
   frappe.db
     .getAll({
