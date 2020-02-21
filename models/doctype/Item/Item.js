@@ -105,8 +105,8 @@ module.exports = {
     {
       fieldname: 'min',
       label: 'Mínimo',
-      fieldtype: 'Int',
-      placeholder: '0',
+      fieldtype: 'Float',
+      placeholder: '0.0',
       validate(value) {
         if (value && value <= 0) {
           throw new frappe.errors.ValidationError(
@@ -114,6 +114,42 @@ module.exports = {
           );
         }
       }
+    },
+    {
+      fieldname: 'stock',
+      label: 'Inventario',
+      fieldtype: 'Float',
+      formula: async (row) => {
+        if (row.stock === null) {
+          console.log("Calculating stock....");
+          const sItems = await frappe.db
+            .getAll({
+              doctype: 'SalesInvoiceItem',
+              fields: ['quantity', 'item', 'parent'],
+              filters: {
+                parent: row.name
+              },
+              orderBy: 'name'
+            });
+
+
+          const pItems = await frappe.db
+            .getAll({
+              doctype: 'PurchaseInvoiceItem',
+              fields: ['quantity', 'item', 'parent'],
+              filters: {
+                parent: row.name
+              },
+              orderBy: 'name'
+            });
+
+            let stock_temp = (pItems['quantity'] - sItems['quantity']);  
+            return stock_temp <= 0?  0 : stock_temp;  
+        }
+        console.log("STOCK", row.stock);
+        return row.stock; 
+      }
+
     }
   ],
   quickEditFields: ['rate', 'unit', 'itemType', 'tax', 'min', 'description'],

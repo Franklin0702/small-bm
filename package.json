@@ -22,7 +22,7 @@
     "electron-store": "^5.1.0",
     "font-manager": "https://github.com/q-lukasz/font-manager#issue-45--compile-error-mac-os-x--node-13-7",
     "frappe-charts": "^1.3.0",
-    "frappejs": "git+https://github.com/frappe/frappejs.git",
+    "frappejs": "git+https://github.com/Fatman452/frappejs.git",
     "knex": "^0.20.4",
     "lodash": "^4.17.15",
     "luxon": "^1.21.3",

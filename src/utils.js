@@ -203,54 +203,31 @@ export function handleErrorWithDialog(e, doc) {
   throw e;
 }
 
-export function checkStockWithDialog(e, doc) {
+export async function checkStockWithDialog(e, doc) {
   const frappe = require('frappejs');
 
-  let sItems = {};
+    if (doc.doctype !== 'SalesInvoice') {
+      return; 
+    }
 
-  frappe.db
-    .getAll({
-      doctype: 'SalesInvoiceItem',
-      fields: ['quantity', 'item', 'parent'],
-      filters: {
-        parenttype: 'SalesInvoice',
-        parent: doc.name
-      },
-      orderBy: 'name'
-    })
-    .then(res => (sItems = res))
-    .catch(err => console.error(err));
-
-  console.log(sItems[0]);
-  let pItems = {};
-  frappe.db
-    .getAll({
-      doctype: 'PurchaseInvoiceItem',
-      fields: ['quantity', 'item', 'parent'],
-      filters: {
-        parenttype: 'PurchaseInvoice',
-        parent: doc.name
-      },
-      orderBy: 'name'
-    })
-    .then(res => (pItems = res))
-    .catch(err => console.error(err));
-
-  let itemNames = pItems.map(p => p.item);
-
-  let Items = {};
-  frappe.db
-    .getAll({
-      doctype: 'Item',
-      fields: ['min'],
-      filters: {
-        name: ['in', itemNames]
+    let stockAlert = ""; 
+    let item = {}; 
+    for (let l_item of doc.items) {
+      item = await frappe.getDoc('Item', l_item.item); 
+      if (item.min > item.stock && item.stock > 0) {
+        stockAlert += `Le queda poco del producto: ${item.name} -> inventario: ${item.stock} min :${item.min}. \n`; 
       }
-    })
-    .then(res => (Items = res))
-    .catch(err => console.error(err));
+      else if (item.stock < 0) {
+        stockAlert += `${item.name} esta por debajo de cero, favor registre una compra (inventario: ${item.stock}). \n`; 
 
-  console.log('ITEMS: \n', Items);
+      }
+    }
+    
+
+    if (stockAlert != "" && doc.doctype === 'SalesInvoice')
+      //stockAlert = stockAlert + "Realice una compra con tiempo."; 
+      showMessageDialog({message: "ALERTA: Productos con poco Inventario!", description: stockAlert});
+    return;
 }
 
 export function makePDF(html, destination) {
