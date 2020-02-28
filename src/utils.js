@@ -111,14 +111,14 @@ export function showMessageDialog({ message, description, buttons = [] }) {
 export function deleteDocWithPrompt(doc) {
   return new Promise(resolve => {
     showMessageDialog({
-      message: _('Are you sure you want to delete {0} "{1}"?', [
+      message: _('¿Está seguro {0} "{1}"?', [
         doc.doctype,
         doc.name
       ]),
-      description: _('This action is permanent'),
+      description: _('Este es un cambio permanente.'),
       buttons: [
         {
-          label: _('Delete'),
+          label: _('Eliminar'),
           action: () => {
             doc
               .delete()
@@ -206,28 +206,30 @@ export function handleErrorWithDialog(e, doc) {
 export async function checkStockWithDialog(e, doc) {
   const frappe = require('frappejs');
 
-    if (doc.doctype !== 'SalesInvoice') {
-      return; 
-    }
-
-    let stockAlert = ""; 
-    let item = {}; 
-    for (let l_item of doc.items) {
-      item = await frappe.getDoc('Item', l_item.item); 
-      if (item.min > item.stock && item.stock > 0) {
-        stockAlert += `Le queda poco del producto: ${item.name} -> inventario: ${item.stock} min :${item.min}. \n`; 
-      }
-      else if (item.stock < 0) {
-        stockAlert += `${item.name} esta por debajo de cero, favor registre una compra (inventario: ${item.stock}). \n`; 
-
-      }
-    }
-    
-
-    if (stockAlert != "" && doc.doctype === 'SalesInvoice')
-      //stockAlert = stockAlert + "Realice una compra con tiempo."; 
-      showMessageDialog({message: "ALERTA: Productos con poco Inventario!", description: stockAlert});
+  if (doc.doctype !== 'SalesInvoice') {
     return;
+  }
+
+  let stockAlert = '';
+  let item = {};
+  console.log("doc.items", doc.items);
+  for (let l_item of doc.items) {
+    console.log(l_item);
+    item = await frappe.getDoc('Item', l_item.item);
+    if (item.min > item.stock && item.stock > 0) {
+      stockAlert += `Le queda poco del producto: ${item.name} \n\t Cantidad en inventario: ${item.stock} \n\t Cantidad mínima :${item.min}. \n`;
+    } else if (item.stock < 0) {
+      stockAlert += `El producto ${item.name} esta por debajo de cero, favor registre una compra (Cantidad en inventario: ${item.stock}). \n`;
+    }
+  }
+
+  if (stockAlert != '' && doc.doctype === 'SalesInvoice')
+    //stockAlert = stockAlert + "Realice una compra con tiempo.";
+    showMessageDialog({
+      message: 'ALERTA: Productos con poco Inventario!',
+      description: stockAlert
+    });
+  return;
 }
 
 export function makePDF(html, destination) {

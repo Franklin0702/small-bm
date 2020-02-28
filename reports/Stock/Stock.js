@@ -1,4 +1,5 @@
 const frappe = require('frappejs');
+//const Badge = require('@/components/Badge').default;
 
 class Stock {
   async run({ fromDate, toDate, item, periodicity }) {
@@ -93,7 +94,7 @@ class Stock {
 
     const items = await frappe.db.getAll({
       doctype: 'Item',
-      fields: ['name', 'unit']
+      fields: ['name', 'unit', 'min']
     });
 
     const taxes = await frappe.db.getAll({
@@ -172,11 +173,24 @@ class Stock {
           return acc;
         }, 0);
 
-      report.balance = report.buy + report.prevQuantity - report.sell;
+      let balance = report.buy + report.prevQuantity - report.sell;
+      let color = 'green';
+      if (item.min > balance){
+        color = 'red';
+      }
+      else if (item.min == balance) {
+        color = 'orange';
+      }
+
+      report.balance = {
+            template: `<span style='color:${color};'>${balance}</span>`,
+          }
+      
+      
+        
 
       reports.push(report);
     }
-    console.log(invoices);
     return { rows: reports };
   }
 }

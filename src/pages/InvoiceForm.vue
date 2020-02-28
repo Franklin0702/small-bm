@@ -273,7 +273,6 @@ export default {
             action: () => {
               this.doc
                 .submit()
-                .then((e) => checkStockWithDialog(e, this.doc).catch((e) => console.error("ERROR", e)))
                 .catch(this.handleError);
             }
           },

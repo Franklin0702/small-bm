@@ -215,6 +215,7 @@ export default {
     cellComponent(cellValue, column) {
       if (typeof cellValue === 'object') {
         // cellValue has a component definition
+        console.log('cell has definition', cellValue);
         return cellValue;
       }
       if (column.component) {

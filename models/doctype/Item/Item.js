@@ -119,37 +119,33 @@ module.exports = {
       fieldname: 'stock',
       label: 'Inventario',
       fieldtype: 'Float',
-      formula: async (row) => {
+      formula: async row => {
         if (row.stock === null) {
-          console.log("Calculating stock....");
-          const sItems = await frappe.db
-            .getAll({
-              doctype: 'SalesInvoiceItem',
-              fields: ['quantity', 'item', 'parent'],
-              filters: {
-                parent: row.name
-              },
-              orderBy: 'name'
-            });
+          console.log('Calculating stock....');
+          const sItems = await frappe.db.getAll({
+            doctype: 'SalesInvoiceItem',
+            fields: ['quantity', 'item', 'parent'],
+            filters: {
+              parent: row.name
+            },
+            orderBy: 'name'
+          });
 
+          const pItems = await frappe.db.getAll({
+            doctype: 'PurchaseInvoiceItem',
+            fields: ['quantity', 'item', 'parent'],
+            filters: {
+              parent: row.name
+            },
+            orderBy: 'name'
+          });
 
-          const pItems = await frappe.db
-            .getAll({
-              doctype: 'PurchaseInvoiceItem',
-              fields: ['quantity', 'item', 'parent'],
-              filters: {
-                parent: row.name
-              },
-              orderBy: 'name'
-            });
-
-            let stock_temp = (pItems['quantity'] - sItems['quantity']);  
-            return stock_temp <= 0?  0 : stock_temp;  
+          let stock_temp = pItems['quantity'] - sItems['quantity'];
+          return stock_temp <= 0 ? 0 : stock_temp;
         }
-        console.log("STOCK", row.stock);
-        return row.stock; 
+        console.log('STOCK', row.stock);
+        return row.stock;
       }
-
     }
   ],
   quickEditFields: ['rate', 'unit', 'itemType', 'tax', 'min', 'description'],

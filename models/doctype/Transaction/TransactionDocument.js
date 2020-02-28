@@ -20,7 +20,7 @@ module.exports = class TransactionDocument extends BaseDocument {
 
   async getTaxSummary() {
     let taxes = {};
-    
+
     for (let row of this.items) {
       if (row.tax) {
         let tax = await this.getTax(row.tax);

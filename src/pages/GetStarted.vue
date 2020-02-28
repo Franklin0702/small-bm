@@ -2,7 +2,7 @@
   <div class="flex flex-col overflow-y-hidden">
     <PageHeader>
       <h1 slot="title" class="text-2xl font-bold">
-        {{ _('Setup your workspace') }}
+        {{ _('Configuralo para tú negocio!') }}
       </h1>
     </PageHeader>
     <div class="px-8">
@@ -95,7 +95,7 @@ export default {
       /* eslint-disable vue/no-side-effects-in-computed-properties */
       return [
         {
-          label: _('Organisation'),
+          label: _('Tú Negocio'),
 
           items: [
             {
@@ -103,15 +103,15 @@ export default {
               label: _('General'),
               icon: 'general',
               description:
-                'Setup your company information, email, country and fiscal year',
+                'Configura la información de tu compañía, el correo, país y año fiscal.',
               fieldname: 'companySetup'
             },
             {
               key: 'System',
-              label: _('System'),
+              label: _('Sistema'),
               icon: 'general',
               description:
-                'Setup system defaults like date format and currency precision',
+                'Configura información del sistema como el formato de fechas y la precisión de los valores monetarios.',
               fieldname: 'systemSetup',
               action() {
                 openSettings('System');
@@ -119,10 +119,10 @@ export default {
             },
             {
               key: 'Invoice',
-              label: _('Invoice'),
+              label: _('Factura (Venta o Compra)'),
               icon: 'invoice',
               description:
-                'Customize your invoices by adding a logo and address details',
+                'Personaliza tu factura, agrega un logo o dirección',
               fieldname: 'invoiceSetup',
               action() {
                 openSettings('Invoice');
@@ -131,93 +131,93 @@ export default {
           ]
         },
         {
-          label: _('Accounts'),
+          label: _('Cuentas'),
 
           items: [
             {
               key: 'Review Accounts',
-              label: _('Review Accounts'),
+              label: _('Revisa las cuentas'),
               icon: 'review-ac',
               description:
-                'Review your chart of accounts, add any account or tax heads as needed',
+                'Revisa los gráficos de cuenta, agrega tus propias cuentas o impuestos.',
               action: () => this.$router.push('/chart-of-accounts')
             },
             {
               key: 'Opening Balances',
-              label: _('Opening Balances'),
+              label: _('Balances Pendientes'),
               icon: 'opening-ac',
               description:
-                'Setup your opening balances before performing any accounting entries'
+                'Configura tus balances pendientes antes de empezar a trabajar.'
             },
             {
-              key: 'Add Taxes',
-              label: _('Add Taxes'),
+              key: 'Taxes',
+              label: _('Agrega impuestos'),
               icon: 'percentage',
               description:
-                'Setup your tax templates for your sales or purchase transactions',
+                'Configura tus plantillas de impuestos.',
               action: () => this.$router.push('/list/Tax')
             }
           ]
         },
         {
-          label: _('Sales'),
+          label: _('Ventas'),
 
           items: [
             {
               key: 'Add Sales Items',
-              label: _('Add Items'),
+              label: _('Crea tus productos o servicios'),
               icon: 'item',
               description:
-                'Add products or services that you sell to your customers',
+                'Agrega los productos o servicios que le vendes a tus clientes.',
               action: () => this.$router.push('/list/Item'),
               fieldname: 'itemCreated'
             },
             {
-              key: 'Add Customers',
-              label: _('Add Customers'),
+              key: 'Customers',
+              label: _('Crea Clientes'),
               icon: 'customer',
-              description: 'Add a few customers to create your first invoice',
+              description: 'Crea algunos clientes para comenzar a hacer facturas.',
               action: () => this.$router.push('/list/Customer'),
               fieldname: 'customerCreated'
             },
             {
-              key: 'Create Invoice',
-              label: _('Create Invoice'),
+              key: 'Invoices',
+              label: _('Realiza una venta'),
               icon: 'sales-invoice',
               description:
-                'Create your first invoice and mail it to your customer',
+                'Crea tu primera factura y envíasela a tu cliente!',
               action: () => this.$router.push('/list/SalesInvoice'),
               fieldname: 'invoiceCreated'
             }
           ]
         },
         {
-          label: _('Purchase'),
+          label: _('Compras'),
 
           items: [
             {
               key: 'Add Purchase Items',
-              label: _('Add Items'),
+              label: _('Empieza tu inventario'),
               icon: 'item',
               description:
                 'Add products or services that you buy from your suppliers',
               action: () => this.$router.push('/list/Item'),
               fieldname: 'itemCreated'
             },
-            {
+           {
               key: 'Add Suppliers',
-              label: _('Add Suppliers'),
+              label: _('Crea Suplidores'),
               icon: 'supplier',
-              description: 'Add a few suppliers to create your first bill',
+              description: 'Agrega algunos suplidores y registra tu primera compra!',
               action: () => this.$router.push('/list/Supplier'),
               fieldname: 'supplierCreated'
             },
             {
               key: 'Create Bill',
-              label: _('Create Bill'),
+              label: _('Realiza una compra'),
               icon: 'purchase-invoice',
               description:
-                'Create your first bill and mail it to your supplier',
+                'Crea tu primera compra!',
               action: () => this.$router.push('/list/PurchaseInvoice'),
               fieldname: 'billCreated'
             }
