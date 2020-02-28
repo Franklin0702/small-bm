@@ -41,7 +41,6 @@ module.exports = {
     let party = await frappe.getDoc('Party', this.customer || this.supplier);
     await party.updateOutstandingAmount();
     if (this.submitted === 1) {
-
       let Items = this.items;
 
       for (let l_item of Items) {
@@ -49,7 +48,7 @@ module.exports = {
         item.set(
           'stock',
           (this.doctype === 'SalesInvoice' ? -1 : 1) * l_item.quantity +
-          item.stock
+            item.stock
         );
         await item.update();
 
@@ -62,7 +61,7 @@ module.exports = {
         console.log(
           'CALC STOCK: ',
           (this.doctype === 'SalesInvoice' ? -1 : 1) * l_item.quantity +
-          item.stock
+            item.stock
         );
         console.log(
           '====================== SUBMIT ============================='
@@ -92,26 +91,26 @@ module.exports = {
       let item = {};
       for (let l_item of Items) {
         item = await frappe.getDoc('Item', l_item.item);
-        console.log("item before update: ", item);
+        console.log('item before update: ', item);
         item.set(
           'stock',
           (this.doctype === 'SalesInvoice' ? 1 : -1) * l_item.quantity +
-          item.stock
+            item.stock
         );
         await item.update();
-        console.log("item after update: ", item);
+        console.log('item after update: ', item);
 
         console.log(
           '====================== REVERT ============================='
         );
-        console.log("Producto: ", item.name);
+        console.log('Producto: ', item.name);
         console.log('Factor: ', this.doctype === 'SalesInvoice' ? 1 : -1);
         console.log('Cantidad: ', l_item.quantity);
         console.log('Current Stock: ', item.stock);
         console.log(
           'CALC STOCK: ',
           (this.doctype === 'SalesInvoice' ? 1 : -1) * l_item.quantity +
-          item.stock
+            item.stock
         );
         console.log(
           '====================== REVERT ============================='

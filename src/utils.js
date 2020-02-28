@@ -111,10 +111,7 @@ export function showMessageDialog({ message, description, buttons = [] }) {
 export function deleteDocWithPrompt(doc) {
   return new Promise(resolve => {
     showMessageDialog({
-      message: _('¿Está seguro {0} "{1}"?', [
-        doc.doctype,
-        doc.name
-      ]),
+      message: _('¿Está seguro {0} "{1}"?', [doc.doctype, doc.name]),
       description: _('Este es un cambio permanente.'),
       buttons: [
         {
@@ -212,7 +209,7 @@ export async function checkStockWithDialog(e, doc) {
 
   let stockAlert = '';
   let item = {};
-  console.log("doc.items", doc.items);
+  console.log('doc.items', doc.items);
   for (let l_item of doc.items) {
     console.log(l_item);
     item = await frappe.getDoc('Item', l_item.item);

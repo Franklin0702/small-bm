@@ -121,8 +121,7 @@ export default {
               key: 'Invoice',
               label: _('Factura (Venta o Compra)'),
               icon: 'invoice',
-              description:
-                'Personaliza tu factura, agrega un logo o dirección',
+              description: 'Personaliza tu factura, agrega un logo o dirección',
               fieldname: 'invoiceSetup',
               action() {
                 openSettings('Invoice');
@@ -153,8 +152,7 @@ export default {
               key: 'Taxes',
               label: _('Agrega impuestos'),
               icon: 'percentage',
-              description:
-                'Configura tus plantillas de impuestos.',
+              description: 'Configura tus plantillas de impuestos.',
               action: () => this.$router.push('/list/Tax')
             }
           ]
@@ -176,7 +174,8 @@ export default {
               key: 'Customers',
               label: _('Crea Clientes'),
               icon: 'customer',
-              description: 'Crea algunos clientes para comenzar a hacer facturas.',
+              description:
+                'Crea algunos clientes para comenzar a hacer facturas.',
               action: () => this.$router.push('/list/Customer'),
               fieldname: 'customerCreated'
             },
@@ -184,8 +183,7 @@ export default {
               key: 'Invoices',
               label: _('Realiza una venta'),
               icon: 'sales-invoice',
-              description:
-                'Crea tu primera factura y envíasela a tu cliente!',
+              description: 'Crea tu primera factura y envíasela a tu cliente!',
               action: () => this.$router.push('/list/SalesInvoice'),
               fieldname: 'invoiceCreated'
             }
@@ -204,11 +202,12 @@ export default {
               action: () => this.$router.push('/list/Item'),
               fieldname: 'itemCreated'
             },
-           {
+            {
               key: 'Add Suppliers',
               label: _('Crea Suplidores'),
               icon: 'supplier',
-              description: 'Agrega algunos suplidores y registra tu primera compra!',
+              description:
+                'Agrega algunos suplidores y registra tu primera compra!',
               action: () => this.$router.push('/list/Supplier'),
               fieldname: 'supplierCreated'
             },
@@ -216,8 +215,7 @@ export default {
               key: 'Create Bill',
               label: _('Realiza una compra'),
               icon: 'purchase-invoice',
-              description:
-                'Crea tu primera compra!',
+              description: 'Crea tu primera compra!',
               action: () => this.$router.push('/list/PurchaseInvoice'),
               fieldname: 'billCreated'
             }

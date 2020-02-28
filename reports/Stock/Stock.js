@@ -175,19 +175,15 @@ class Stock {
 
       let balance = report.buy + report.prevQuantity - report.sell;
       let color = 'green';
-      if (item.min > balance){
+      if (item.min > balance) {
         color = 'red';
-      }
-      else if (item.min == balance) {
+      } else if (item.min == balance) {
         color = 'orange';
       }
 
       report.balance = {
-            template: `<span style='color:${color};'>${balance}</span>`,
-          }
-      
-      
-        
+        template: `<span style='color:${color};'>${balance}</span>`
+      };
 
       reports.push(report);
     }

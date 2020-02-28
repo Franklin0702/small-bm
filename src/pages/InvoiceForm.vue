@@ -271,9 +271,7 @@ export default {
           {
             label: this._('Registrar'),
             action: () => {
-              this.doc
-                .submit()
-                .catch(this.handleError);
+              this.doc.submit().catch(this.handleError);
             }
           },
           {
