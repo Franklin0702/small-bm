@@ -10,7 +10,7 @@
           class="text-white text-xs ml-2"
           @click="onSaveClick"
         >
-          {{ _('Save') }}
+          {{ _('Guardar') }}
         </Button>
         <Button
           v-if="!doc._dirty && !doc._notInserted && !doc.submitted"
@@ -18,7 +18,7 @@
           class="text-white text-xs ml-2"
           @click="onSubmitClick"
         >
-          {{ _('Submit') }}
+          {{ _('Guardar') }}
         </Button>
       </template>
     </PageHeader>

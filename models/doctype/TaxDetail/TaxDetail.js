@@ -1,6 +1,6 @@
 module.exports = {
   name: 'TaxDetail',
-  label: 'Tax Detail',
+  label: 'Detalle de Impuesto',
   doctype: 'DocType',
   isSingle: 0,
   isChild: 1,
@@ -8,14 +8,14 @@ module.exports = {
   fields: [
     {
       fieldname: 'account',
-      label: 'Tax Account',
+      label: 'Cuenta de impuesto',
       fieldtype: 'Link',
       target: 'Account',
       required: 1
     },
     {
       fieldname: 'rate',
-      label: 'Rate',
+      label: 'Tasa',
       fieldtype: 'Float',
       required: 1,
       placeholder: '0%'

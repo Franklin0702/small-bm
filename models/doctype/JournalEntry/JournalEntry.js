@@ -10,9 +10,9 @@ module.exports = {
   fields: [
     {
       fieldname: 'entryType',
-      label: 'Entry Type',
+      label: 'Tipo de Entrada',
       fieldtype: 'Select',
-      placeholder: 'Entry Type',
+      placeholder: 'Tipo de Entrada',
       options: [
         'Entrada de Diario',
         'Bank Entry',
@@ -30,37 +30,37 @@ module.exports = {
     },
     {
       fieldname: 'date',
-      label: 'Date',
+      label: 'Fecha',
       fieldtype: 'Date',
       default: DateTime.local().toISODate()
     },
     {
       fieldname: 'accounts',
-      label: 'Account Entries',
+      label: 'Cuenta de entradas',
       fieldtype: 'Table',
       childtype: 'JournalEntryAccount',
       required: true
     },
     {
       fieldname: 'referenceNumber',
-      label: 'Reference Number',
+      label: 'Número de referencia',
       fieldtype: 'Data'
     },
     {
       fieldname: 'referenceDate',
-      label: 'Reference Date',
+      label: 'Fecha de referencia',
       fieldtype: 'Date'
     },
     {
       fieldname: 'userRemark',
-      label: 'User Remark',
+      label: 'Comentario del usuario',
       fieldtype: 'Text',
-      placeholder: 'User Remark'
+      placeholder: 'Comentario del usuario'
     }
   ],
   actions: [
     {
-      label: 'Revert',
+      label: 'Editar',
       condition: doc => doc.submitted,
       action(doc) {
         doc.revert();

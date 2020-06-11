@@ -2,6 +2,10 @@ import { _ } from 'frappejs/utils';
 
 export default {
   doctype: 'Customer',
-  title: _('Customers'),
-  columns: ['name', 'phone', 'outstandingAmount']
+  title: _('Clientes'),
+  columns: [
+    { fieldname: 'name', label: 'Nombre' },
+    { fieldname: 'phone', label: 'teléfono' },
+    { fieldname: 'outstandingAmount', label: 'Monto Pendiente' }
+  ]
 };

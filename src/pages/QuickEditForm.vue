@@ -18,7 +18,7 @@
           v-if="doc && doc._notInserted"
           class="ml-2 text-white text-xs"
         >
-          {{ _('Save') }}
+          {{ _('Guardar') }}
         </Button>
         <Button
           :icon="true"
@@ -33,7 +33,7 @@
           "
           class="ml-2 text-white text-xs"
         >
-          {{ _('Submit') }}
+          {{ _('Guardar') }}
         </Button>
       </div>
     </div>
@@ -146,7 +146,7 @@ export default {
             this.$refs.titleControl.focus();
           }, 300);
         } else {
-          this.doc.set(this.titleField.fieldname, 'New ' + this.doc.doctype);
+          this.doc.set(this.titleField.fieldname, 'Nuevo ' + this.meta.label);
         }
       }
 
@@ -169,7 +169,7 @@ export default {
           });
         });
         this.doc.on('beforeUpdate', () => {
-          this.statusText = _('Saving...');
+          this.statusText = _('Guardando...');
         });
         this.doc.on('afterUpdate', () => {
           setTimeout(() => {

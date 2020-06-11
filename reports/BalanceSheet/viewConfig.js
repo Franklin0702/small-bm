@@ -8,8 +8,8 @@ module.exports = {
       fieldtype: 'Date',
       fieldname: 'toDate',
       size: 'small',
-      placeholder: 'ToDate',
-      label: 'To Date',
+      placeholder: 'Hasta',
+      label: 'Hasta',
       required: 1,
       default: async () => {
         return (await frappe.getSingle('AccountingSettings')).fiscalYearEnd;
@@ -25,14 +25,14 @@ module.exports = {
         'Half Yearly',
         'Yearly'
       ],
-      label: 'Periodicity',
+      label: 'Periodicidad',
       fieldname: 'periodicity',
       default: 'Monthly'
     }
   ],
   getColumns(data) {
     const columns = [
-      { label: 'Account', fieldtype: 'Data', fieldname: 'account', width: 2 }
+      { label: 'Cuenta', fieldtype: 'Data', fieldname: 'account', width: 2 }
     ];
 
     if (data && data.columns) {

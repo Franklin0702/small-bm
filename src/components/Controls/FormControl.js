@@ -33,6 +33,7 @@ export default {
       Color
     };
     let { df } = this.$attrs;
+    
     return h(controls[df.fieldtype] || Data, {
       props: this.$attrs,
       on: this.$listeners,

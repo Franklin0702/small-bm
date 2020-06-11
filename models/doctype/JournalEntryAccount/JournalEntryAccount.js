@@ -4,7 +4,7 @@ module.exports = {
   fields: [
     {
       fieldname: 'account',
-      label: 'Account',
+      label: 'Cuenta',
       fieldtype: 'Link',
       target: 'Account',
       required: 1,
@@ -12,13 +12,13 @@ module.exports = {
     },
     {
       fieldname: 'debit',
-      label: 'Debit',
+      label: 'Débito',
       fieldtype: 'Currency',
       formula: autoDebitCredit('debit')
     },
     {
       fieldname: 'credit',
-      label: 'Credit',
+      label: 'Crédito',
       fieldtype: 'Currency',
       formula: autoDebitCredit('credit')
     }

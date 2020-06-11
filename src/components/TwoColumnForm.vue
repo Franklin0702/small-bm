@@ -34,7 +34,7 @@
                 class="ml-2 w-1/2 text-white"
                 @click="saveInlineEditDoc"
               >
-                {{ df.inlineSaveText || _('Save') }}
+                {{ df.inlineSaveText || _('Guardar') }}
               </Button>
             </div>
           </div>

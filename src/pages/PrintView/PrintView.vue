@@ -8,10 +8,10 @@
             class="text-gray-900 text-xs ml-2"
             @click="showCustomiser = !showCustomiser"
           >
-            {{ _('Customise') }}
+            {{ _('Personalizar') }}
           </Button>
           <Button class="text-gray-900 text-xs ml-2" @click="makePDF">
-            {{ _('Save as PDF') }}
+            {{ _('Guardar como PDF') }}
           </Button>
         </template>
       </PageHeader>
@@ -34,7 +34,7 @@
     </div>
     <div class="border-l w-80" v-if="showCustomiser">
       <div class="mt-4 px-4 flex items-center justify-between">
-        <h2 class="font-semibold">{{ _('Customise') }}</h2>
+        <h2 class="font-semibold">{{ _('Personalizar') }}</h2>
         <Button :icon="true" @click="showCustomiser = false">
           <feather-icon name="x" class="w-4 h-4" />
         </Button>

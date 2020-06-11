@@ -6,7 +6,7 @@
           <h4>Customize</h4>
         </div>
         <div class="col-6 text-right">
-          <f-button secondary @click="saveAndClose">{{ _('Save & Close') }}</f-button>
+          <f-button secondary @click="saveAndClose">{{ _('Guardar & Cerrar') }}</f-button>
         </div>
       </div>
       <div class="row">

@@ -45,9 +45,29 @@ module.exports = class PaymentServer extends BaseDocument {
         // update outstanding amounts in invoice and party
         let newOutstanding = outstandingAmount - this.amount;
         await referenceDoc.set('outstandingAmount', newOutstanding);
+        if (newOutstanding === 0.0) {
+          referenceDoc.set('voucher');
+
+          let nextSerie = await referenceDoc.getNextVoucherSerie(
+            referenceDoc.voucherType
+          );
+          try {
+            let VoucherType = await frappe.getDoc(
+              'VoucherType',
+              referenceDoc.voucherType
+            );
+            console.log('Voucher Serie: ', nextSerie);
+            VoucherType.current = parseInt(nextSerie.slice(3));
+            await VoucherType.update();
+            referenceDoc.voucherSerie = nextSerie;
+          } catch (error) {
+            console.error('Error getting NCF: ', error);
+          }
+        }
         await referenceDoc.update();
         let party = await frappe.getDoc('Party', this.party);
         await party.updateOutstandingAmount();
+        //generate Voucher Serie
       }
     }
   }

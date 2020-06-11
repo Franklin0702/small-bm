@@ -10,7 +10,7 @@ module.exports = {
     "fields": [
         {
             "fieldname": "companyName",
-            "label": "Company Name",
+            "label": "Nombre del Negocio",
             "fieldtype": "Data",
             "disabled": false,
             "required": true

@@ -58,12 +58,12 @@
                   "
                 >
                   <span class="text-white text-base">
-                    {{ _('Setup') }}
+                    {{ _('Preparar') }}
                   </span>
                 </Button>
                 <Button class="ml-4 leading-tight">
                   <span class="text-base">
-                    {{ _('Documentation') }}
+                    {{ _('Documentación') }}
                   </span>
                 </Button>
               </div>

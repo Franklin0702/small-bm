@@ -3,7 +3,7 @@ const countryList = require('~/fixtures/countryInfo.json');
 
 module.exports = {
   name: 'SetupWizard',
-  label: 'Setup Wizard',
+  label: 'Guía de Preparación',
   naming: 'name',
   isSingle: 1,
   isChild: 0,
@@ -13,31 +13,31 @@ module.exports = {
   fields: [
     {
       fieldname: 'companyLogo',
-      label: 'Company Logo',
+      label: 'Logo',
       fieldtype: 'AttachImage'
     },
     {
       fieldname: 'country',
-      label: 'Country',
+      label: 'País',
       fieldtype: 'AutoComplete',
-      placeholder: 'Select Country',
+      placeholder: 'Elegir País',
       required: 1,
       getList: () => Object.keys(countryList).sort()
     },
 
     {
       fieldname: 'fullname',
-      label: 'Your Name',
+      label: 'Tú nombre',
       fieldtype: 'Data',
-      placeholder: 'John Doe',
+      placeholder: 'Juan Pérez',
       required: 1
     },
 
     {
       fieldname: 'email',
-      label: 'Email',
+      label: 'Correo',
       fieldtype: 'Data',
-      placeholder: 'john@doe.com',
+      placeholder: 'juanperez@gmail.com',
       required: 1,
       validate: {
         type: 'email'
@@ -46,24 +46,24 @@ module.exports = {
 
     {
       fieldname: 'companyName',
-      label: 'Company Name',
-      placeholder: 'Company Name',
+      label: 'Nombre del Negocio',
+      placeholder: 'Nombre del Negocio',
       fieldtype: 'Data',
       required: 1
     },
 
     {
       fieldname: 'bankName',
-      label: 'Bank Name',
+      label: 'Banco',
       fieldtype: 'Data',
-      placeholder: 'Prime Bank',
+      placeholder: 'Banco principal',
       required: 1
     },
 
     {
       fieldname: 'fiscalYearStart',
-      label: 'Fiscal Year Start Date',
-      placeholder: 'Fiscal Year Start Date',
+      label: 'Inicio del Año Fiscal',
+      placeholder: 'Inicio del año fiscal',
       fieldtype: 'Date',
       formula: doc => {
         if (!doc.country) return;
@@ -80,8 +80,8 @@ module.exports = {
 
     {
       fieldname: 'fiscalYearEnd',
-      label: 'Fiscal Year End Date',
-      placeholder: 'Fiscal Year End Date',
+      label: 'Fin del Año Fiscal',
+      placeholder: 'Fin del año fiscal',
       fieldtype: 'Date',
       formula: doc => {
         if (!doc.country) return;
@@ -95,9 +95,9 @@ module.exports = {
     },
     {
       fieldname: 'currency',
-      label: 'Currency',
+      label: 'Moneda',
       fieldtype: 'Data',
-      placeholder: 'INR',
+      placeholder: 'DOP',
       formula: doc => {
         if (!doc.country) return;
         return countryList[doc.country].currency;
@@ -106,7 +106,7 @@ module.exports = {
     },
     {
       fieldname: 'completed',
-      label: 'Completed',
+      label: 'Completado',
       fieldtype: 'Check',
       readonly: 1
     }

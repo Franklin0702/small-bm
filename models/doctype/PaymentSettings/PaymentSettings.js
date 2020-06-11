@@ -1,6 +1,6 @@
 module.exports = {
     name: "PaymentSettings",
-    label: "Payment Settings",
+    label: "Configuración de Pago",
     isSingle: 1,
     isChild: 0,
     keywordFields: [],

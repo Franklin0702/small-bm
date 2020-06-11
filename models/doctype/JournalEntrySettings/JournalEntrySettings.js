@@ -1,6 +1,6 @@
 module.exports = {
   name: 'JournalEntrySettings',
-  label: 'Journal Entry Setting',
+  label: 'Configuración de Entrada de Diarío',
   doctype: 'DocType',
   isSingle: 1,
   isChild: 0,
@@ -8,7 +8,7 @@ module.exports = {
   fields: [
     {
       fieldname: 'numberSeries',
-      label: 'Number Series',
+      label: 'Número de Series',
       fieldtype: 'Link',
       target: 'NumberSeries',
       required: 1,

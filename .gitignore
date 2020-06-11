@@ -22,3 +22,7 @@ yarn-error.log*
 
 #Electron-builder output
 /dist_electron
+
+#vscode files
+/.vscode
+.vscode/launch.json

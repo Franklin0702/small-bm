@@ -1,6 +1,6 @@
 module.exports = {
   name: 'Currency',
-  label: 'Currency',
+  label: 'Moneda',
   doctype: 'DocType',
   isSingle: 0,
   keywordFields: ['name', 'symbol'],
@@ -8,34 +8,34 @@ module.exports = {
   fields: [
     {
       fieldname: 'name',
-      label: 'Currency Name',
+      label: 'Nombre de moneda',
       fieldtype: 'Data',
       required: 1
     },
     {
       fieldname: 'fraction',
-      label: 'Fraction',
+      label: 'Facción',
       fieldtype: 'Data'
     },
     {
       fieldname: 'fractionUnits',
-      label: 'Fraction Units',
+      label: 'Unidades de Fracción',
       fieldtype: 'Int'
     },
     {
-      label: 'Smallest Currency Fraction Value',
+      label: 'Valor de fracción de moneda más pequeño',
       fieldname: 'smallestValue',
       fieldtype: 'Currency'
     },
     {
-      label: 'Symbol',
+      label: 'Símbolo',
       fieldname: 'symbol',
       fieldtype: 'Data'
     },
     {
       fieldname: 'numberFormat',
       fieldtype: 'Select',
-      label: 'Number Format',
+      label: 'Formato de número',
       options: [
         '',
         '#,###.##',

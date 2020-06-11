@@ -5,7 +5,7 @@ const Quotation = model.extend(
   SalesInvoice,
   {
     name: 'Quotation',
-    label: 'Quotation',
+    label: 'Cotización',
     settings: 'QuotationSettings',
     fields: [
       {

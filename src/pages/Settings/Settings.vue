@@ -57,12 +57,12 @@ export default {
         //   icon: 'mail'
         // },
         {
-          label: _('Invoice'),
+          label: _('Factura'),
           icon: 'invoice',
           component: TabInvoice
         },
         {
-          label: _('System'),
+          label: _('Sistema'),
           icon: 'system',
           component: TabSystem
         }

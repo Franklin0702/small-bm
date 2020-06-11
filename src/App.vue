@@ -1,13 +1,14 @@
 <template>
   <div
     id="app"
-    class="h-screen flex flex-col font-sans overflow-hidden antialiased"
+    class="h-screen flex flex-col font-sans antialiased"
   >
     <WindowsTitleBar
       v-if="platform === 'Windows'"
       @close="reloadMainWindowOnSettingsClose"
     />
     <Desk class="flex-1" v-if="activeScreen === 'Desk'" />
+    
     <DatabaseSelector
       v-if="activeScreen === 'DatabaseSelector'"
       @database-connect="showSetupWizardOrDesk(true)"

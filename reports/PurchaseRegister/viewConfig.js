@@ -6,10 +6,10 @@ module.exports = {
     {
       fieldtype: 'Link',
       target: 'Party',
-      label: 'Supplier Name',
+      label: 'Proveedor',
       fieldname: 'supplier',
       size: 'small',
-      placeholder: 'Supplier Name',
+      placeholder: 'Proveedor',
       getFilters: query => {
         if (query)
           return {
@@ -26,15 +26,15 @@ module.exports = {
       fieldtype: 'Date',
       fieldname: 'fromDate',
       size: 'small',
-      placeholder: 'From Date',
-      label: 'From Date',
+      placeholder: 'Desde',
+      label: 'Desde',
       required: 1
     },
     {
       fieldtype: 'Date',
       size: 'small',
-      placeholder: 'To Date',
-      fieldname: 'toDate',
+      placeholder: 'Hasta',
+      fieldname: 'Hasta',
       label: 'To Date',
       required: 1
     }

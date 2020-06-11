@@ -7,7 +7,7 @@ module.exports = {
   fields: [
     {
       fieldname: 'item',
-      label: 'Item',
+      label: 'Producto',
       fieldtype: 'Link',
       target: 'Item',
       required: 1,
@@ -22,21 +22,21 @@ module.exports = {
     },
     {
       fieldname: 'description',
-      label: 'Description',
+      label: 'Descripción',
       fieldtype: 'Text',
       formula: (row, doc) => doc.getFrom('Item', row.item, 'description'),
       hidden: 1
     },
     {
       fieldname: 'quantity',
-      label: 'Quantity',
+      label: 'Cantidad',
       fieldtype: 'Float',
       required: 1,
       formula: () => 1
     },
     {
       fieldname: 'rate',
-      label: 'Rate',
+      label: 'Precio',
       fieldtype: 'Currency',
       required: 1,
       formula: async (row, doc) => {
@@ -47,14 +47,14 @@ module.exports = {
     },
     {
       fieldname: 'baseRate',
-      label: 'Rate (Company Currency)',
+      label: 'Precio (Moneda Local)',
       fieldtype: 'Currency',
       formula: (row, doc) => row.rate * doc.exchangeRate,
       readOnly: 1
     },
     {
       fieldname: 'account',
-      label: 'Account',
+      label: 'Cuenta',
       hidden: 1,
       fieldtype: 'Link',
       target: 'Account',
@@ -63,7 +63,7 @@ module.exports = {
     },
     {
       fieldname: 'tax',
-      label: 'Tax',
+      label: 'Impuestos',
       fieldtype: 'Link',
       target: 'Tax',
       formula: (row, doc) => {
@@ -73,7 +73,7 @@ module.exports = {
     },
     {
       fieldname: 'amount',
-      label: 'Amount',
+      label: 'Monto',
       fieldtype: 'Currency',
       readOnly: 1,
       formula: row => row.quantity * row.rate,
@@ -81,7 +81,7 @@ module.exports = {
     },
     {
       fieldname: 'baseAmount',
-      label: 'Amount (Company Currency)',
+      label: 'Monto (Moneda Local)',
       fieldtype: 'Currency',
       readOnly: 1,
       formula: (row, doc) => row.amount * doc.exchangeRate

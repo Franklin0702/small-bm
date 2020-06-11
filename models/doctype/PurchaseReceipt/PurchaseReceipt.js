@@ -3,7 +3,7 @@ const PurchaseOrder = require('../PurchaseOrder/PurchaseOrder');
 
 module.exports = model.extend(PurchaseOrder, {
     name: "PurchaseReceipt",
-    label: "Purchase Receipt",
+    label: "Recibo de Compra",
     settings: "PurchaseReceiptSettings",
     fields: [
         {

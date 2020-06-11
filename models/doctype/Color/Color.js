@@ -10,7 +10,7 @@ module.exports = {
     {
       fieldname: 'hexvalue',
       fieldtype: 'Data',
-      label: 'Hex Value'
+      label: 'Valor Hex (#fff)'
     }
   ]
 };

@@ -12,7 +12,7 @@
       />
       <f-button secondary v-if="doctype" primary @click="uploadCSV">Upload CSV</f-button>
       <f-button secondary v-if="doctype" primary @click="downloadCSV">Download CSV Template</f-button>
-      <f-button primary @click="importData">Submit</f-button>
+      <f-button primary @click="importData">Guardar</f-button>
 
       <frappe-control
         v-if="doctype"

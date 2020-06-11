@@ -22,6 +22,10 @@ module.exports = {
   async beforeInsert() {
     const entries = await this.getPosting();
     await entries.validateEntries();
+
+  },
+  async beforeSubmit() {
+
   },
 
   async afterSubmit() {
@@ -37,9 +41,37 @@ module.exports = {
       'outstandingAmount',
       this.baseGrandTotal
     );
+    // let nextSerie = await this.getNextVoucherSerie(this.voucherType);
+    // try {
+    //   let VoucherType = await frappe.getDoc('VoucherType', this.voucherType);
+    //   console.log('Voucher Serie: ', nextSerie);
+    //   VoucherType.current = parseInt(nextSerie.slice(3));
+    //   await VoucherType.update();
+    //   this.voucherSerie = nextSerie;
+    // } catch (error) {}
+    //update Voucher Serie
+    // try {
+    //   let nextSerie = await this.getNextVoucherSerie(this.voucherType);
+    //   await frappe.db.setValue(
+    //     this.doctype,
+    //     this.name,
+    //     'voucherSerie',
+    //     nextSerie
+    //   );
+    //   //update current in voucher type;
+    //   let VoucherType = await frappe.getDoc('VoucherType', this.voucherType);
+    //   console.log('Voucher Serie: ', nextSerie);
+    //   VoucherType.current = parseInt(nextSerie.slice(3));
+    //   await VoucherType.update();
+    //   this.voucherSerie = nextSerie;
+
+    // } catch (error) {
+
+    // }
 
     let party = await frappe.getDoc('Party', this.customer || this.supplier);
     await party.updateOutstandingAmount();
+
     if (this.submitted === 1) {
       let Items = this.items;
 
@@ -67,7 +99,6 @@ module.exports = {
           '====================== SUBMIT ============================='
         );
       }
-
       checkStockWithDialog({}, this);
     }
   },

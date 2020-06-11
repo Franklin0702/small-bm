@@ -12,13 +12,13 @@ module.exports = {
   fields: [
     {
       fieldname: 'year',
-      label: 'Year',
+      label: 'Año',
       fieldtype: 'Data',
       required: 1
     },
     {
       fieldname: 'month',
-      label: 'Month',
+      label: 'Mes',
       fieldtype: 'Select',
       options: [
         '',
@@ -39,7 +39,7 @@ module.exports = {
     },
     {
       fieldname: 'jsonData',
-      label: 'JSON Data',
+      label: 'Datos JSON',
       fieldtype: 'Code',
       formula: doc => doc.getJson(),
       required: 1,
@@ -54,7 +54,7 @@ module.exports = {
   ],
   links: [
     {
-      label: 'Print PDF',
+      label: 'Imprimir en PDF',
       condition: form => !form.doc._notInserted,
       action: async form => {
         form.$router.push({
@@ -63,7 +63,7 @@ module.exports = {
       }
     },
     {
-      label: 'Delete',
+      label: 'Eliminar',
       condition: form => !form.doc._notInserted,
       action: async form => {
         const doc = await frappe.getDoc('GSTR3B', form.doc.name);

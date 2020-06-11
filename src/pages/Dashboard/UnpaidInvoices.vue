@@ -84,7 +84,7 @@ export default {
   data: () => ({
     invoices: [
       {
-        title: 'Sales Invoices',
+        title: 'Ventas',
         doctype: 'SalesInvoice',
         total: 0,
         unpaid: 0,
@@ -95,7 +95,7 @@ export default {
         barWidth: 40
       },
       {
-        title: 'Purchase Invoices',
+        title: 'Compras',
         doctype: 'PurchaseInvoice',
         total: 0,
         unpaid: 0,
@@ -106,8 +106,8 @@ export default {
         barWidth: 60
       }
     ],
-    salesInvoicePeriod: 'This Year',
-    purchaseInvoicePeriod: 'This Year'
+    salesInvoicePeriod: 'Este Año',
+    purchaseInvoicePeriod: 'Este Año'
   }),
   watch: {
     salesInvoicePeriod: 'calculateInvoiceTotals',

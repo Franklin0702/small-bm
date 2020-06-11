@@ -62,6 +62,7 @@ export default {
         doc.set(this.filters);
       }
       let path = this.getFormPath(doc.name);
+      console.log('PATH: ', path);
       this.$router.push(path);
       doc.on('afterInsert', () => {
         let path = this.getFormPath(doc.name);

@@ -1,6 +1,6 @@
 module.exports = {
   name: 'PurchaseInvoiceSettings',
-  label: 'Purchase Invoice Settings',
+  label: 'Configuración de Compra',
   doctype: 'DocType',
   isSingle: 1,
   isChild: 0,
@@ -8,7 +8,7 @@ module.exports = {
   fields: [
     {
       fieldname: 'numberSeries',
-      label: 'Number Series',
+      label: 'Prefijo',
       fieldtype: 'Link',
       target: 'NumberSeries',
       required: 1,

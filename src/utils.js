@@ -286,7 +286,7 @@ export function getActionsForDocument(doc) {
 
   let deleteAction = {
     component: {
-      template: `<span class="text-red-700">{{ _('Delete') }}</span>`
+      template: `<span class="text-red-700">{{ _('Eliminar') }}</span>`
     },
     condition: doc => !doc.isNew() && !doc.submitted && !doc.meta.isSingle,
     action: () =>

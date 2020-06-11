@@ -13,6 +13,10 @@ export default {
   async mounted() {
     await this.doc.loadLink(this.partyField);
     this.party = this.doc.getLink(this.partyField);
+    
+    await this.doc.loadLink('voucherType')
+    this.VoucherType = this.doc.getLink('voucherType');
+    
     await this.printSettings.loadLink('address');
     this.companyAddress = this.printSettings.getLink('address');
   },

@@ -4,7 +4,7 @@ const InvoiceTemplate = require('../SalesInvoice/InvoiceTemplate.vue').default;
 module.exports = {
   name: 'PurchaseInvoice',
   doctype: 'DocType',
-  label: 'Purchase Invoice',
+  label: 'Compra',
   documentClass: require('./PurchaseInvoiceDocument'),
   printTemplate: InvoiceTemplate,
   isSingle: 0,
@@ -15,7 +15,7 @@ module.exports = {
   showTitle: true,
   fields: [
     {
-      label: 'Bill No',
+      label: 'Número',
       fieldname: 'name',
       fieldtype: 'Data',
       required: 1,
@@ -23,20 +23,20 @@ module.exports = {
     },
     {
       fieldname: 'date',
-      label: 'Date',
+      label: 'Fecha',
       fieldtype: 'Date',
       default: new Date().toISOString().slice(0, 10)
     },
     {
       fieldname: 'supplier',
-      label: 'Supplier',
+      label: 'Proveedor',
       fieldtype: 'Link',
       target: 'Supplier',
       required: 1
     },
     {
       fieldname: 'account',
-      label: 'Account',
+      label: 'Cuenta',
       fieldtype: 'Link',
       target: 'Account',
       formula: doc => doc.getFrom('Party', doc.supplier, 'defaultAccount'),
@@ -49,7 +49,7 @@ module.exports = {
     },
     {
       fieldname: 'currency',
-      label: 'Supplier Currency',
+      label: 'Moneda del Proveedor',
       fieldtype: 'Link',
       target: 'Currency',
       hidden: 1,
@@ -58,21 +58,21 @@ module.exports = {
     },
     {
       fieldname: 'exchangeRate',
-      label: 'Exchange Rate',
+      label: 'Tasa de intercambio',
       fieldtype: 'Float',
       formula: doc => doc.getExchangeRate(),
       required: true
     },
     {
       fieldname: 'items',
-      label: 'Items',
+      label: 'Productos',
       fieldtype: 'Table',
       childtype: 'PurchaseInvoiceItem',
       required: true
     },
     {
       fieldname: 'netTotal',
-      label: 'Net Total',
+      label: 'Total Neto',
       fieldtype: 'Currency',
       formula: doc => doc.getSum('items', 'amount'),
       readOnly: 1,
@@ -80,14 +80,14 @@ module.exports = {
     },
     {
       fieldname: 'baseNetTotal',
-      label: 'Net Total (Company Currency)',
+      label: 'Total Neto (Moneda Local)',
       fieldtype: 'Currency',
       formula: doc => doc.netTotal * doc.exchangeRate,
       readOnly: 1
     },
     {
       fieldname: 'taxes',
-      label: 'Taxes',
+      label: 'Impuestos',
       fieldtype: 'Table',
       childtype: 'TaxSummary',
       formula: doc => doc.getTaxSummary(),
@@ -95,7 +95,7 @@ module.exports = {
     },
     {
       fieldname: 'grandTotal',
-      label: 'Grand Total',
+      label: 'Total',
       fieldtype: 'Currency',
       formula: doc => doc.getGrandTotal(),
       readOnly: 1,
@@ -103,14 +103,14 @@ module.exports = {
     },
     {
       fieldname: 'baseGrandTotal',
-      label: 'Grand Total (Company Currency)',
+      label: 'Total (Moneda Local)',
       fieldtype: 'Currency',
       formula: doc => doc.grandTotal * doc.exchangeRate,
       readOnly: 1
     },
     {
       fieldname: 'outstandingAmount',
-      label: 'Outstanding Amount',
+      label: 'Monto Pendiente',
       fieldtype: 'Currency',
       formula: doc => {
         if (doc.submitted) return;
@@ -120,20 +120,34 @@ module.exports = {
     },
     {
       fieldname: 'terms',
-      label: 'Terms',
+      label: 'Términos',
       fieldtype: 'Text'
     },
     {
       fieldname: 'voucherType',
       label: 'Tipo de Comprobante',
-      fieldtype: 'Select',
-      default: 'Consumidor Final',
-      options: [
-        'Consumidor Final',
-        'Crédito Fiscal',
-        'Gubernamental',
-        'Regimenes Especiales'
-      ]
+      fieldtype: 'Link',
+      target:'VoucherType',
+      getFilters:  (doc) => {
+        return {
+          active: ['in', [1, 'true']],
+          useOn: 'Compras'
+        }
+      },
+      disableCreation: true,
+      //formula: doc => doc.getFrom('VoucherType', doc.name, 'description'),
+      // options: [
+      //   'Consumidor Final',
+      //   'Crédito Fiscal',
+      //   'Gubernamental',
+      //   'Regimenes Especiales'
+      // ],
+  
+    },
+    {
+      fieldname: 'voucherSerie',
+      label: 'NCF',
+      fieldtype: 'Data'
     }
   ],
 

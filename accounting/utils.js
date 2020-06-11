@@ -1,6 +1,6 @@
 module.exports = {
   ledgerLink: {
-    label: 'Ledger Entries',
+    label: 'Entradas de Libro',
     condition: doc => doc.submitted,
     action: (doc, router) => {
       router.push({

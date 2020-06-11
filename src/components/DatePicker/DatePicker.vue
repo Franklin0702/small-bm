@@ -101,7 +101,6 @@ export default {
     },
     datesAsWeeks() {
       let datesAsWeeks = [];
-      console.log('this.dates:\n', this.dates);
       let dates = this.dates.slice();
       while (dates.length) {
         let week = dates.splice(0, 7);
@@ -135,7 +134,7 @@ export default {
     },
     formatMonth() {
       let date = this.getDate(this.currentYear, this.currentMonth - 1, 1);
-      return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+      return date.toLocaleString('es-ES', { month: 'short', year: 'numeric' });
     }
   },
   methods: {

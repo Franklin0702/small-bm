@@ -28,13 +28,13 @@ module.exports = {
       fieldname: 'unit',
       label: 'Unidad',
       fieldtype: 'Select',
-      default: 'Unit',
+      default: 'Unidad',
       options: ['Libras', '25-Libras', '50-Libras', '100-Libras', 'Unidad']
     },
     {
       fieldname: 'itemType',
       label: 'Tipo',
-      placeholder: 'Sales',
+      placeholder: 'Ventas',
       fieldtype: 'Select',
       default: 'Producto',
       options: ['Producto', 'Servicio']
@@ -44,7 +44,7 @@ module.exports = {
       label: 'Cuenta de Ingresos',
       fieldtype: 'Link',
       target: 'Account',
-      placeholder: 'Sales',
+      placeholder: 'Ventas',
       required: 1,
       disableCreation: true,
       getFilters: () => {
@@ -87,7 +87,7 @@ module.exports = {
       label: 'Impuesto',
       fieldtype: 'Link',
       target: 'Tax',
-      placeholder: 'GST'
+      placeholder: 'Impuesto'
     },
     {
       fieldname: 'rate',
@@ -106,7 +106,7 @@ module.exports = {
       fieldname: 'min',
       label: 'Mínimo',
       fieldtype: 'Float',
-      placeholder: '0.0',
+      placeholder: '0.00',
       validate(value) {
         if (value && value <= 0) {
           throw new frappe.errors.ValidationError(

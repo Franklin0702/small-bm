@@ -6,18 +6,18 @@ const Badge = require('@/components/Badge').default;
 module.exports = {
   getStatusColumn() {
     return {
-      label: 'Status',
+      label: 'Estado',
       fieldname: 'status',
       fieldtype: 'Select',
       render(doc) {
-        let status = 'Unpaid';
+        let status = 'pendiente';
         let color = 'orange';
         if (!doc.submitted) {
-          status = 'Draft';
+          status = 'borrador';
           color = 'gray';
         }
         if (doc.submitted === 1 && doc.outstandingAmount === 0.0) {
-          status = 'Paid';
+          status = 'pagado';
           color = 'green';
         }
         return {
@@ -30,7 +30,7 @@ module.exports = {
   getActions(doctype) {
     return [
       {
-        label: 'Make Payment',
+        label: 'Pagar',
         condition: doc => doc.submitted && doc.outstandingAmount > 0,
         action: async function makePayment(doc) {
           let payment = await frappe.getNewDoc('Payment');
@@ -39,7 +39,7 @@ module.exports = {
           });
           let isSales = doctype === 'SalesInvoice';
           let party = isSales ? doc.customer : doc.supplier;
-          let paymentType = isSales ? 'Receive' : 'Pay';
+          let paymentType = isSales ? 'Cobro' : 'Pago';
           let hideAccountField = isSales ? 'account' : 'paymentAccount';
           openQuickEdit({
             doctype: 'Payment',
@@ -68,7 +68,7 @@ module.exports = {
         }
       },
       {
-        label: 'Revert',
+        label: 'Editar',
         condition: doc =>
           doc.submitted && doc.baseGrandTotal === doc.outstandingAmount,
         action(doc) {
@@ -76,7 +76,7 @@ module.exports = {
         }
       },
       {
-        label: 'Print',
+        label: 'Imprimir',
         condition: doc => doc.submitted,
         action(doc, router) {
           router.push(`/print/${doc.doctype}/${doc.name}`);

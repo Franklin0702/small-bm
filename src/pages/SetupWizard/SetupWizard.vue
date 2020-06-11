@@ -1,7 +1,7 @@
 <template>
   <div class="py-10 flex-1 bg-white window-drag">
     <div class="px-12">
-      <h1 class="text-2xl font-semibold">{{ _('Setup your organization') }}</h1>
+      <h1 class="text-2xl font-semibold">{{ _('Prepara tu negocio') }}</h1>
       <p class="text-gray-600">
         {{ _('These settings can be changed later') }}
       </p>
@@ -121,7 +121,7 @@ export default {
     },
     async submit() {
       if (!this.allValuesFilled()) {
-        showMessageDialog({ message: this._('Please fill all values') });
+        showMessageDialog({ message: this._('Por favor complete todos los valores.') });
         return;
       }
       try {
@@ -142,7 +142,7 @@ export default {
       return this.meta.getQuickEditFields();
     },
     buttonText() {
-      return this.loading ? this._('Setting Up...') : this._('Next');
+      return this.loading ? this._('Preparando...') : this._('Siguiente');
     }
   }
 };

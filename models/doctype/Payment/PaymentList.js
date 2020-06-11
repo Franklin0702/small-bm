@@ -7,19 +7,19 @@ export default {
   columns: [
     'party',
     {
-      label: 'Status',
+      label: 'Estado',
       fieldname: 'status',
       fieldtype: 'Select',
       size: 'small',
       render(doc) {
-        let status = 'Draft';
+        let status = 'pendiente';
         let color = 'gray';
         if (
           doc.submitted === 1 &&
           (doc.clearanceDate !== null || doc.paymentMethod === 'Cash')
         ) {
           color = 'green';
-          status = 'Submitted';
+          status = 'hecho';
         }
 
         return {
@@ -28,8 +28,8 @@ export default {
         };
       }
     },
-    'paymentType',
-    'date',
-    'amount'
+    {fieldname: 'paymentType', label:'Tipo de pago'},
+    {fieldname: 'date', label:'Fecha'},
+    {fieldname: 'amount', label: 'Monto'}
   ]
 };

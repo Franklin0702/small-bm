@@ -3,14 +3,15 @@ import { getStatusColumn } from '../Transaction/Transaction';
 
 export default {
   doctype: 'PurchaseInvoice',
-  title: _('Bills'),
+  title: _('Compras'),
   formRoute: name => `/edit/PurchaseInvoice/${name}`,
   columns: [
-    'supplier',
-    'name',
+    {fieldname: 'supplier', label: 'Proveedor'},
+    {fieldname: 'name', label: 'Número'},
     getStatusColumn('PurchaseInvoice'),
-    'date',
-    'grandTotal',
-    'outstandingAmount'
+    {fieldname: 'date', label: 'Fecha'},
+    {fieldname: 'grandTotal', label: 'Total'},
+    {fieldname: 'outstandingAmount', label:'Monto Pendiente'},
+    {fieldname: 'voucherSerie', label: 'NCF'}
   ]
 };

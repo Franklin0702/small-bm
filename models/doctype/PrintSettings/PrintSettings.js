@@ -1,11 +1,11 @@
 const theme = require('@/theme');
-const fontManager = require('font-manager');
+// const fontManager = require('font-manager');
 const uniq = require('lodash/uniq');
 let fonts = [];
 
 module.exports = {
   name: 'PrintSettings',
-  label: 'Print Settings',
+  label: 'Configurar Impresión',
   isSingle: 1,
   fields: [
     {
@@ -15,12 +15,12 @@ module.exports = {
     },
     {
       fieldname: 'companyName',
-      label: 'Company Name',
+      label: 'Nombre del Negocio',
       fieldtype: 'Data'
     },
     {
       fieldname: 'email',
-      label: 'Email',
+      label: 'Correo',
       fieldtype: 'Data',
       placeholder: 'john@doe.com',
       validate: {
@@ -29,12 +29,12 @@ module.exports = {
     },
     {
       fieldname: 'displayLogo',
-      label: 'Display Logo in Invoice',
+      label: 'Logo a mostrar en Factura',
       fieldtype: 'Check'
     },
     {
       fieldname: 'phone',
-      label: 'Phone',
+      label: 'Teléfono',
       fieldtype: 'Data',
       placeholder: '9888900000',
       validate: {
@@ -43,10 +43,10 @@ module.exports = {
     },
     {
       fieldname: 'address',
-      label: 'Address',
+      label: 'Dirección',
       fieldtype: 'Link',
       target: 'Address',
-      placeholder: 'Click to create',
+      placeholder: 'Clic para crear',
       inline: true
     },
     {
@@ -57,7 +57,7 @@ module.exports = {
     },
     {
       fieldname: 'template',
-      label: 'Template',
+      label: 'Plantilla',
       fieldtype: 'Select',
       options: ['Basic', 'Minimal', 'Business'],
       default: 'Basic'
@@ -65,7 +65,7 @@ module.exports = {
     {
       fieldname: 'color',
       label: 'Color',
-      placeholder: 'Select Color',
+      placeholder: 'Elige un color',
       fieldtype: 'Color',
       colors: [
         'red',
@@ -86,23 +86,23 @@ module.exports = {
           };
         })
         .concat({
-          label: 'Black',
+          label: 'Negro',
           value: theme.colors['black']
         })
     },
     {
       fieldname: 'font',
-      label: 'Font',
+      label: 'Fuente',
       fieldtype: 'AutoComplete',
       getList() {
         return new Promise(resolve => {
           if (fonts.length > 0) {
             resolve(fonts);
           } else {
-            fontManager.getAvailableFonts(_fonts => {
-              fonts = ['Inter'].concat(uniq(_fonts.map(f => f.family)).sort());
-              resolve(fonts);
-            });
+            // fontManager.getAvailableFonts(_fonts => {
+            //   fonts = ['Inter'].concat(uniq(_fonts.map(f => f.family)).sort());
+            //   resolve(fonts);
+            // });
           }
         });
       },

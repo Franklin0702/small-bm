@@ -5,7 +5,7 @@ module.exports = model.extend(
   PurchaseInvoice,
   {
     name: 'PurchaseOrder',
-    label: 'Purchase Order',
+    label: 'Ordenar Compra',
     settings: 'PurchaseOrderSettings',
     fields: [
       {

@@ -70,6 +70,8 @@ git clone https://github.com/frappe/books.git
 cd books
 # install dependencies
 yarn
+# postinstall configuration
+yarn electron:postinstall
 # start the electron app
 yarn electron:serve
 ```

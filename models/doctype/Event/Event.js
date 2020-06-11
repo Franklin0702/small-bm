@@ -10,19 +10,19 @@ module.exports = {
   fields: [
     {
       fieldname: 'title',
-      label: 'Title',
+      label: 'Título',
       fieldtype: 'Data'
     },
     {
       fieldname: 'date',
-      label: 'Date',
+      label: 'Fecha',
       fieldtype: 'Date'
     },
     {
       fieldname: 'schedule',
       fieldtype: 'Table',
       childtype: 'EventSchedule',
-      label: 'Schedule'
+      label: 'Calendario'
     }
   ],
   titleField: 'title',

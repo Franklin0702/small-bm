@@ -26,16 +26,34 @@
       <div class="mt-8 px-6">
         <div class="flex justify-between">
           <div class="w-1/3">
-            <h1 class="text-2xl font-semibold">
+          <h1 class="text-1x1 font-semibold">
+            <span v-if="doc.outstandingAmount>0">FACTURA PROFORMA</span>
+            <span v-if="doc.outstandingAmount===0">FACTURA</span>
+          </h1>
+            <h2 class="text-2xl font-bold">
               {{ doc.name }}
-            </h1>
+            </h2>
             <div class="py-2 text-base">
               {{ frappe.format(doc.date, 'Date') }}
             </div>
           </div>
           <div class="w-1/3">
             <div class="py-1 text-right text-lg font-semibold">
-              {{ doc[partyField.fieldname] }}
+              {{doc.doctype=== "SalesInvoice"? "Cliente": "Proveedor"}}: {{ doc[partyField.fieldname] }}
+              <p v-if="partyDoc && partyDoc.document">
+              RNC: {{partyDoc.document}}
+              </p>
+              <p v-if="partyDoc && partyDoc.businessName">
+              Razón Social: {{partyDoc.businessName}}
+              </p>
+            </div>
+            <div
+              v-if="voucherTypeDoc && voucherTypeDoc.name && doc.outstandingAmount===0.0"
+              class="py-1 text-right text-md"
+            >
+              {{ voucherTypeDoc.name }}
+              <br />
+              {{ doc.voucherSerie }}
             </div>
             <div v-if="partyDoc" class="mt-1 text-xs text-gray-600 text-right">
               {{ partyDoc.addressDisplay }}
@@ -133,7 +151,13 @@ export default {
       return this.printSettings && this.printSettings.getLink('address');
     },
     partyDoc() {
+      console.log('partyfield: ', this.partyField.fieldname);
       return this.doc.getLink(this.partyField.fieldname);
+    },
+    voucherTypeDoc() {
+      console.log('partyfield: ', this.voucherTypeField.fieldname);
+
+      return this.doc.getLink(this.voucherTypeField.fieldname);
     },
     partyField() {
       let fieldname = {
@@ -141,6 +165,9 @@ export default {
         PurchaseInvoice: 'supplier'
       }[this.doc.doctype];
       return this.meta.getField(fieldname);
+    },
+    voucherTypeField() {
+      return this.meta.getField('voucherType');
     },
     itemFields() {
       let itemsMeta = frappe.getMeta(`${this.doc.doctype}Item`);
@@ -162,6 +189,7 @@ export default {
   async mounted() {
     this.accountingSettings = await frappe.getSingle('AccountingSettings');
     await this.doc.loadLink(this.partyField.fieldname);
+    await this.doc.loadLink(this.voucherTypeField.fieldname);
   }
 };
 </script>

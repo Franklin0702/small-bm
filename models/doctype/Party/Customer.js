@@ -5,14 +5,14 @@ const PartyWidget = require('./PartyWidget.vue').default;
 
 module.exports = {
   name: 'Customer',
-  label: 'Customer',
+  label: 'Cliente',
   basedOn: 'Party',
   filters: {
     customer: 1
   },
   actions: [
     {
-      label: _('Create Invoice'),
+      label: _('Registrar Venta'),
       condition: doc => !doc.isNew(),
       action: async customer => {
         let doc = await frappe.getNewDoc('SalesInvoice');
@@ -28,7 +28,7 @@ module.exports = {
       }
     },
     {
-      label: _('View Invoices'),
+      label: _('Ver Ventas'),
       condition: doc => !doc.isNew(),
       action: customer => {
         router.push({

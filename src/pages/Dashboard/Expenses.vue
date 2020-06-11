@@ -2,7 +2,7 @@
   <div>
     <SectionHeader>
       <template slot="title" class="font-medium">{{
-        _('Top Expenses')
+        _('Gastos')
       }}</template>
       <PeriodSelector
         v-if="hasData"
@@ -36,13 +36,13 @@
             {{ frappe.format(totalExpense, 'Currency') }}
           </div>
           <div class="text-xs text-gray-600">
-            {{ _('Total Spending') }}
+            {{ _('Total Gastado') }}
           </div>
         </div>
       </div>
       <div v-if="totalExpense === 0" class="absolute inset-0 flex-center">
         <span class="text-base text-gray-600">
-          {{ _('No transactions yet') }}
+          {{ _('Aún no hay trasancciones') }}
         </span>
       </div>
     </div>
@@ -64,7 +64,7 @@ export default {
     SectionHeader
   },
   data: () => ({
-    period: 'This Year',
+    period: 'Este Año',
     expenses: [{ account: 'Test', total: 0 }]
   }),
   activated() {

@@ -8,7 +8,7 @@ module.exports = {
     "fields": [
         {
             fieldname: "enableNotifications",
-            label: "Enable Notifications",
+            label: "Activar Notificaciones",
             fieldtype: "Check"
         }
     ]

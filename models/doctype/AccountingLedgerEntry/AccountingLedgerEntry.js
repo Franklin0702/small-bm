@@ -1,6 +1,6 @@
 module.exports = {
   name: 'AccountingLedgerEntry',
-  label: 'Ledger Entry',
+  label: 'Entrada de libro mayor',
   naming: 'autoincrement',
   doctype: 'DocType',
   isSingle: 0,
@@ -9,50 +9,50 @@ module.exports = {
   fields: [
     {
       fieldname: 'date',
-      label: 'Date',
+      label: 'Fecha',
       fieldtype: 'Date'
     },
     {
       fieldname: 'account',
-      label: 'Account',
+      label: 'Cuenta',
       fieldtype: 'Link',
       target: 'Account',
       required: 1
     },
     {
       fieldname: 'description',
-      label: 'Description',
+      label: 'Descripción',
       fieldtype: 'Text'
     },
     {
       fieldname: 'party',
-      label: 'Party',
+      label: 'Interesado (Cliente / Proveedor)',
       fieldtype: 'Link',
       target: 'Party'
     },
     {
       fieldname: 'debit',
-      label: 'Debit',
+      label: 'Débito',
       fieldtype: 'Currency'
     },
     {
       fieldname: 'credit',
-      label: 'Credit',
+      label: 'Crédito',
       fieldtype: 'Currency'
     },
     {
       fieldname: 'againstAccount',
-      label: 'Against Account',
+      label: 'Contra Cuenta',
       fieldtype: 'Text'
     },
     {
       fieldname: 'referenceType',
-      label: 'Ref. Type',
+      label: 'Tipo de referencia',
       fieldtype: 'Data'
     },
     {
       fieldname: 'referenceName',
-      label: 'Ref. Name',
+      label: 'Nombre de referencia',
       fieldtype: 'DynamicLink',
       references: 'referenceType'
     },

@@ -9,52 +9,52 @@ const viewConfig = {
       fieldtype: 'Select',
       options: [
         { label: '', value: '' },
-        { label: 'Sales Invoice', value: 'SalesInvoice' },
-        { label: 'Purchase Invoice', value: 'PurchaseInvoice' },
-        { label: 'Payment', value: 'Payment' },
+        { label: 'Venta', value: 'SalesInvoice' },
+        { label: 'Compra', value: 'PurchaseInvoice' },
+        { label: 'Pago', value: 'Payment' },
         { label: 'Entrada de Diario', value: 'JournalEntry' }
       ],
       size: 'small',
-      label: 'Reference Type',
+      label: 'Tipo de referencia',
       fieldname: 'referenceType',
-      placeholder: 'Reference Type'
+      placeholder: 'Tipo de referencia'
     },
     {
       fieldtype: 'DynamicLink',
       size: 'small',
-      placeholder: 'Reference Name',
+      placeholder: 'Nombre de referencia',
       references: 'referenceType',
-      label: 'Reference Name',
+      label: 'Nombre de referencia',
       fieldname: 'referenceName'
     },
     {
       fieldtype: 'Link',
       target: 'Account',
       size: 'small',
-      placeholder: 'Account',
-      label: 'Account',
+      placeholder: 'Cuenta',
+      label: 'Cuenta',
       fieldname: 'account'
     },
     {
       fieldtype: 'Link',
       target: 'Party',
-      label: 'Party',
+      label: 'Interesado (Cliente / Proveedor)',
       size: 'small',
-      placeholder: 'Party',
+      placeholder: 'Interesado (Cliente / Proveedor)',
       fieldname: 'party'
     },
     {
       fieldtype: 'Date',
       size: 'small',
-      placeholder: 'From Date',
-      label: 'From Date',
+      placeholder: 'Desde',
+      label: 'Desde',
       fieldname: 'fromDate'
     },
     {
       fieldtype: 'Date',
       size: 'small',
-      placeholder: 'To Date',
-      label: 'To Date',
+      placeholder: 'Hasta',
+      label: 'Hasta',
       fieldname: 'toDate'
     }
   ],

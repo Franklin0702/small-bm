@@ -2,7 +2,7 @@ const countryList = Object.keys(require('~/fixtures/countryInfo.json')).sort();
 
 module.exports = {
   name: 'AccountingSettings',
-  label: 'Accounting Settings',
+  label: 'Configuración de Contabilidad',
   naming: 'name', // {random|autoincrement}
   isSingle: 1,
   isChild: 0,
@@ -11,14 +11,14 @@ module.exports = {
   keywordFields: [],
   fields: [
     {
-      label: 'Company Name',
+      label: 'Nombre del Negocio',
       fieldname: 'companyName',
       fieldtype: 'Data',
       required: 1
     },
 
     {
-      label: 'Write Off Account',
+      label: 'Cuenta de cancelación',
       fieldname: 'writeOffAccount',
       fieldtype: 'Link',
       target: 'Account',
@@ -32,7 +32,7 @@ module.exports = {
     },
 
     {
-      label: 'Round Off Account',
+      label: 'Cuenta de redondeo',
       fieldname: 'roundOffAccount',
       fieldtype: 'Link',
       target: 'Account',
@@ -47,30 +47,30 @@ module.exports = {
 
     {
       fieldname: 'country',
-      label: 'Country',
+      label: 'País',
       fieldtype: 'AutoComplete',
-      placeholder: 'Select Country',
+      placeholder: 'Elegir País',
       required: 1,
       getList: () => countryList
     },
 
     {
       fieldname: 'currency',
-      label: 'Currency',
+      label: 'Moneda',
       fieldtype: 'Data',
       required: 0
     },
 
     {
       fieldname: 'fullname',
-      label: 'Name',
+      label: 'Nombre',
       fieldtype: 'Data',
       required: 1
     },
 
     {
       fieldname: 'email',
-      label: 'Email',
+      label: 'Correo',
       fieldtype: 'Data',
       required: 1,
       validate: {
@@ -80,35 +80,35 @@ module.exports = {
 
     {
       fieldname: 'bankName',
-      label: 'Bank Name',
+      label: 'Banco',
       fieldtype: 'Data',
       required: 1
     },
 
     {
       fieldname: 'fiscalYearStart',
-      label: 'Fiscal Year Start Date',
+      label: 'Inicio del año fiscal',
       fieldtype: 'Date',
       required: 1
     },
 
     {
       fieldname: 'fiscalYearEnd',
-      label: 'Fiscal Year End Date',
+      label: 'Fin del año fiscal',
       fieldtype: 'Date',
       required: 1
     },
 
     {
       fieldname: 'setupComplete',
-      label: 'Setup Complete',
+      label: 'Completado',
       fieldtype: 'Check',
       default: 0
     },
 
     {
       fieldname: 'autoUpdate',
-      label: 'Auto Update',
+      label: 'Actualizar automáticamente',
       fieldtype: 'Check',
       default: 1
     }

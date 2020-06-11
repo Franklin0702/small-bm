@@ -9,7 +9,7 @@
           :icon="true"
           @click="$router.push(`/print/${doc.doctype}/${doc.name}`)"
         >
-          Print
+          Imprimir
         </Button>
         <DropdownWithActions class="ml-2" :actions="actions" />
         <Button
@@ -18,14 +18,14 @@
           class="text-white text-xs ml-2"
           @click="onSaveClick"
         >
-          {{ _('Save') }}
+          {{ _('Guardar') }}
         </Button>
         <Button
           v-if="!doc._dirty && !doc._notInserted && !doc.submitted"
           type="primary"
           class="text-white text-xs ml-2"
           @click="onSubmitClick"
-          >{{ _('Submit') }}</Button
+          >{{ _('Confirmar') }}</Button
         >
       </template>
     </PageHeader>
@@ -102,13 +102,23 @@
                 />
 
                 <FormControl
-                  v-if="doc.doctype === 'SalesInvoice'"
                   class="mt-2 text-base"
                   input-class="bg-gray-100 px-3 py-2 text-base text-right"
                   :df="meta.getField('voucherType')"
                   :value="doc.voucherType"
                   :placeholder="'Tipo de Comprobante'"
                   @change="value => doc.set('voucherType', value)"
+                  :read-only="doc.submitted"
+                />
+
+                <FormControl
+                  v-if="doc.submitted && doc.outstandingAmount === 0.0"
+                  class="mt-2 text-base"
+                  input-class="bg-gray-100 px-3 py-2 text-base text-right"
+                  :df="meta.getField('voucherSerie')"
+                  :value="doc.voucherSerie"
+                  :placeholder="'NCF'"
+                  @change="value => doc.set('voucherSerie', value)"
                   :read-only="doc.submitted"
                 />
               </div>
@@ -163,7 +173,7 @@
             <div
               class="flex pl-2 justify-between py-3 border-t text-green-600 font-semibold text-base"
             >
-              <div>{{ _('Grand Total') }}</div>
+              <div>{{ _('Total') }}</div>
               <div>{{ formattedValue('grandTotal') }}</div>
             </div>
           </div>

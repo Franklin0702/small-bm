@@ -4,47 +4,47 @@ module.exports = {
   fields: [
     {
       fieldname: 'onboardingComplete',
-      label: 'Onboarding Complete',
+      label: 'Inducción Completada',
       fieldtype: 'Check'
     },
     {
       fieldname: 'companySetup',
-      label: 'Company Setup',
+      label: 'Preparar Compañía',
       fieldtype: 'Check'
     },
     {
       fieldname: 'systemSetup',
-      label: 'System Setup',
+      label: 'Preparar Sistema',
       fieldtype: 'Check'
     },
     {
       fieldname: 'invoiceSetup',
-      label: 'Invoice Setup',
+      label: 'Preparar Facturas',
       fieldtype: 'Check'
     },
     {
       fieldname: 'itemCreated',
-      label: 'Item Created',
+      label: 'Producto Creado',
       fieldtype: 'Check'
     },
     {
       fieldname: 'customerCreated',
-      label: 'Customer Created',
+      label: 'Cliente Creado',
       fieldtype: 'Check'
     },
     {
       fieldname: 'supplierCreated',
-      label: 'Supplier Created',
+      label: 'Proveedor Creado',
       fieldtype: 'Check'
     },
     {
       fieldname: 'invoiceCreated',
-      label: 'Invoice Created',
+      label: 'Venta Creada',
       fieldtype: 'Check'
     },
     {
       fieldname: 'billCreated',
-      label: 'Bill Created',
+      label: 'Compra Creada',
       fieldtype: 'Check'
     }
   ]

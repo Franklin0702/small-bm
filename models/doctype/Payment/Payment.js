@@ -2,7 +2,7 @@ const utils = require('../../../accounting/utils');
 
 module.exports = {
   name: 'Payment',
-  label: 'Payment',
+  label: 'Pago',
   isSingle: 0,
   isChild: 0,
   isSubmittable: 1,
@@ -11,26 +11,26 @@ module.exports = {
   fields: [
     {
       fieldname: 'party',
-      label: 'Party',
+      label: 'Interesado (Cliente/Proveedor)',
       fieldtype: 'Link',
       target: 'Party',
       required: 1
     },
     {
       fieldname: 'date',
-      label: 'Posting Date',
+      label: 'Fecha de publicación',
       fieldtype: 'Date',
       defaultValue: new Date().toISOString()
     },
     {
       fieldname: 'account',
-      label: 'From Account',
+      label: 'Cuenta origen',
       fieldtype: 'Link',
       target: 'Account',
       required: 1,
       getFilters: (query, doc) => {
-        if (doc.paymentType === 'Pay') {
-          if (doc.paymentMethod === 'Cash') {
+        if (doc.paymentType === 'Pago') {
+          if (doc.paymentMethod === 'Efectivo') {
             return { accountType: 'Cash', isGroup: 0 };
           } else {
             return { accountType: ['in', ['Bank', 'Cash']], isGroup: 0 };
@@ -40,21 +40,21 @@ module.exports = {
     },
     {
       fieldname: 'paymentType',
-      label: 'Payment Type',
+      label: 'Tipo de Pago',
       fieldtype: 'Select',
-      options: ['', 'Receive', 'Pay'],
+      options: ['', 'Cobro', 'Pago'],
       required: 1
     },
     {
       fieldname: 'paymentAccount',
-      label: 'To Account',
-      placeholder: 'To Account',
+      label: 'Cuenta destino',
+      placeholder: 'Cuenta destino',
       fieldtype: 'Link',
       target: 'Account',
       required: 1,
       getFilters: (query, doc) => {
-        if (doc.paymentType === 'Receive') {
-          if (doc.paymentMethod === 'Cash') {
+        if (doc.paymentType === 'Cobro') {
+          if (doc.paymentMethod === 'Efectivo') {
             return { accountType: 'Cash', isGroup: 0 };
           } else {
             return { accountType: ['in', ['Bank', 'Cash']], isGroup: 0 };
@@ -62,57 +62,90 @@ module.exports = {
         }
       },
       formula: doc => {
-        if (doc.paymentMethod === 'Cash') {
+        if (doc.paymentMethod === 'Efectivo') {
           return 'Cash';
         }
       }
     },
     {
       fieldname: 'paymentMethod',
-      label: 'Payment Method',
-      placeholder: 'Payment Method',
+      label: 'Método de Pago',
+      placeholder: 'Método de Pago',
       fieldtype: 'Select',
-      options: ['', 'Cash', 'Cheque', 'Transfer'],
+      options: ['', 'Efectivo', 'Cheque', 'Transferencia', 'Nota de crédito'],
       required: 1
     },
     {
       fieldname: 'referenceId',
-      label: 'Ref. / Cheque No.',
-      placeholder: 'Ref. / Cheque No.',
+      label: 'Ref. / Num. Cheque',
+      placeholder: 'Ref. / Num. Cheque',
       fieldtype: 'Data',
       required: 1 // TODO: UNIQUE
     },
     {
       fieldname: 'referenceDate',
-      label: 'Ref. Date',
-      placeholder: 'Ref. Date',
+      label: 'Fecha de referencia',
+      placeholder: 'Fecha de referencia',
       fieldtype: 'Date'
     },
     {
       fieldname: 'clearanceDate',
-      label: 'Clearance Date',
-      placeholder: 'Clearance Date',
+      label: 'Fecha de liquidación',
+      placeholder: 'Fecha de liquidación',
       fieldtype: 'Date',
       hidden: doc => {
-        return doc.paymentMethod === 'Cash' ? 1 : 0;
+        return doc.paymentMethod === 'Efectivo' ? 1 : 0;
       }
     },
     {
       fieldname: 'amount',
-      label: 'Amount',
+      label: 'Monto',
       fieldtype: 'Currency',
       required: 1,
       readOnly: 1,
-      formula: doc => doc.getSum('for', 'amount')
+      formulaDependsOn: ['paymentMethod'],
+      formula: async doc => {
+        
+        if (doc.paymentMethod === 'Nota de crédito' && doc.referenceId && doc.referenceId !== '') {
+          const frappe = require('frappejs'); 
+          let document = await frappe.db.getAll({
+            doctype: 'SalesInvoice',
+            fields: [
+              'name',
+              'date',
+              'customer',
+              'account',
+              'netTotal',
+              'grandTotal',
+              'outstandingAmount',
+              'voucherSerie'
+            ],
+            filters: {
+              voucherSerie: doc.referenceId,
+              voucherType: 'Nota de Crédito'
+            }
+          });
+          if (document.length === 1)
+            return document[0].grandTotal;
+          else
+            throw new frappe.errors.throw(
+              'El numero de referencia no corresponde con ninguna nota de credito'
+            );
+        }
+        else {
+          doc.getSum('for', 'amount');
+
+        }
+      }
     },
     {
       fieldname: 'writeoff',
-      label: 'Write Off / Refund',
+      label: 'Cancelar / reembolsar',
       fieldtype: 'Currency'
     },
     {
       fieldname: 'for',
-      label: 'Payment For',
+      label: 'Pago por',
       fieldtype: 'Table',
       childtype: 'PaymentFor',
       required: 1

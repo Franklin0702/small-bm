@@ -43,6 +43,11 @@ const config = {
           doctype: 'Item'
         },
         {
+          label: _('Notas de crédito'),
+          route: '/list/AdjustSalesInvoice',
+          doctype: 'AdjustSalesInvoice'
+        },
+        {
           label: _('Entrada de diario'),
           route: '/list/JournalEntry',
           doctype: 'JournalEntry'
@@ -78,6 +83,7 @@ const config = {
         }
       ]
     },
+    
     {
       title: _('Reportes'),
       icon: getIcon('reports'),
@@ -112,13 +118,18 @@ const config = {
       icon: getIcon('settings'),
       items: [
         {
-          label: _('Gráficos de cuentas'),
+          label: _('Jerarquía de cuentas'),
           route: '/chart-of-accounts'
         },
         {
           label: _('Impuestos'),
           route: '/list/Tax',
           doctype: 'Tax'
+        },
+        {
+          label: _('Comprobantes Fiscales'),
+          route:'/list/VoucherType',
+          doctype: 'VoucherType'
         },
         {
           label: _('General'),

@@ -13,53 +13,53 @@ module.exports = {
   fields: [
     {
       fieldname: 'addressLine1',
-      label: 'Address Line 1',
-      placeholder: 'Address Line 1',
+      label: 'Línea 1',
+      placeholder: 'Línea 1',
       fieldtype: 'Data',
       required: 1,
     },
     {
       fieldname: 'addressLine2',
-      label: 'Address Line 2',
-      placeholder: 'Address Line 2',
+      label: 'Línea 2',
+      placeholder: 'Línea 2',
       fieldtype: 'Data'
     },
     {
       fieldname: 'city',
-      label: 'City / Town',
-      placeholder: 'City / Town',
+      label: 'Ciudad / Pueblo',
+      placeholder: 'Ciudad / Pueblo',
       fieldtype: 'Data',
       required: 1
     },
     {
       fieldname: 'state',
-      label: 'State',
-      placeholder: 'State',
+      label: 'Provincia / Estado',
+      placeholder: 'Provincia / Estado',
       fieldtype: 'Data'
     },
     {
       fieldname: 'country',
-      label: 'Country',
-      placeholder: 'Country',
+      label: 'País',
+      placeholder: 'País',
       fieldtype: 'Data',
       required: 1
     },
     {
       fieldname: 'postalCode',
-      label: 'Postal Code',
-      placeholder: 'Postal Code',
+      label: 'Código Postal',
+      placeholder: 'Código Postal',
       fieldtype: 'Data'
     },
     {
       fieldname: 'emailAddress',
-      label: 'Email Address',
-      placeholder: 'Email Address',
+      label: 'Dirección de correo',
+      placeholder: 'Dirección de correo',
       fieldtype: 'Data'
     },
     {
       fieldname: 'phone',
-      label: 'Phone',
-      placeholder: 'Phone',
+      label: 'Teléfono',
+      placeholder: 'Teléfono',
       fieldtype: 'Data'
     },
     {
@@ -70,7 +70,7 @@ module.exports = {
     {
       fieldname: 'addressDisplay',
       fieldtype: 'Text',
-      label: 'Address Display',
+      label: 'Dirección a mostrar',
       readOnly: true,
       formula: doc => {
         return [

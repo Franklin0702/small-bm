@@ -1,6 +1,7 @@
+const frappe = require('frappejs');
 module.exports = {
   name: 'PaymentFor',
-  label: 'Payment For',
+  label: 'Pagar por',
   isSingle: 0,
   isChild: 1,
   keywordFields: [],
@@ -12,23 +13,24 @@ module.exports = {
   fields: [
     {
       fieldname: 'referenceType',
-      label: 'Reference Type',
+      label: 'Tipo de referencia',
       fieldtype: 'AutoComplete',
       options: ['SalesInvoice', 'PurchaseInvoice'],
       required: 1
     },
     {
       fieldname: 'referenceName',
-      label: 'Reference Name',
+      label: 'Tipo de referencia',
       fieldtype: 'DynamicLink',
       references: 'referenceType',
       required: 1
     },
     {
       fieldname: 'amount',
-      label: 'Amount',
+      label: 'Monto',
       fieldtype: 'Currency',
-      formula: (row, doc) => {
+      formula: async (row, doc) => {
+    
         return doc.getFrom(row.referenceType, row.referenceName, 'outstandingAmount');
       },
       required: 1

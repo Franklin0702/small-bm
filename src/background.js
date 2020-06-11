@@ -78,6 +78,10 @@ function createSettingsWindow(tab = 'General') {
 
 ipcMain.on('check-for-updates', () => {
   if (!isDevelopment && !checkedForUpdate) {
+    autoUpdater.setFeedURL({
+      url: '',
+      provider: 'generic'
+    })
     autoUpdater.checkForUpdatesAndNotify();
     checkedForUpdate = true;
   }

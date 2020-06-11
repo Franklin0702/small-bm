@@ -2,11 +2,11 @@ import { _ } from 'frappejs/utils';
 
 export default {
   doctype: 'Item',
-  title: _('Items'),
+  title: _('Productos'),
   columns: [
-    'name',
-    'unit',
-    'tax',
-    'rate',
+    { fieldname: 'name', label: 'producto' },
+    { fieldname: 'unit', label: 'unidad' },
+    { fieldname: 'tax', label: 'impuestos' },
+    { fieldname: 'rate', label: 'precio' },
   ]
 }

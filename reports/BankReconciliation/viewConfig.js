@@ -7,8 +7,8 @@ module.exports = {
       fieldtype: 'Link',
       target: 'Account',
       size: 'small',
-      placeholder: 'Payment Account',
-      label: 'Payment Account',
+      placeholder: 'Cuenta de Pago',
+      label: 'Cuenta de Pago',
       fieldname: 'paymentAccount',
       getFilters: () => {
         return {
@@ -21,34 +21,34 @@ module.exports = {
       fieldtype: 'Link',
       target: 'Party',
       size: 'small',
-      label: 'Party',
-      placeholder: 'Party',
+      label: 'Interesado (Cliente / Proveedor)',
+      placeholder: 'Interesado (Cliente / Proveedor)',
       fieldname: 'party'
     },
     {
       fieldtype: 'Date',
       size: 'small',
-      placeholder: 'From Date',
-      label: 'From Date',
+      placeholder: 'Desde',
+      label: 'Desde',
       fieldname: 'fromDate'
     },
     {
       fieldtype: 'Date',
       size: 'small',
-      placeholder: 'To Date',
-      label: 'To Date',
+      placeholder: 'Hasta',
+      label: 'Hasta',
       fieldname: 'toDate'
     }
   ],
   linkFields: [
     {
-      label: 'Reconcile',
+      label: 'Interesado (Cliente / Proveedor)',
       type: 'secondary',
       condition: report => report.currentFilters.paymentAccount,
       action: async report => {
         report.$modal.show({
           modalProps: {
-            title: `Import Bank Account Statement`,
+            title: `Importar estado de cuenta`,
             noFooter: true
           },
           component: require('../../src/components/ImportWizard').default,
@@ -61,7 +61,7 @@ module.exports = {
       }
     },
     {
-      label: 'Clear Filters',
+      label: 'Limpiar Filtros',
       type: 'secondary',
       action: async report => {
         await report.getReportData({});
@@ -72,20 +72,20 @@ module.exports = {
   getColumns() {
     return [
       {
-        label: 'Posting Date',
+        label: 'Fecha de publicación',
         fieldtype: 'Date',
         fieldname: 'date'
       },
       {
-        label: 'Payment Account',
+        label: 'Cuenta de Pago',
         fieldtype: 'Link'
       },
       {
-        label: 'Debit',
+        label: 'Débito',
         fieldtype: 'Currency'
       },
       {
-        label: 'Credit',
+        label: 'Crédito',
         fieldtype: 'Currency'
       },
       {
@@ -93,33 +93,33 @@ module.exports = {
         fieldtype: 'Currency'
       },
       {
-        label: 'Ref/Cheque ID',
+        label: 'Ref / Cheque ID',
         fieldtype: 'Data',
         fieldname: 'referenceId'
       },
       {
-        label: 'Clearance Date',
+        label: 'Fecha de liquidación',
         fieldtype: 'Date',
         fieldname: 'clearanceDate'
       },
       {
-        label: 'Ref. Type',
+        label: 'Tipo de referencia',
         fieldtype: 'Data',
         fieldname: 'referenceType'
       },
       {
-        label: 'Ref. Name',
+        label: 'Nombre de referencia',
         fieldtype: 'Data',
         fieldname: 'referenceName'
       },
       {
-        label: 'Ref. Date',
+        label: 'Fecha de referencia',
         fieldtype: 'Date',
         fieldname: 'referenceDate'
       },
 
       {
-        label: 'Party',
+        label: 'Interesados (Cliente / Proveedores)',
         fieldtype: 'Link'
       }
     ];

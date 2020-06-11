@@ -3,7 +3,7 @@ const Quotation = require('../Quotation/Quotation');
 
 module.exports = model.extend(Quotation, {
   name: 'SalesOrder',
-  label: 'Sales Order',
+  label: 'Orden de venta',
   settings: 'SalesOrderSettings',
   fields: [
     {

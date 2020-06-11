@@ -9,9 +9,9 @@ module.exports = {
     {
       fieldtype: 'Date',
       fieldname: 'fromDate',
-      label: 'From Date',
+      label: 'Desde',
       size: 'small',
-      placeholder: 'From Date',
+      placeholder: 'Desde',
       required: 1,
       default: async () => {
         return (await frappe.getSingle('AccountingSettings')).fiscalYearStart;
@@ -20,9 +20,9 @@ module.exports = {
     {
       fieldtype: 'Date',
       size: 'small',
-      placeholder: 'To Date',
+      placeholder: 'Hasta',
       fieldname: 'toDate',
-      label: 'To Date',
+      label: 'Hasta',
       required: 1,
       default: async () => {
         return (await frappe.getSingle('AccountingSettings')).fiscalYearEnd;

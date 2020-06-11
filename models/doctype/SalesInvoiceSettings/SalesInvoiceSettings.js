@@ -8,7 +8,7 @@ module.exports = {
   fields: [
     {
       fieldname: 'numberSeries',
-      label: 'Number Series',
+      label: 'Prefijo de Factura',
       fieldtype: 'Link',
       target: 'NumberSeries',
       required: 1,
@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       fieldname: 'template',
-      label: 'Template',
+      label: 'Plantilla',
       fieldtype: 'Select',
       options: ['Basic I', 'Basic II', 'Modern'],
       required: 1,
@@ -24,7 +24,7 @@ module.exports = {
     },
     {
       fieldname: 'font',
-      label: 'Font',
+      label: 'Fuente',
       fieldtype: 'Select',
       options: ['Montserrat', 'Open Sans', 'Oxygen', 'Merriweather'],
       required: 1,
@@ -32,7 +32,7 @@ module.exports = {
     },
     {
       fieldname: 'themeColor',
-      label: 'Theme Color',
+      label: 'Color Principal',
       fieldtype: 'Data',
       required: 1,
       default: '#000000',

@@ -9,7 +9,7 @@
               {{ filterAppliedMessage }}
             </template>
             <template v-else>
-              {{ _('Filter') }}
+              {{ _('Filtrar') }}
             </template>
           </span>
         </span>
@@ -30,7 +30,7 @@
                   size="small"
                   input-class="bg-gray-100"
                   :df="{
-                    placeholder: 'Field',
+                    placeholder: 'Campos',
                     fieldname: 'fieldname',
                     fieldtype: 'Select',
                     options: fieldOptions
@@ -44,7 +44,7 @@
                   size="small"
                   input-class="bg-gray-100"
                   :df="{
-                    placeholder: 'Condition',
+                    placeholder: 'Condición',
                     fieldname: 'condition',
                     fieldtype: 'Select',
                     options: conditions
@@ -58,7 +58,7 @@
                   size="small"
                   input-class="bg-gray-100"
                   :df="{
-                    placeholder: 'Value',
+                    placeholder: 'Valor',
                     fieldname: 'value',
                     fieldtype: 'Data'
                   }"
@@ -80,7 +80,7 @@
         </template>
         <template v-else>
           <span class="text-base text-gray-600">{{
-            _('No filters selected')
+            _('No hay filtros')
           }}</span>
         </template>
       </div>
@@ -89,7 +89,7 @@
         @click="addNewFilter"
       >
         <feather-icon name="plus" class="w-4 h-4" />
-        <span class="ml-2">{{ _('Add a filter') }}</span>
+        <span class="ml-2">{{ _('Agrega un filtro') }}</span>
       </div>
     </div>
   </Popover>
@@ -102,14 +102,14 @@ import Icon from './Icon';
 import FormControl from './Controls/FormControl';
 
 let conditions = [
-  { label: 'Is', value: '=' },
-  { label: 'Is Not', value: '!=' },
-  { label: 'Contains', value: 'like' },
-  { label: 'Does Not Contain', value: 'not like' },
-  { label: 'Greater Than', value: '>' },
-  { label: 'Less Than', value: '<' },
-  { label: 'Is Empty', value: 'is null' },
-  { label: 'Is Not Empty', value: 'is not null' }
+  { label: 'Igual a', value: '=' },
+  { label: 'Distinto de', value: '!=' },
+  { label: 'Contiene', value: 'like' },
+  { label: 'No contiene', value: 'not like' },
+  { label: 'Mayor que', value: '>' },
+  { label: 'Menor que', value: '<' },
+  { label: 'vacío', value: 'is null' },
+  { label: 'No vacío', value: 'is not null' }
 ];
 
 export default {
@@ -180,9 +180,9 @@ export default {
     },
     filterAppliedMessage() {
       if (this.activeFilterCount === 1) {
-        return this._('1 filter applied');
+        return this._('1 filtro aplicado');
       }
-      return this._('{0} filters applied', [this.activeFilterCount]);
+      return this._('{0} filtros aplicados', [this.activeFilterCount]);
     }
   }
 };

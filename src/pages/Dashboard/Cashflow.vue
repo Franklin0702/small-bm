@@ -2,15 +2,15 @@
   <div class="mt-6">
     <template v-if="hasData">
       <div class="flex items-center justify-between">
-        <div class="font-medium">{{ _('Cashflow') }}</div>
+        <div class="font-medium">{{ _('Flujo de efectivo') }}</div>
         <div class="flex text-base">
           <div class="flex items-center">
             <span class="w-3 h-3 rounded-sm inline-block bg-blue-500"></span>
-            <span class="ml-2">{{ _('Inflow') }}</span>
+            <span class="ml-2">{{ _('Entrada') }}</span>
           </div>
           <div class="flex items-center ml-6">
             <span class="w-3 h-3 rounded-sm inline-block bg-gray-500"></span>
-            <span class="ml-2">{{ _('Outflow') }}</span>
+            <span class="ml-2">{{ _('Salida') }}</span>
           </div>
         </div>
         <PeriodSelector :value="period" @change="value => (period = value)" />
@@ -24,6 +24,7 @@
       class="w-full h-full"
     >
       <defs>
+
         <linearGradient x1="50%" y1="100%" x2="50%" y2=".889%" id="a">
           <stop stop-color="#FFF" stop-opacity="0" offset="0%" />
           <stop stop-color="#F4F4F6" offset="100%" />
@@ -31,7 +32,7 @@
       </defs>
       <g fill="none" fill-rule="evenodd">
         <text fill="#112B42" class="font-medium">
-          <tspan y="16">{{ _('Cashflow') }}</tspan>
+          <tspan y="16">{{ _('Flujo de efectivo') }}</tspan>
         </text>
         <g fill="#E9E9ED">
           <path d="M371 2h12v12h-12zM391 2h53v12h-53z" />
@@ -99,7 +100,7 @@ export default {
   components: {
     PeriodSelector
   },
-  data: () => ({ period: 'This Year', hasData: false }),
+  data: () => ({ period: 'Este Año', hasData: false }),
   watch: {
     period: 'render'
   },
@@ -148,12 +149,12 @@ export default {
           labels: periodList,
           datasets: [
             {
-              name: 'Inflow',
+              name: 'Entrada',
               chartType: 'line',
               values: data.map(period => period.inflow)
             },
             {
-              name: 'Outflow',
+              name: 'Salida',
               chartType: 'line',
               values: data.map(period => period.outflow)
             }

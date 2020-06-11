@@ -8,13 +8,13 @@ module.exports = {
   fields: [
     {
       fieldname: 'name',
-      label: 'Name',
+      label: 'Nombre',
       fieldtype: 'Data',
       required: 1
     },
     {
       fieldname: 'details',
-      label: 'Details',
+      label: 'Detalles',
       fieldtype: 'Table',
       childtype: 'TaxDetail',
       required: 1

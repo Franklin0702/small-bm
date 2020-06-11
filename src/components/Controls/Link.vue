@@ -15,6 +15,7 @@ export default {
       if (keyword && !filters.keywords) {
         filters.keywords = ['like', keyword];
       }
+
       let results = await frappe.db.getAll({
         doctype,
         filters,
@@ -22,6 +23,7 @@ export default {
           ...new Set(['name', meta.titleField, ...meta.getKeywordFields()])
         ]
       });
+      console.log(results, doctype, filters, meta.titleField, ...new Set(['name', meta.titleField, ...meta.getKeywordFields()])); 
       let createNewOption = this.getCreateNewOption();
       let suggestions = results
         .map(r => {
@@ -66,12 +68,14 @@ export default {
       };
     },
     async getFilters(keyword) {
-      if (this.doc) {
+      try {
         return this.df.getFilters
           ? (await this.df.getFilters(keyword, this.doc)) || {}
           : {};
       }
-      return {};
+      catch (error) {
+        return {};
+      }
     },
     getTarget() {
       return this.df.target;

@@ -32,7 +32,7 @@ export default {
     Dropdown
   },
   data() {
-    let options = ['This Year', 'This Quarter', 'This Month'];
+    let options = ['Este Año', 'Este Cuatrimestre', 'Este Mes'];
     return {
       periodOptions: options.map(option => {
         return {

@@ -107,7 +107,8 @@ export default {
     partiallyPaid(invoice) {
       return (
         invoice.outstandingAmount &&
-        invoice.outstandingAmount !== invoice.baseGrandTotal
+        invoice.outstandingAmount !== invoice.baseGrandTotal &&
+        invoice.outstandingAmount > 0
       );
     },
     notPaid(invoice) {

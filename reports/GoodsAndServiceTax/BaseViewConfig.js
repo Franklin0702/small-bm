@@ -15,23 +15,23 @@ module.exports = {
     },
     {
       fieldtype: 'Data',
-      label: 'Place',
+      label: 'Lugar',
       size: 'small',
-      placeholder: 'Place',
+      placeholder: 'Lugar',
       fieldname: 'place'
     },
     {
       fieldtype: 'Date',
-      label: 'From Date',
+      label: 'Desde',
       size: 'small',
-      placeholder: 'From Date',
+      placeholder: 'Desde',
       fieldname: 'fromDate'
     },
     {
       fieldtype: 'Date',
-      label: 'To Date',
+      label: 'Hasta',
       size: 'small',
-      placeholder: 'To Date',
+      placeholder: 'Hasta',
       fieldname: 'toDate'
     }
   ],

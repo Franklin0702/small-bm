@@ -6,17 +6,17 @@ export async function getDatesAndPeriodicity(period) {
   let periodicity = 'Monthly';
   let accountingSettings = await frappe.getSingle('AccountingSettings');
 
-  if (period === 'This Year') {
+  if (period === 'Este Año') {
     fromDate = accountingSettings.fiscalYearStart;
     toDate = accountingSettings.fiscalYearEnd;
-  } else if (period === 'This Quarter') {
+  } else if (period === 'Este Cuatrimestre') {
     fromDate = DateTime.local()
       .startOf('quarter')
       .toISODate();
     toDate = DateTime.local()
       .endOf('quarter')
       .toISODate();
-  } else if (period === 'This Month') {
+  } else if (period === 'Este Mes') {
     fromDate = DateTime.local()
       .startOf('month')
       .toISODate();

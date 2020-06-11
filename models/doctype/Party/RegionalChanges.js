@@ -3,7 +3,7 @@ const party = require('./Party');
 party.fields.splice(3, 0, {
   //insert at 3rd position
   fieldname: 'gstin',
-  label: 'GSTIN No.',
+  label: 'Número.GSTIN',
   fieldtype: 'Data',
   hidden: form => {
     return form.gstType === 'Registered Regular' ? 0 : 1;

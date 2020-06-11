@@ -5,12 +5,12 @@ module.exports = {
     fields: [
         {
             fieldname: 'startTime',
-            label: 'Start Time',
+            label: 'Tiempo Inicio',
             fieldtype: 'Data',
         },
         {
             fieldname: 'title',
-            label: 'Title',
+            label: 'Título',
             fieldtype: 'Data',
         },
     ]

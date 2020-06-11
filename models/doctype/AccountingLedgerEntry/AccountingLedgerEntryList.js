@@ -2,7 +2,7 @@ import { _ } from 'frappejs/utils';
 
 export default {
   doctype: 'AccountingLedgerEntry',
-  title: _('Accounting Ledger Entries'),
+  title: _('Contabilidad de Entradas de Libro'),
   columns: [
     'account',
     'party',

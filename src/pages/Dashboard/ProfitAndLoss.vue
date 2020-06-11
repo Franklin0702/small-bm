@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full">
     <SectionHeader>
-      <template slot="title">{{ _('Profit and Loss') }}</template>
+      <template slot="title">{{ _('Ganancias y Pérdidas') }}</template>
       <PeriodSelector
         v-if="hasData"
         slot="action"
@@ -12,7 +12,7 @@
     <div v-if="hasData" class="chart-wrapper" ref="profit-and-loss"></div>
     <div class="flex-1 w-full h-full flex-center" v-else>
       <span class="text-base text-gray-600">
-        {{ _('No transactions yet') }}
+        {{ _('Aún no hay transacciones') }}
       </span>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
     PeriodSelector,
     SectionHeader
   },
-  data: () => ({ period: 'This Year', hasData: false }),
+  data: () => ({ period: 'Este Año', hasData: false }),
   activated() {
     this.render();
   },

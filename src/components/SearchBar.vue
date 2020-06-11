@@ -18,7 +18,7 @@
           <input
             type="search"
             class="bg-gray-200 text-sm pl-8 focus:outline-none h-full w-56"
-            placeholder="Search..."
+            placeholder="buscar..."
             autocomplete="off"
             spellcheck="false"
             v-model="inputValue"

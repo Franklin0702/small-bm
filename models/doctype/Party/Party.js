@@ -3,34 +3,34 @@ let { _ } = require('frappejs/utils');
 
 module.exports = {
   name: 'Party',
-  label: 'Party',
+  label: 'Persona',
   keywordFields: ['name'],
   fields: [
     {
       fieldname: 'name',
-      label: 'Name',
+      label: 'Nombre',
       fieldtype: 'Data',
       required: 1,
-      placeholder: 'Full Name'
+      placeholder: 'Nombre Completo'
     },
     {
       fieldname: 'image',
-      label: 'Image',
+      label: 'Imagen',
       fieldtype: 'AttachImage'
     },
     {
       fieldname: 'customer',
-      label: 'Customer',
+      label: 'Cliente',
       fieldtype: 'Check'
     },
     {
       fieldname: 'supplier',
-      label: 'Supplier',
+      label: 'Proveedor',
       fieldtype: 'Check'
     },
     {
       fieldname: 'defaultAccount',
-      label: 'Default Account',
+      label: 'Cuenta por defecto',
       fieldtype: 'Link',
       target: 'Account',
       getFilters: (query, doc) => {
@@ -50,46 +50,46 @@ module.exports = {
     },
     {
       fieldname: 'outstandingAmount',
-      label: 'Outstanding Amount',
+      label: 'Monto Pendiente',
       fieldtype: 'Currency'
     },
     {
       fieldname: 'currency',
-      label: 'Currency',
+      label: 'Moneda',
       fieldtype: 'Link',
       target: 'Currency',
-      placeholder: 'INR',
+      placeholder: 'DOP',
       formula: () => frappe.AccountingSettings.currency
     },
     {
       fieldname: 'email',
-      label: 'Email',
+      label: 'Correo',
       fieldtype: 'Data',
-      placeholder: 'john@doe.com',
+      placeholder: 'juan@pérez.com',
       validate: {
         type: 'email'
       }
     },
     {
       fieldname: 'phone',
-      label: 'Phone',
+      label: 'Teléfono',
       fieldtype: 'Data',
-      placeholder: 'Phone',
+      placeholder: 'Teléfono',
       validate: {
         type: 'phone'
       }
     },
     {
       fieldname: 'address',
-      label: 'Address',
+      label: 'Dirección',
       fieldtype: 'Link',
       target: 'Address',
-      placeholder: _('Click to create'),
+      placeholder: _('Clic para crear'),
       inline: true
     },
     {
       fieldname: 'addressDisplay',
-      label: 'Address Display',
+      label: 'Dirección a mostrar',
       fieldtype: 'Text',
       readOnly: true,
       formula: doc => {
@@ -97,8 +97,26 @@ module.exports = {
           return doc.getFrom('Address', doc.address, 'addressDisplay');
         }
       }
+    },
+    {
+      fieldname: 'document',
+      label: 'RNC / Cedula',
+      fieldtype: 'Data',
+      required: true
+    },
+    {
+      fieldname:'businessName', 
+      label: 'Razon Comercial / Nombre del Cliente',
+      fieldtype: 'Data',
+      required: true
+    },
+    {
+      fieldname: 'tradename', 
+      label: 'Nombre Comercial',
+      fieldtype: 'Data',
+      required: false
     }
   ],
 
-  quickEditFields: ['email', 'phone', 'address', 'defaultAccount', 'currency']
+  quickEditFields: ['businessName', 'document', 'tradename', 'email', 'phone', 'address', 'defaultAccount', 'currency']
 };

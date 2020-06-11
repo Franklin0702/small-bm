@@ -2,7 +2,7 @@
   <Row
     :ratio="ratio"
     class="border-b px-2 w-full "
-    :class="{ 'bg-brand-100': hovering }"
+    v-bind:class="{ 'bg-brand-100': false }"
     @mouseover="hovering = true"
     @mouseleave="hovering = false"
     @click="hovering = false"
@@ -45,6 +45,11 @@ export default {
   data: () => ({ hovering: false }),
   beforeCreate() {
     this.$options.components.FormControl = FormControl;
+  },
+  computed:{
+    getHovering(){
+      return this.hovering; 
+    }
   },
   provide() {
     return {

@@ -2,29 +2,29 @@ const frappe = require('frappejs');
 
 module.exports = {
   name: 'Account',
-  label: 'Account',
+  label: 'Cuenta',
   doctype: 'DocType',
   documentClass: require('./AccountDocument.js'),
   isSingle: 0,
   isTree: 1,
-  keywordFields: ['name', 'rootType', 'accountType'],
+  keywordFields: ['name', 'rootType', 'accountType', 'isGroup'],
   fields: [
     {
       fieldname: 'name',
-      label: 'Account Name',
+      label: 'Nombre de Cuenta',
       fieldtype: 'Data',
       required: 1
     },
     {
       fieldname: 'rootType',
-      label: 'Root Type',
+      label: 'Tipo Raíz',
       fieldtype: 'Select',
       options: ['', 'Asset', 'Liability', 'Equity', 'Income', 'Expense'],
       required: 1
     },
     {
       fieldname: 'parentAccount',
-      label: 'Parent Account',
+      label: 'Cuenta Padre',
       fieldtype: 'Link',
       target: 'Account',
       getFilters: (query, doc) => {
@@ -37,7 +37,7 @@ module.exports = {
     },
     {
       fieldname: 'accountType',
-      label: 'Account Type',
+      label: 'Tipo de cuenta',
       fieldtype: 'Select',
       options: [
         '',
@@ -71,7 +71,7 @@ module.exports = {
     },
     {
       fieldname: 'isGroup',
-      label: 'Is Group',
+      label: 'Es un grupo?',
       fieldtype: 'Check'
     }
   ],

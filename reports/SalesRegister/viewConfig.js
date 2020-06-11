@@ -6,9 +6,9 @@ module.exports = {
     {
       fieldtype: 'Link',
       target: 'Party',
-      label: 'Customer Name',
+      label: 'Cliente',
       size: 'small',
-      placeholder: 'Customer Name',
+      placeholder: 'Cliente',
       fieldname: 'customer',
       getFilters: query => {
         if (query)
@@ -26,22 +26,22 @@ module.exports = {
       fieldtype: 'Date',
       fieldname: 'fromDate',
       size: 'small',
-      placeholder: 'From Date',
-      label: 'From Date',
+      placeholder: 'Desde',
+      label: 'Desde',
       required: 1
     },
     {
       fieldtype: 'Date',
       size: 'small',
-      placeholder: 'To Date',
+      placeholder: 'Hasta',
       fieldname: 'toDate',
-      label: 'To Date',
+      label: 'Hasta',
       required: 1
     }
   ],
   linkFields: [
     {
-      label: 'Clear Filters',
+      label: 'Limpiar filtros',
       type: 'secondary',
       action: async report => {
         await report.getReportData({});
