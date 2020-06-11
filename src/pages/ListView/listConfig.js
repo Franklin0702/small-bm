@@ -10,8 +10,8 @@ import JournalEntry from '../../../models/doctype/JournalEntry/JournalEntryList'
 import AccountingLedgerEntry from '../../../models/doctype/AccountingLedgerEntry/AccountingLedgerEntryList';
 import Account from '../../../models/doctype/Account/AccountList';
 import GSTR3B from '../../../models/doctype/GSTR3B/GSTR3BList';
-import VoucherType from '../../../models/doctype/VoucherType/VoucherTypeList'; 
-import AdjustSalesInvoice from '../../../models/doctype/SalesInvoice/AdjustSalesInvoiceList'
+import VoucherType from '../../../models/doctype/VoucherType/VoucherTypeList';
+import AdjustSalesInvoice from '../../../models/doctype/SalesInvoice/AdjustSalesInvoiceList';
 
 export default {
   SalesInvoice,

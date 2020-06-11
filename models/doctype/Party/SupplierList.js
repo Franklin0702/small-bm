@@ -6,5 +6,6 @@ export default {
   columns: [
     { fieldname: 'name', label: 'Proveedor' },
     { fieldname: 'phone', label: 'teléfono' },
-    { fieldname: 'outstandingAmount', label: 'Monto Pendiente' }]
+    { fieldname: 'outstandingAmount', label: 'Monto Pendiente' }
+  ]
 };

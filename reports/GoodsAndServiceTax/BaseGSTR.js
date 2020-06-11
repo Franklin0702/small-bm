@@ -10,7 +10,8 @@ class BaseGSTR {
 
       let tableData = [];
       for (let entry of entries) {
-        entry.doctype = gstrType === 'GSTR-1' ? 'SalesInvoice' : 'PurchaseInvoice';
+        entry.doctype =
+          gstrType === 'GSTR-1' ? 'SalesInvoice' : 'PurchaseInvoice';
         const row = await this.getRow(entry);
         tableData.push(row);
       }

@@ -28,8 +28,8 @@ export default {
         };
       }
     },
-    {fieldname: 'paymentType', label:'Tipo de pago'},
-    {fieldname: 'date', label:'Fecha'},
-    {fieldname: 'amount', label: 'Monto'}
+    { fieldname: 'paymentType', label: 'Tipo de pago' },
+    { fieldname: 'date', label: 'Fecha' },
+    { fieldname: 'amount', label: 'Monto' }
   ]
 };

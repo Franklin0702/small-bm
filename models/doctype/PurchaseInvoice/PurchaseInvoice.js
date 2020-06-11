@@ -127,14 +127,14 @@ module.exports = {
       fieldname: 'voucherType',
       label: 'Tipo de Comprobante',
       fieldtype: 'Link',
-      target:'VoucherType',
-      getFilters:  (doc) => {
+      target: 'VoucherType',
+      getFilters: doc => {
         return {
           active: ['in', [1, 'true']],
           useOn: 'Compras'
-        }
+        };
       },
-      disableCreation: true,
+      disableCreation: true
       //formula: doc => doc.getFrom('VoucherType', doc.name, 'description'),
       // options: [
       //   'Consumidor Final',
@@ -142,7 +142,6 @@ module.exports = {
       //   'Gubernamental',
       //   'Regimenes Especiales'
       // ],
-  
     },
     {
       fieldname: 'voucherSerie',

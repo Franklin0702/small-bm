@@ -127,15 +127,14 @@ module.exports = {
       label: 'Tipo de Comprobante',
       placeholder: 'tipo de comprobante...',
       fieldtype: 'Link',
-      target:'VoucherType',
+      target: 'VoucherType',
       disableCreation: true,
       getFilters: async () => {
         return {
-          active: ["in", ["true", 1]],
+          active: ['in', ['true', 1]],
           useOn: 'Ventas'
         };
-      },
-  
+      }
     },
     {
       fieldname: 'voucherSerie',

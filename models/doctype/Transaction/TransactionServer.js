@@ -22,11 +22,8 @@ module.exports = {
   async beforeInsert() {
     const entries = await this.getPosting();
     await entries.validateEntries();
-
   },
-  async beforeSubmit() {
-
-  },
+  async beforeSubmit() {},
 
   async afterSubmit() {
     const { checkStockWithDialog } = require('@/utils');

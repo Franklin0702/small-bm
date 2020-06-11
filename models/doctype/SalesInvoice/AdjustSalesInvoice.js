@@ -9,5 +9,4 @@ module.exports = {
   filters: {
     voucherType: 'Nota de Crédito'
   }
- 
 };

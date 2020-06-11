@@ -4,15 +4,17 @@ const { round } = require('frappejs/utils/numberFormat');
 const { getExchangeRate } = require('../../../accounting/exchangeRate');
 
 module.exports = class TransactionDocument extends BaseDocument {
-  
   async getNextVoucherSerie(voucherType) {
     let VoucherType = await frappe.getDoc('VoucherType', voucherType);
     let nextSerie = '';
     nextSerie =
       VoucherType.serie +
       VoucherType.code +
-      ('0'.repeat(VoucherType.sequenceLength) + (VoucherType.current + 1).toString()).slice(-1 * VoucherType.sequenceLength);
-    console.log('sequence: ', VoucherType.sequenceLength)
+      (
+        '0'.repeat(VoucherType.sequenceLength) +
+        (VoucherType.current + 1).toString()
+      ).slice(-1 * VoucherType.sequenceLength);
+    console.log('sequence: ', VoucherType.sequenceLength);
     //VoucherType.current += 1;
 
     return nextSerie;

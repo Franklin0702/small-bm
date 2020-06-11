@@ -81,7 +81,7 @@ ipcMain.on('check-for-updates', () => {
     autoUpdater.setFeedURL({
       url: '',
       provider: 'generic'
-    })
+    });
     autoUpdater.checkForUpdatesAndNotify();
     checkedForUpdate = true;
   }

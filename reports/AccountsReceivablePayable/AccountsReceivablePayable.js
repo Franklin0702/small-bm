@@ -141,12 +141,14 @@ async function getReceivablePayable({ reportType = 'Receivable', date }) {
     }
 
     const partyType = reportType === 'Receivable' ? 'customer' : 'supplier';
-    const partyList = (await frappe.db.getAll({
-      doctype: 'Party',
-      filters: {
-        [partyType]: 1
-      }
-    })).map(d => d.name);
+    const partyList = (
+      await frappe.db.getAll({
+        doctype: 'Party',
+        filters: {
+          [partyType]: 1
+        }
+      })
+    ).map(d => d.name);
 
     return await frappe.db.getAll({
       doctype: 'AccountingLedgerEntry',

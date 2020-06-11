@@ -1,4 +1,3 @@
-const { DateTime } = require('luxon');
 const EventDocument = require('./EventDocument');
 
 module.exports = {
@@ -29,7 +28,7 @@ module.exports = {
   keywordFields: [],
   isSingle: 0,
   listSettings: {
-    getFields(list) {
+    getFields() {
       return ['name', 'title', 'date'];
     },
     getRowHTML(list, data) {

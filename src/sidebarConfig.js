@@ -83,7 +83,7 @@ const config = {
         }
       ]
     },
-    
+
     {
       title: _('Reportes'),
       icon: getIcon('reports'),
@@ -128,7 +128,7 @@ const config = {
         },
         {
           label: _('Comprobantes Fiscales'),
-          route:'/list/VoucherType',
+          route: '/list/VoucherType',
           doctype: 'VoucherType'
         },
         {

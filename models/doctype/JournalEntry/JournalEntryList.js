@@ -5,7 +5,7 @@ export default {
   title: _('Entrada de Diario'),
   formRoute: name => `/edit/JournalEntry/${name}`,
   columns: [
-    {fieldname: 'date', label:'Fecha'},
+    { fieldname: 'date', label: 'Fecha' },
     {
       label: 'ID Entrada',
       fieldname: 'name',
@@ -14,7 +14,7 @@ export default {
         return doc.name;
       }
     },
-    {fieldname: 'entryType', label:'Tipo de Entrada'},
-    {fieldname: 'referenceNumber', label: 'Referencia'}
+    { fieldname: 'entryType', label: 'Tipo de Entrada' },
+    { fieldname: 'referenceNumber', label: 'Referencia' }
   ]
 };

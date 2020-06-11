@@ -29,7 +29,7 @@ module.exports = async function postStart() {
   let systemSettings = await frappe.getSingle('SystemSettings');
   //date format
   systemSettings.dateFormat = 'dd-MMMM-yyyy';
-  systemSettings.dateFormatLocale = 'es'; 
+  systemSettings.dateFormatLocale = 'es';
 
   await frappe.getSingle('AccountingSettings');
   await frappe.getSingle('GetStarted');

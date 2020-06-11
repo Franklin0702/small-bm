@@ -5,11 +5,7 @@ module.exports = {
   isSingle: 0,
   isChild: 1,
   keywordFields: [],
-  tableFields: [
-    'referenceType',
-    'referenceName',
-    'amount'
-  ],
+  tableFields: ['referenceType', 'referenceName', 'amount'],
   fields: [
     {
       fieldname: 'referenceType',
@@ -30,8 +26,11 @@ module.exports = {
       label: 'Monto',
       fieldtype: 'Currency',
       formula: async (row, doc) => {
-    
-        return doc.getFrom(row.referenceType, row.referenceName, 'outstandingAmount');
+        return doc.getFrom(
+          row.referenceType,
+          row.referenceName,
+          'outstandingAmount'
+        );
       },
       required: 1
     }

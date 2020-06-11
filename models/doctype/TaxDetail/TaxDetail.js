@@ -21,8 +21,5 @@ module.exports = {
       placeholder: '0%'
     }
   ],
-  tableFields: [
-    'account',
-    'rate'
-  ]
+  tableFields: ['account', 'rate']
 };

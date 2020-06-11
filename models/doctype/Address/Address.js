@@ -16,7 +16,7 @@ module.exports = {
       label: 'Línea 1',
       placeholder: 'Línea 1',
       fieldtype: 'Data',
-      required: 1,
+      required: 1
     },
     {
       fieldname: 'addressLine2',

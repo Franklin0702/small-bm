@@ -105,9 +105,12 @@ module.exports = {
       readOnly: 1,
       formulaDependsOn: ['paymentMethod'],
       formula: async doc => {
-        
-        if (doc.paymentMethod === 'Nota de crédito' && doc.referenceId && doc.referenceId !== '') {
-          const frappe = require('frappejs'); 
+        if (
+          doc.paymentMethod === 'Nota de crédito' &&
+          doc.referenceId &&
+          doc.referenceId !== ''
+        ) {
+          const frappe = require('frappejs');
           let document = await frappe.db.getAll({
             doctype: 'SalesInvoice',
             fields: [
@@ -125,16 +128,13 @@ module.exports = {
               voucherType: 'Nota de Crédito'
             }
           });
-          if (document.length === 1)
-            return document[0].grandTotal;
+          if (document.length === 1) return document[0].grandTotal;
           else
             throw new frappe.errors.throw(
               'El numero de referencia no corresponde con ninguna nota de credito'
             );
-        }
-        else {
+        } else {
           doc.getSum('for', 'amount');
-
         }
       }
     },

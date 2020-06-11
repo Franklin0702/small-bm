@@ -15,7 +15,7 @@ module.exports = {
   PaymentSettings: require('./doctype/PaymentSettings/PaymentSettings.js'),
 
   Item: require('./doctype/Item/Item.js'),
-  
+
   SalesInvoice: require('./doctype/SalesInvoice/SalesInvoice.js'),
   SalesInvoiceItem: require('./doctype/SalesInvoiceItem/SalesInvoiceItem.js'),
   SalesInvoiceSettings: require('./doctype/SalesInvoiceSettings/SalesInvoiceSettings.js'),
@@ -37,36 +37,36 @@ module.exports = {
   JournalEntry: require('./doctype/JournalEntry/JournalEntry.js'),
   JournalEntryAccount: require('./doctype/JournalEntryAccount/JournalEntryAccount.js'),
   JournalEntrySettings: require('./doctype/JournalEntrySettings/JournalEntrySettings.js'),
-  
+
   Quotation: require('./doctype/Quotation/Quotation.js'),
   QuotationItem: require('./doctype/QuotationItem/QuotationItem.js'),
   QuotationSettings: require('./doctype/QuotationSettings/QuotationSettings.js'),
-  
+
   SalesOrder: require('./doctype/SalesOrder/SalesOrder.js'),
   SalesOrderItem: require('./doctype/SalesOrderItem/SalesOrderItem.js'),
   SalesOrderSettings: require('./doctype/SalesOrderSettings/SalesOrderSettings.js'),
-  
+
   Fulfillment: require('./doctype/Fulfillment/Fulfillment.js'),
   FulfillmentItem: require('./doctype/FulfillmentItem/FulfillmentItem.js'),
   FulfillmentSettings: require('./doctype/FulfillmentSettings/FulfillmentSettings.js'),
-  
+
   PurchaseOrder: require('./doctype/PurchaseOrder/PurchaseOrder.js'),
   PurchaseOrderItem: require('./doctype/PurchaseOrderItem/PurchaseOrderItem.js'),
   PurchaseOrderSettings: require('./doctype/PurchaseOrderSettings/PurchaseOrderSettings.js'),
-  
+
   PurchaseReceipt: require('./doctype/PurchaseReceipt/PurchaseReceipt.js'),
   PurchaseReceiptItem: require('./doctype/PurchaseReceiptItem/PurchaseReceiptItem.js'),
   PurchaseReceiptSettings: require('./doctype/PurchaseReceiptSettings/PurchaseReceiptSettings.js'),
-  
+
   Event: require('./doctype/Event/Event'),
   EventSchedule: require('./doctype/EventSchedule/EventSchedule'),
   EventSettings: require('./doctype/EventSettings/EventSettings'),
-  
+
   Email: require('./doctype/Email/Email'),
   EmailAccount: require('./doctype/EmailAccount/EmailAccount'),
 
   PrintSettings: require('./doctype/PrintSettings/PrintSettings'),
   GetStarted: require('./doctype/GetStarted/GetStarted'),
 
-  VoucherType: require('./doctype/VoucherType/VoucherType'),
+  VoucherType: require('./doctype/VoucherType/VoucherType')
 };

@@ -16,7 +16,7 @@ module.exports = {
     {
       fieldname: 'code',
       label: 'Codigo',
-      fieldtype: 'Data',
+      fieldtype: 'Data'
       //childtype: 'TaxDetail',
     },
     {
@@ -47,7 +47,7 @@ module.exports = {
       fieldname: 'serie',
       label: 'Serie DGII',
       fieldtype: 'Data',
-      default: ""
+      default: ''
     },
     {
       fieldname: 'active',
@@ -63,11 +63,20 @@ module.exports = {
     },
     {
       fieldname: 'sequenceLength',
-      label:'Cantidad de Ceros (0)', 
-      fieldtype:'Int',
+      label: 'Cantidad de Ceros (0)',
+      fieldtype: 'Int',
       default: 8
     }
-
   ],
-  quickEditFields: ['code', 'description', 'initial', 'end', 'current', 'serie', 'useOn','active', 'sequenceLength']
+  quickEditFields: [
+    'code',
+    'description',
+    'initial',
+    'end',
+    'current',
+    'serie',
+    'useOn',
+    'active',
+    'sequenceLength'
+  ]
 };

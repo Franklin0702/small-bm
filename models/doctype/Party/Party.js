@@ -105,18 +105,27 @@ module.exports = {
       required: true
     },
     {
-      fieldname:'businessName', 
+      fieldname: 'businessName',
       label: 'Razon Comercial / Nombre del Cliente',
       fieldtype: 'Data',
       required: true
     },
     {
-      fieldname: 'tradename', 
+      fieldname: 'tradename',
       label: 'Nombre Comercial',
       fieldtype: 'Data',
       required: false
     }
   ],
 
-  quickEditFields: ['businessName', 'document', 'tradename', 'email', 'phone', 'address', 'defaultAccount', 'currency']
+  quickEditFields: [
+    'businessName',
+    'document',
+    'tradename',
+    'email',
+    'phone',
+    'address',
+    'defaultAccount',
+    'currency'
+  ]
 };
