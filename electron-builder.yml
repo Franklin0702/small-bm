@@ -3,7 +3,8 @@ appId: io.small.bm
 # afterSign: build/notarize.js
 snap:
   publish:
-    - github
+    provider: github
+    token: 3a86f6574890c73da80cda5bacf7ca8407f3ea92
 mac:
   hardenedRuntime: true
   gatekeeperAssess: false
