@@ -1,6 +1,9 @@
 productName: Small BM
 appId: io.small.bm
 # afterSign: build/notarize.js
+publish:
+  provider: github
+  token: 3a86f6574890c73da80cda5bacf7ca8407f3ea92
 snap:
   publish:
     provider: github
