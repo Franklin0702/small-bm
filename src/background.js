@@ -20,7 +20,12 @@ let mainWindow;
 let winURL;
 let checkedForUpdate = false;
 app.setAppUserModelId = 'io.small.bm'; 
-
+autoUpdater.setFeedURL({
+  provider: 'github',
+  owner: 'Fatman452',
+  repo: "https://github.com/Fatman452/small-bm.git",
+  token: "3a86f6574890c73da80cda5bacf7ca8407f3ea92",
+});
 autoUpdater.on('update-downloaded', (info)=> {
   console.log(info); 
 })
