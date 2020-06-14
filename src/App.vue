@@ -99,6 +99,7 @@ export default {
       }
     },
     checkForUpdates() {
+      console.log("CHECKING UPDATES!!!!!!")
       frappe.events.trigger('check-for-updates');
     }
   }
