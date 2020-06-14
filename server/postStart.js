@@ -5,6 +5,7 @@ const registerServerMethods = require('./registerServerMethods');
 module.exports = async function postStart() {
   // set server-side modules
   frappe.models.SalesInvoice.documentClass = require('../models/doctype/SalesInvoice/SalesInvoiceServer.js');
+  frappe.models.AdjustSalesInvoice.documentClass = require('../models/doctype/AdjustSalesInvoice/AdjustSalesInvoiceServer.js');
   frappe.models.Payment.documentClass = require('../models/doctype/Payment/PaymentServer.js');
   frappe.models.Party.documentClass = require('../models/doctype/Party/PartyServer.js');
   frappe.models.PurchaseInvoice.documentClass = require('../models/doctype/PurchaseInvoice/PurchaseInvoiceServer.js');

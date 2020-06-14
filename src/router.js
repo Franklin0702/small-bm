@@ -12,6 +12,7 @@ import Report from '@/pages/Report';
 import GetStarted from '@/pages/GetStarted';
 import ChartOfAccounts from '@/pages/ChartOfAccounts';
 import InvoiceForm from '@/pages/InvoiceForm';
+import CreditNotes from '@/pages/CreditNotes';
 import JournalEntryForm from '@/pages/JournalEntryForm';
 
 Vue.use(Router);
@@ -49,6 +50,18 @@ const routes = [
     name: 'InvoiceForm',
     components: {
       default: InvoiceForm,
+      edit: QuickEditForm
+    },
+    props: {
+      default: true,
+      edit: route => route.query
+    }
+  },
+  {
+    path: '/credit/:doctype/:name',
+    name: 'CreditNotes',
+    components: {
+      default: CreditNotes,
       edit: QuickEditForm
     },
     props: {

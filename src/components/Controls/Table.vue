@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-gray-600 text-sm mb-1" v-if="true">
+    <div class="text-gray-600 text-sm mb-1" v-if="!disable.includes('label')">
       {{ df.label }}
     </div>
     <Row :ratio="ratio" class="border-b px-2 text-gray-600 w-full">
@@ -19,7 +19,7 @@
     </Row>
     <div class="overflow-auto" :style="{ 'max-height': rowContainerHeight }">
       <TableRow
-        :class="{ 'pointer-events-none': isReadOnly }"
+        :class="{ 'pointer-events-none': isReadOnly || disable.includes('row') }"
         ref="table-row"
         v-for="row in value"
         :key="row.name"
@@ -30,7 +30,7 @@
     <Row
       :ratio="ratio"
       class="text-gray-500 cursor-pointer border-transparent px-2 w-full"
-      v-if="!isReadOnly"
+      v-if="!isReadOnly && !disable.includes('addRow')"
       @click.native="addRow"
     >
       <div class="flex items-center pl-1">
@@ -70,11 +70,18 @@ export default {
   name: 'Table',
   extends: Base,
   props: {
+    betweenRatio: {
+      type: Array, 
+      default: () => ([])
+    },
     showHeader: {
       default: true
     },
     maxRowsBeforeOverflow: {
       default: 0
+    },
+    disable: {
+      default: ()=>([''])
     }
   },
   components: {
@@ -119,11 +126,11 @@ export default {
   },
   computed: {
     ratio() {
-      return [0.3].concat(this.tableFields.map(() => 1));
+    
+      return [0.3].concat(this.betweenRatio).concat(this.tableFields.map(() => 1));
     },
     tableFields() {
       let meta = frappe.getMeta(this.df.childtype);
-      console.log(meta.tableFields.map(fieldname => meta.getField(fieldname)));
       return meta.tableFields.map(fieldname => meta.getField(fieldname));
     }
   }

@@ -11,7 +11,7 @@ export default {
     getStatusColumn('SalesInvoice'),
     { fieldname: 'date', label: 'Fecha' },
     { fieldname: 'grandTotal', label: 'Total' },
-    { fieldname: 'outstandingAmount', label: 'Monto Pendiente' },
+    { fieldname: 'outstandingAmount ', label: 'Monto Pendiente' },
     { fieldname: 'voucherSerie', label: 'NCF' }
   ]
 };

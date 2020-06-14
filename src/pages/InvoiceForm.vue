@@ -137,7 +137,7 @@
         </div>
         <div
           class="px-6 mb-6 flex justify-between text-base"
-          v-if="doc.items.length"
+          v-if="doc.items && doc.items.length"
         >
           <div class="flex-1 mr-10">
             <FormControl

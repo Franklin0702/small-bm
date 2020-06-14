@@ -19,7 +19,10 @@ module.exports = {
   SalesInvoice: require('./doctype/SalesInvoice/SalesInvoice.js'),
   SalesInvoiceItem: require('./doctype/SalesInvoiceItem/SalesInvoiceItem.js'),
   SalesInvoiceSettings: require('./doctype/SalesInvoiceSettings/SalesInvoiceSettings.js'),
-  AdjustSalesInvoice: require('./doctype/SalesInvoice/AdjustSalesInvoice'),
+  
+  AdjustSalesInvoice: require('./doctype/AdjustSalesInvoice/AdjustSalesInvoice.js'),
+  AdjustSalesInvoiceItem: require('./doctype/AdjustSalesInvoiceItem/AdjustSalesInvoiceItem.js'),
+  AdjustSalesInvoiceSettings: require('./doctype/AdjustSalesInvoiceSettings/AdjustSalesInvoiceSettings.js'),
 
   PurchaseInvoice: require('./doctype/PurchaseInvoice/PurchaseInvoice.js'),
   PurchaseInvoiceItem: require('./doctype/PurchaseInvoiceItem/PurchaseInvoiceItem.js'),

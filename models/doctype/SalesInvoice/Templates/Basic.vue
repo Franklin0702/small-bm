@@ -26,38 +26,52 @@
       <div class="mt-8 px-6">
         <div class="flex justify-between">
           <div class="w-1/3">
-          <h1 class="text-1x1 font-semibold">
-            <span v-if="doc.outstandingAmount>0">FACTURA PROFORMA</span>
-            <span v-if="doc.outstandingAmount===0">FACTURA</span>
-          </h1>
-            <h2 class="text-2xl font-bold">
-              {{ doc.name }}
+            <h1 class="text-1x1 font-semibold">
+              <span v-if="doc.outstandingAmount > 0">FACTURA PROFORMA</span>
+              <span v-if="doc.outstandingAmount === 0">FACTURA</span>
+            </h1>
+            <h2 class="text-1xl font-bold">
+              Número de factura: {{ doc.name }}
             </h2>
-            <div class="py-2 text-base">
+            <div class="py-2 text-2x1 text-base">
               {{ frappe.format(doc.date, 'Date') }}
             </div>
-          </div>
-          <div class="w-1/3">
-            <div class="py-1 text-right text-lg font-semibold">
-              {{doc.doctype=== "SalesInvoice"? "Cliente": "Proveedor"}}: {{ doc[partyField.fieldname] }}
+                        <div class="py-1 text-left text-lg font-semibold">
+              {{
+                { customer: 'Cliente', supplier: 'Proveedor' }[
+                  partyField.fieldname
+                ]
+              }}: {{ doc[partyField.fieldname] }}
               <p v-if="partyDoc && partyDoc.document">
-              RNC: {{partyDoc.document}}
+                RNC: {{ partyDoc.document }}
               </p>
+              <br />
               <p v-if="partyDoc && partyDoc.businessName">
-              Razón Social: {{partyDoc.businessName}}
+                Razón Social: {{ partyDoc.businessName }}
               </p>
+              <p v-if="partyDoc && partyDoc.addressDisplay">{{ partyDoc.addressDisplay }}</p>
             </div>
+          </div>
+          <div class="w-1/2">
             <div
-              v-if="voucherTypeDoc && voucherTypeDoc.name && doc.outstandingAmount===0.0"
+              v-if="
+                voucherTypeDoc &&
+                  voucherTypeDoc.name &&
+                  doc.outstandingAmount === 0.0
+              "
               class="py-1 text-right text-md"
             >
-              {{ voucherTypeDoc.name }}
+              <strong>{{ voucherTypeDoc.name }}</strong>
               <br />
               {{ doc.voucherSerie }}
+              <br />
+              <span class='text-sm ml-1' v-if="voucherTypeDoc.code === '04'">
+                NCF MODIFICADO: {{ doc.affectedSerie }}
+              </span>
             </div>
-            <div v-if="partyDoc" class="mt-1 text-xs text-gray-600 text-right">
-              {{ partyDoc.addressDisplay }}
-            </div>
+            <br />
+
+
             <div
               v-if="partyDoc && partyDoc.gstin"
               class="mt-1 text-xs text-gray-600 text-right"
@@ -155,13 +169,15 @@ export default {
       return this.doc.getLink(this.partyField.fieldname);
     },
     voucherTypeDoc() {
-      console.log('partyfield: ', this.voucherTypeField.fieldname);
-
+      console.log('voucherTypefield: ', this.voucherTypeField.fieldname);
+      let result = this.doc.getLink(this.voucherTypeField.fieldname);
+      console.log('link vouchertype: ', result);
       return this.doc.getLink(this.voucherTypeField.fieldname);
     },
     partyField() {
       let fieldname = {
         SalesInvoice: 'customer',
+        AdjustSalesInvoice: 'customer',
         PurchaseInvoice: 'supplier'
       }[this.doc.doctype];
       return this.meta.getField(fieldname);

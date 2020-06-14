@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     partyField() {
-      return this.doc.doctype === 'SalesInvoice' ? 'customer' : 'supplier';
+      return ['SalesInvoice', 'AdjustSalesInvoice'].includes(this.doc.doctype)  ? 'customer' : 'supplier';
     }
   }
 };

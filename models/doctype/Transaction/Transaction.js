@@ -20,6 +20,10 @@ module.exports = {
           status = 'pagado';
           color = 'green';
         }
+        if(doc.doctype === "AdjustSalesInvoice" && doc.submitted === 1) {
+          status = 'completado';
+          color = 'green';
+        }
         return {
           template: `<Badge class="text-xs" color="${color}">${status}</Badge>`,
           components: { Badge }
@@ -31,7 +35,7 @@ module.exports = {
     return [
       {
         label: 'Pagar',
-        condition: doc => doc.submitted && doc.outstandingAmount > 0,
+        condition: doc => doc.submitted && doc.outstandingAmount > 0 && ['SalesInvoice', 'PurchaseInvoice'].includes(doctype),
         action: async function makePayment(doc) {
           let payment = await frappe.getNewDoc('Payment');
           payment.once('afterInsert', async () => {
@@ -70,7 +74,7 @@ module.exports = {
       {
         label: 'Editar',
         condition: doc =>
-          doc.submitted && doc.baseGrandTotal === doc.outstandingAmount,
+          (doc.submitted && doc.baseGrandTotal === doc.outstandingAmount) /*|| (doc.submitted && doc.doctype === "AdjustSalesInvoice")*/,
         action(doc) {
           doc.revert();
         }

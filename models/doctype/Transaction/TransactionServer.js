@@ -23,51 +23,42 @@ module.exports = {
     const entries = await this.getPosting();
     await entries.validateEntries();
   },
-  async beforeSubmit() {},
-
+  async beforeSubmit() {
+    // Generar NCF para notas de crédito...
+    console.log('DOCTYPE INSIDE AFTER SUBMIT: ', this.doctype);
+    if (this.doctype === 'AdjustSalesInvoice') {
+      let nextSerie = await this.getNextVoucherSerie(this.voucherType);
+      try {
+        let VoucherType = await frappe.getDoc('VoucherType', this.voucherType);
+        console.log('Voucher Serie: ', nextSerie);
+        VoucherType.set('current', parseInt(nextSerie.slice(3)));
+        await VoucherType.update();
+        this.set('voucherSerie', nextSerie);
+        // this.voucherSerie = nextSerie;
+      } catch (error) {
+        console.error('Error getting NCF: ', error);
+      }
+      // await this.update();
+    }
+  },
   async afterSubmit() {
     const { checkStockWithDialog } = require('@/utils');
     // post ledger entries
     const entries = await this.getPosting();
     await entries.post();
 
-    // update outstanding amounts
-    await frappe.db.setValue(
-      this.doctype,
-      this.name,
-      'outstandingAmount',
-      this.baseGrandTotal
-    );
-    // let nextSerie = await this.getNextVoucherSerie(this.voucherType);
-    // try {
-    //   let VoucherType = await frappe.getDoc('VoucherType', this.voucherType);
-    //   console.log('Voucher Serie: ', nextSerie);
-    //   VoucherType.current = parseInt(nextSerie.slice(3));
-    //   await VoucherType.update();
-    //   this.voucherSerie = nextSerie;
-    // } catch (error) {}
-    //update Voucher Serie
-    // try {
-    //   let nextSerie = await this.getNextVoucherSerie(this.voucherType);
-    //   await frappe.db.setValue(
-    //     this.doctype,
-    //     this.name,
-    //     'voucherSerie',
-    //     nextSerie
-    //   );
-    //   //update current in voucher type;
-    //   let VoucherType = await frappe.getDoc('VoucherType', this.voucherType);
-    //   console.log('Voucher Serie: ', nextSerie);
-    //   VoucherType.current = parseInt(nextSerie.slice(3));
-    //   await VoucherType.update();
-    //   this.voucherSerie = nextSerie;
+    // update outstanding amounts if it is a Sales or a Purchase, but not a credit note. 
+    if (this.doctype !== 'AdjustSalesInvoice') {
+      await frappe.db.setValue(
+        this.doctype,
+        this.name,
+        'outstandingAmount',
+        this.baseGrandTotal
+        );
+        let party = await frappe.getDoc('Party', this.customer || this.supplier);
+        await party.updateOutstandingAmount();
+    }
 
-    // } catch (error) {
-
-    // }
-
-    let party = await frappe.getDoc('Party', this.customer || this.supplier);
-    await party.updateOutstandingAmount();
 
     if (this.submitted === 1) {
       let Items = this.items;

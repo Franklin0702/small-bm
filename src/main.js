@@ -55,6 +55,13 @@ import router from './router';
     methods: {
       _(...args) {
         return frappe._(...args);
+      },
+      $propagatedEmit: function (event, payload) {
+        let vm = this.$parent;
+        while (vm) {
+          vm.$emit(event, payload);
+          vm = vm.$parent;
+        }
       }
     }
   });
