@@ -6,6 +6,10 @@
     "name": "Torquez Script S.R.L",
     "email": "info@torquezscript.com"
   },
+  "repository": {
+    "url": "https://github.com/Fatman452/small-bm.git"
+  
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -13,8 +17,7 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps",
-    "postinstall2": "electron-rebuild"
+    "postuninstall": "electron-builder install-app-deps"
   },
   "main": "background.js",
   "dependencies": {
@@ -31,7 +34,8 @@
     "sqlite3": "^4.1.1",
     "tailwindcss": "^1.1.4",
     "vue": "^2.6.10",
-    "vue-router": "^3.1.3"
+    "vue-router": "^3.1.3",
+    "electron-updater": "^4.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -43,7 +47,6 @@
     "electron": "6.0.0",
     "electron-notarize": "^0.2.1",
     "electron-rebuild": "^1.11.0",
-    "electron-updater": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",

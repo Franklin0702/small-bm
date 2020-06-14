@@ -19,7 +19,11 @@ const isLinux = process.platform === 'linux';
 let mainWindow;
 let winURL;
 let checkedForUpdate = false;
+app.setAppUserModelId = 'io.small.bm'; 
 
+autoUpdater.on('update-downloaded', (info)=> {
+  console.log(info); 
+})
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -78,10 +82,6 @@ function createSettingsWindow(tab = 'General') {
 
 ipcMain.on('check-for-updates', () => {
   if (!isDevelopment && !checkedForUpdate) {
-    autoUpdater.setFeedURL({
-      url: '',
-      provider: 'generic'
-    });
     autoUpdater.checkForUpdatesAndNotify();
     checkedForUpdate = true;
   }
