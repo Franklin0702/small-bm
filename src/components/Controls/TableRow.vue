@@ -1,13 +1,7 @@
 <template>
-  <Row
-    :ratio="ratio"
-    class="border-b px-2 w-full "
-    v-bind:class="{ 'bg-brand-100': false }"
-    @mouseover="hovering = true"
-    @mouseleave="hovering = false"
-  >
+  <Row :ratio="ratio" class="w-full px-2 border-b hover:bg-brand-100 group">
     <div class="flex items-center pl-2 text-gray-600">
-      <span v-if="!disable.includes('remove')">
+      <span v-if="!disable.includes('remove')" class="hidden group-hover:inline-block">
         <feather-icon
           name="x"
           class="w-4 h-4 -ml-1 cursor-pointer"
@@ -29,6 +23,7 @@
         </span>
       </span>
       <span v-else>
+      <span class="group-hover:hidden">
         {{ row.idx + 1 }}
       </span>
     </div>

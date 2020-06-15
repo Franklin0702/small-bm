@@ -48,6 +48,11 @@ const config = {
           doctype: 'AdjustSalesInvoice'
         },
         {
+          label: _('Payments'),
+          route: '/list/Payment',
+          doctype: 'Payment'
+        },
+        {
           label: _('Entrada de diario'),
           route: '/list/JournalEntry',
           doctype: 'JournalEntry'
@@ -77,7 +82,13 @@ const config = {
           doctype: 'Item'
         },
         {
+          label: _('Payments'),
+          route: '/list/Payment',
+          doctype: 'Payment'
+        },
+        {
           label: _('Entrada de diario'),
+          label: _('Journal Entry'),
           route: '/list/JournalEntry',
           doctype: 'JournalEntry'
         }

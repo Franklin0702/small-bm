@@ -114,7 +114,6 @@ module.exports = {
     'displayLogo',
     'template',
     'color',
-    'font',
     'email',
     'phone',
     'address',

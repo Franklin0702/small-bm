@@ -8,17 +8,17 @@
     <div class="px-8">
       <div class="border-t"></div>
     </div>
-    <div class="px-8 flex-1 overflow-y-auto">
+    <div class="flex-1 px-8 overflow-y-auto">
       <div class="my-6" v-for="section in sections" :key="section.label">
         <h2 class="font-medium">{{ section.label }}</h2>
-        <div class="mt-4 flex -mx-2">
+        <div class="flex mt-4 -mx-2">
           <div
-            class="w-1/3 px-2"
+            class="flex-shrink-0 w-full px-2 md:w-1/3 sm:w-1/2"
             v-for="item in section.items"
             :key="item.label"
           >
             <div
-              class="flex flex-col justify-between border rounded-lg p-6 h-full hover:shadow-md cursor-pointer"
+              class="flex flex-col justify-between h-full p-6 border rounded-lg cursor-pointer hover:shadow-md"
               @mouseenter="() => (activeCard = item.key)"
               @mouseleave="() => (activeCard = null)"
             >
@@ -40,10 +40,11 @@
                 </p>
               </div>
               <div
-                class="mt-2 flex"
+                class="flex mt-2 overflow-hidden"
                 v-show="activeCard === item.key && !isCompleted(item)"
               >
                 <Button
+                  v-if="item.action"
                   class="leading-tight"
                   type="primary"
                   v-on="
@@ -57,11 +58,16 @@
                       : null
                   "
                 >
-                  <span class="text-white text-base">
-                    {{ _('Preparar') }}
+                  <span class="text-base text-white">
+                    {{ item.actionLabel || _('Preparar') }}
                   </span>
                 </Button>
-                <Button class="ml-4 leading-tight">
+                <Button
+                  v-if="item.documentation"
+                  class="leading-tight"
+                  :class="{ 'ml-4': item.action }"
+                  @click="visitLink(item.documentation)"
+                >
                   <span class="text-base">
                     {{ _('Documentación') }}
                   </span>
@@ -139,21 +145,32 @@ export default {
               icon: 'review-ac',
               description:
                 'Revisa los gráficos de cuenta, agrega tus propias cuentas o impuestos.',
-              action: () => this.$router.push('/chart-of-accounts')
+              action: () => {
+                this.$router.push('/chart-of-accounts');
+                this.updateChecks({ chartOfAccountsReviewed: 1 });
+              },
+              fieldname: 'chartOfAccountsReviewed',
+              documentation:
+                'https://frappebooks.com/docs/setting-up#1-enter-bank-accounts'
             },
             {
               key: 'Opening Balances',
               label: _('Balances Pendientes'),
               icon: 'opening-ac',
               description:
-                'Configura tus balances pendientes antes de empezar a trabajar.'
+                'Configura tus balances pendientes antes de empezar a trabajar.',
+              documentation:
+                'https://frappebooks.com/docs/setting-up#5-setup-opening-balances'
             },
             {
               key: 'Taxes',
               label: _('Agrega impuestos'),
               icon: 'percentage',
-              description: 'Configura tus plantillas de impuestos.',
-              action: () => this.$router.push('/list/Tax')
+              description:
+                'Configura tus plantillas de impuestos.',
+              action: () => this.$router.push('/list/Tax'),
+              documentation:
+                'https://frappebooks.com/docs/setting-up#2-add-taxes'
             }
           ]
         },
@@ -168,7 +185,9 @@ export default {
               description:
                 'Agrega los productos o servicios que le vendes a tus clientes.',
               action: () => this.$router.push('/list/Item'),
-              fieldname: 'itemCreated'
+              fieldname: 'itemCreated',
+              documentation:
+                'https://frappebooks.com/docs/setting-up#3-add-items'
             },
             {
               key: 'Customers',
@@ -177,7 +196,9 @@ export default {
               description:
                 'Crea algunos clientes para comenzar a hacer facturas.',
               action: () => this.$router.push('/list/Customer'),
-              fieldname: 'customerCreated'
+              fieldname: 'customerCreated',
+              documentation:
+                'https://frappebooks.com/docs/setting-up#4-add-customers'
             },
             {
               key: 'Invoices',
@@ -185,7 +206,8 @@ export default {
               icon: 'sales-invoice',
               description: 'Crea tu primera factura y envíasela a tu cliente!',
               action: () => this.$router.push('/list/SalesInvoice'),
-              fieldname: 'invoiceCreated'
+              fieldname: 'invoiceCreated',
+              documentation: 'https://frappebooks.com/docs/invoices'
             }
           ]
         },
@@ -217,7 +239,8 @@ export default {
               icon: 'purchase-invoice',
               description: 'Crea tu primera compra!',
               action: () => this.$router.push('/list/PurchaseInvoice'),
-              fieldname: 'billCreated'
+              fieldname: 'billCreated',
+              documentation: 'https://frappebooks.com/docs/bills'
             }
           ]
         }
@@ -295,9 +318,16 @@ export default {
           toUpdate.supplierCreated = 1;
         }
       }
-
+      await this.updateChecks(toUpdate);
+    },
+    async updateChecks(toUpdate) {
       await frappe.GetStarted.update(toUpdate);
       frappe.GetStarted = await frappe.getSingle('GetStarted');
+    },
+    visitLink(link) {
+      if (link) {
+        require('electron').shell.openExternal(link);
+      }
     },
     isCompleted(item) {
       return frappe.GetStarted.get(item.fieldname) || 0;

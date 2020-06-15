@@ -54,7 +54,7 @@ database.
 
     You will also need [Xcode App](https://apps.apple.com/in/app/xcode/id497799835?mt=12) from App Store
 
-2. Install [Node.js](https://nodejs.org/en/)
+2. Install [Node.js](https://nodejs.org/en/). Make sure you have atleast version 12 installed.
     > Tip: The best way to install and manage Node is to install [nvm](https://github.com/nvm-sh/nvm#usage)
 3. Install `yarn` package manager
     ```bash
@@ -66,14 +66,28 @@ database.
 ```bash
 # clone the repository
 git clone https://github.com/frappe/books.git
+
 # change directory
 cd books
+
 # install dependencies
 yarn
-# postinstall configuration
-yarn electron:postinstall
 # start the electron app
 yarn electron:serve
+```
+
+### Developing with FrappeJS
+
+FrappeBooks is based on [FrappeJS](https://github.com/frappe/frappejs) for managing models and objects. To develop alongside FrappeJS
+
+```bash
+# clone frappejs
+git clone https://github.com/frappe/frappejs.git
+
+# link frappejs
+cd frappejs
+yarn link
+yarn link frappejs
 ```
 
 ## License

@@ -20,7 +20,7 @@ module.exports = {
       fieldname: 'date',
       label: 'Fecha de publicación',
       fieldtype: 'Date',
-      defaultValue: new Date().toISOString()
+      default: new Date().toISOString()
     },
     {
       fieldname: 'account',
