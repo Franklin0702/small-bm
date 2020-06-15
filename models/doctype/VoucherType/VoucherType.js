@@ -4,7 +4,7 @@ module.exports = {
   doctype: 'DocType',
   isSingle: 0,
   keywordFields: ['name', 'useOn', 'active'],
-  titleField: 'description',
+  titleField: 'name',
   tableFields: ['name', 'code'],
   fields: [
     {
@@ -69,6 +69,7 @@ module.exports = {
     }
   ],
   quickEditFields: [
+    'name', 
     'code',
     'description',
     'initial',

@@ -114,7 +114,7 @@ module.exports = {
       fieldtype: 'Currency',
       formula: doc => {
         if (doc.submitted) return;
-        return 0;
+        return 0.0;
       },
       readOnly: 1
     },

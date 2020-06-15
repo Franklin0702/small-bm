@@ -1,14 +1,13 @@
 {
   "name": "small-bm",
   "description": "Simple book-keeping app for everyone",
-  "version": "0.0.3-beta.10",
+  "version": "0.0.3-beta.12",
   "author": {
     "name": "Torquez Script S.R.L",
     "email": "info@torquezscript.com"
   },
   "repository": {
     "url": "https://github.com/Fatman452/small-bm.git"
-  
   },
   "scripts": {
     "serve": "vue-cli-service serve",
