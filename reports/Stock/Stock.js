@@ -92,6 +92,29 @@ class Stock {
       orderBy: 'name'
     });
 
+    const adjusts = await frappe.db.getAll({
+      doctype: 'AdjustSalesInvoice',
+      fields: ['name', 'date', 'customer', 'account', 'netTotal', 'grandTotal'],
+      filters: {
+        date: filters.date,
+        submitted: filters.submitted
+      },
+      orderBy: 'date',
+      order: 'desc'
+    });
+
+    const adjustsNames = adjusts.map(d => d.name);
+
+    const adjustsItems = await frappe.db.getAll({
+      doctype: 'AdjustSalesInvoiceItem',
+      fields: ['quantity', 'item', 'parent'],
+      filters: {
+        parenttype: 'AdjustSalesInvoice',
+        parent: ['in', adjustsNames]
+      },
+      orderBy: 'name'
+    });
+
     const items = await frappe.db.getAll({
       doctype: 'Item',
       fields: ['name', 'unit', 'min']
@@ -137,6 +160,16 @@ class Stock {
       orderBy: 'name'
     });
 
+    const adjustItemsPrev = await frappe.db.getAll({
+      doctype: 'AdjustSalesInvoiceItem',
+      fields: ['name', 'item', 'quantity', 'parent'],
+      filters: {
+        parenttype: 'AdustSalesInvoice',
+        parent: ['not in', adjustsNames]
+      },
+      orderBy: 'name'
+    });
+
     let reports = [];
     for (let item of items) {
       console.log('item\n', item);
@@ -155,11 +188,25 @@ class Stock {
           return acc;
         }, 0);
 
+        let prevAdjust = adjustItemsPrev
+          .filter(p => p.item === item.name)
+          .reduce((acc, p) => {
+            acc = acc + p.quantity;
+            return acc;
+          }, 0); 
+
+
       report.name = item.name;
       report.unit = item.unit;
-      report.prevQuantity = prevBuy - prevSell;
+
+      report.prevQuantity = prevBuy - prevSell + prevAdjust;
 
       report.buy = purchaseItems
+        .filter(p => p.item === item.name)
+        .reduce((acc, p) => {
+          acc = acc + p.quantity;
+          return acc;
+        }, 0) + adjustsItems
         .filter(p => p.item === item.name)
         .reduce((acc, p) => {
           acc = acc + p.quantity;

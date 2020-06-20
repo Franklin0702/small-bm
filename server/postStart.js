@@ -16,6 +16,7 @@ module.exports = async function postStart() {
 
   // init naming series if missing
   await naming.createNumberSeries('SINV-', 'SalesInvoiceSettings');
+  await naming.createNumberSeries('RSINV-', 'AdjustSalesInvoiceSettings');
   await naming.createNumberSeries('PINV-', 'PurchaseInvoiceSettings');
   await naming.createNumberSeries('PAY-', 'PaymentSettings');
   await naming.createNumberSeries('JV-', 'JournalEntrySettings');

@@ -48,7 +48,7 @@ const config = {
           doctype: 'AdjustSalesInvoice'
         },
         {
-          label: _('Payments'),
+          label: _('Pagos'),
           route: '/list/Payment',
           doctype: 'Payment'
         },
@@ -82,7 +82,7 @@ const config = {
           doctype: 'Item'
         },
         {
-          label: _('Payments'),
+          label: _('Pagos'),
           route: '/list/Payment',
           doctype: 'Payment'
         },

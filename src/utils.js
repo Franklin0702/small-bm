@@ -4,6 +4,8 @@ import { _ } from 'frappejs/utils';
 import migrate from './migrate';
 import { remote, shell, ipcRenderer } from 'electron';
 import SQLite from 'frappejs/backends/sqlite';
+import MariaDB from 'frappejs/backends/mariadb';
+
 import postStart from '../server/postStart';
 import router from '@/router';
 import Avatar from '@/components/Avatar';
@@ -14,8 +16,8 @@ export function createNewDatabase() {
     remote.dialog.showSaveDialog(
       remote.getCurrentWindow(),
       {
-        title: _('Select folder'),
-        defaultPath: 'frappe-books.db'
+        title: _('Elegir carpeta'),
+        defaultPath: 'small-bm.db'
       },
       filePath => {
         if (filePath) {
@@ -63,7 +65,20 @@ export function loadExistingDatabase() {
     );
   });
 }
+export async function connectToDatabaseServer({db_name, username, password, host}) {
+  frappe.login('Administrator');
 
+  frappe.db = new MariaDB({
+    db_name: db_name,
+    username: username,
+    password: password,
+    host: host
+  });
+
+  await frappe.db.connect();
+  await migrate();
+  await postStart();
+}
 export async function connectToLocalDatabase(filepath) {
   frappe.login('Administrator');
   frappe.db = new SQLite({
@@ -184,12 +199,12 @@ export function openQuickEdit({ doctype, name, hideFields, defaults = {} }) {
 export function getErrorMessage(e, doc) {
   let errorMessage = e.message || _('An error occurred');
   if (e.type === frappe.errors.LinkValidationError) {
-    errorMessage = _('{0} {1} is linked with existing records.', [
+    errorMessage = _('{0} {1} esta asociado con otros registros.', [
       doc.doctype,
       doc.name
     ]);
   } else if (e.type === frappe.errors.DuplicateEntryError) {
-    errorMessage = _('{0} {1} already exists.', [doc.doctype, doc.name]);
+    errorMessage = _('{0} {1} ya existe.', [doc.doctype, doc.name]);
   }
   return errorMessage;
 }

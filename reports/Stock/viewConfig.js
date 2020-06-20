@@ -57,7 +57,7 @@ module.exports = {
       { label: 'Producto', fieldname: 'name' },
       { label: 'Unidad', fieldname: 'unit' },
       { label: 'Cantidad Previa', fieldname: 'prevQuantity' },
-      { label: 'Compra', fieldname: 'buy' },
+      { label: 'Compra / Retornos', fieldname: 'buy' },
       { label: 'Venta', fieldname: 'sell' },
       { label: 'Balance', fieldname: 'balance' }
     ];

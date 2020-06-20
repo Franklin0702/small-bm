@@ -22,7 +22,6 @@
           ->
         </span>
       </span>
-      <span v-else>
       <span class="group-hover:hidden">
         {{ row.idx + 1 }}
       </span>

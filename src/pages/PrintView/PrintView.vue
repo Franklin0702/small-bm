@@ -95,7 +95,7 @@ export default {
         remote.dialog.showSaveDialog(
           remote.getCurrentWindow(),
           {
-            title: this._('Select folder'),
+            title: this._('Elegir Carpeta'),
             defaultPath: `${this.name}.pdf`
           },
           filePath => {

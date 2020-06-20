@@ -7,6 +7,7 @@ export default {
     { fieldname: 'name', label: 'producto' },
     { fieldname: 'unit', label: 'unidad' },
     { fieldname: 'tax', label: 'impuestos' },
-    { fieldname: 'rate', label: 'precio' }
+    { fieldname: 'rate', label: 'precio' },
+    { fieldname: 'stock', label: 'inventario' }
   ]
 };
