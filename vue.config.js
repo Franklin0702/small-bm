@@ -25,7 +25,7 @@ module.exports = {
       // https://github.com/knex/knex/issues/1446#issuecomment-537715431
       new webpack.ContextReplacementPlugin(
         /knex[/\\]lib[/\\]dialects/,
-        /(?:mysql|sqlite3)[/\\]index.js/
+        /mysql|sqlite3[/\\]index.js/
       )
     );
 
