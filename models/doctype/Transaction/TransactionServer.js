@@ -40,25 +40,23 @@ module.exports = {
       }
       // await this.update();
     }
+    // update outstanding amounts if it is a Sales or a Purchase, but not a credit note.
+    else if (this.doctype !== 'AdjustSalesInvoice') {
+      await frappe.db.setValue(
+        this.doctype,
+        this.name,
+        'outstandingAmount',
+        this.baseGrandTotal
+      );
+      let party = await frappe.getDoc('Party', this.customer || this.supplier);
+      await party.updateOutstandingAmount();
+    }
   },
   async afterSubmit() {
     const { checkStockWithDialog } = require('@/utils');
     // post ledger entries
     const entries = await this.getPosting();
     await entries.post();
-    console.log('Tamo aqui lider', this.outstandingAmount); 
-    // update outstanding amounts if it is a Sales or a Purchase, but not a credit note. 
-    if (this.doctype !== 'AdjustSalesInvoice') {
-      await frappe.db.setValue(
-        this.doctype,
-        this.name,
-        'outstandingAmount',
-        this.baseGrandTotal
-        );
-        let party = await frappe.getDoc('Party', this.customer || this.supplier);
-        await party.updateOutstandingAmount();
-    }
-
 
     if (this.submitted === 1) {
       let Items = this.items;

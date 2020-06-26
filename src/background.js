@@ -85,6 +85,22 @@ function createSettingsWindow(tab = 'General') {
   settingsWindow.loadURL(`${winURL}#/settings/${tab}`);
 }
 
+function createRemoteDatabaseWindow() {
+  let settingsWindow = new BrowserWindow({
+    parent: mainWindow,
+    frame: isLinux,
+    width: 460,
+    height: 577,
+    backgroundColor: theme.backgroundColor.gray['200'],
+    webPreferences: {
+      nodeIntegration: true
+    },
+    resizable: false
+  });
+
+  settingsWindow.loadURL(`${winURL}#/remote-database/`);
+}
+
 ipcMain.on('check-for-updates', () => {
   if (!isDevelopment && !checkedForUpdate) {
     autoUpdater.checkForUpdatesAndNotify();
@@ -95,6 +111,10 @@ ipcMain.on('check-for-updates', () => {
 ipcMain.on('open-settings-window', (event, tab) => {
   createSettingsWindow(tab);
 });
+
+ipcMain.on('open-remote-database-window', (event) => {
+  createRemoteDatabaseWindow();
+})
 
 ipcMain.on('reload-main-window', () => {
   mainWindow.reload();

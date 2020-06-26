@@ -67,7 +67,7 @@ export function loadExistingDatabase() {
 }
 export async function connectToDatabaseServer({db_name, username, password, host}) {
   frappe.login('Administrator');
-
+  console.log(username, password, host, db_name); 
   frappe.db = new MariaDB({
     db_name: db_name,
     username: username,
@@ -78,6 +78,11 @@ export async function connectToDatabaseServer({db_name, username, password, host
   await frappe.db.connect();
   await migrate();
   await postStart();
+
+  await frappe.AccountingSettings.update('dbName', db_name); 
+  await frappe.AccountingSettings.update('dbUserName', username); 
+  await frappe.AccountingSettings.update('dbUserPassword', password); 
+  await frappe.AccountingSettings.update('dbHost', host); 
 }
 export async function connectToLocalDatabase(filepath) {
   frappe.login('Administrator');
@@ -327,4 +332,27 @@ export function getActionsForDocument(doc) {
 
 export function openSettings(tab = 'General') {
   ipcRenderer.send('open-settings-window', tab);
+}
+
+export function openRemoteDatabase() {
+  ipcRenderer.send('open-remote-database-window'); 
+}
+
+export async function testMySQLConnection({dbname, user, password, host}) { 
+  const db = require('mysql');
+  let connection = db.createConnection({
+    host: host,
+    user: user,
+    password: password, 
+    database: dbname
+  }); 
+
+  let connectPromise = new Promise((resolve, reject) => {
+    connection.connect((error) => {
+      if(error)
+        resolve(false); 
+      resolve(true); 
+    })
+  });
+  return connectPromise;   
 }

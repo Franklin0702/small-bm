@@ -111,7 +111,38 @@ module.exports = {
       label: 'Actualizar automáticamente',
       fieldtype: 'Check',
       default: 1
-    }
+    },
+    {
+      fieldname: 'dbType',
+      label: 'Tipo de conexión',
+      fieldtype: 'Select', 
+      options: ['local', 'server'],
+      default: 'local'
+    },
+    {
+      fieldname: 'dbName',
+      label: 'Base de datos',
+      fieldtype: 'Data',
+      default: 1
+    },
+    {
+      fieldname: 'dbUserName',
+      label: 'Usuario',
+      fieldtype: 'Data',
+      default: 1
+    },
+    {
+      fieldname: 'dbUserPassword',
+      label: 'Contraseña',
+      fieldtype: 'Data',
+      default: 1
+    },
+    {
+      fieldname: 'dbHost',
+      label: 'Servidor',
+      fieldtype: 'Data',
+      default: 1
+    },
   ],
   quickEditFields: [
     'fullname',

@@ -1,6 +1,16 @@
 <template>
   <div>
-    <div class="flex items-center justify-between">
+    <FormControl
+      :df="AccountingSettings.meta.getField('dbType')"
+      :show-label="true"
+      @change="changeDbType"
+      :value="AccountingSettings.dbType"
+    />
+
+    <div
+      v-if="AccountingSettings.dbType === 'local'"
+      class="flex items-center justify-between"
+    >
       <div class="flex items-center">
         <svg
           class="h-12"
@@ -19,8 +29,59 @@
         </div>
       </div>
       <Button class="text-sm" @click="changeFile">
-        {{ _('Change File') }}
+        {{ _('Cambiar el archivo') }}
       </Button>
+    </div>
+    <div
+      v-else-if="AccountingSettings.dbType === 'server'"
+      class="flex flex-wrap"
+    >
+      <div class="flex items-center">
+        <div class="flex flex-col w-56 ml-4 truncate">
+          <label for="dbName">Base de datos: </label>
+          <FormControl
+            :df="AccountingSettings.meta.getField('dbName')"
+            :show-label="true"
+            @change="value => AccountingSettings.update('dbName', value)"
+            :value="AccountingSettings.dbName"
+          />
+        </div>
+
+        <div class="flex flex-col w-56 ml-4 truncate">
+          <label for="dbHost">Servidor: </label>
+          <FormControl
+            :df="AccountingSettings.meta.getField('dbHost')"
+            :show-label="true"
+            @change="value => AccountingSettings.update('dbHost', value)"
+            :value="AccountingSettings.dbHost"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center">
+        <div class="flex flex-col w-56 ml-4 truncate">
+          <label for="dbUserName">Usuario: </label>
+          <FormControl
+            :df="AccountingSettings.meta.getField('dbUserName')"
+            :show-label="true"
+            @change="value => AccountingSettings.update('dbUserName', value)"
+            :value="AccountingSettings.dbUserName"
+          />
+        </div>
+
+        <div class="flex flex-col w-56 ml-4 truncate">
+          <label for="dbUserPassword">Contraseña: </label>
+          <input
+            id="dbUserPassword"
+            type="password"
+            :value="AccountingSettings.dbUserPassword"
+            @change="
+              value => AccountingSettings.update('dbUserPassword', value)
+            "
+            placeholder="****"
+          />
+        </div>
+      </div>
     </div>
 
     <TwoColumnForm
@@ -63,18 +124,26 @@ export default {
   data() {
     return {
       companyName: null,
-      doc: null
+      doc: null,
+
     };
   },
   async mounted() {
     this.doc = frappe.SystemSettings;
     this.companyName = frappe.AccountingSettings.companyName;
+    this.AccountingSettings.dbType = 'local';
   },
   methods: {
     changeFile() {
       config.set('lastSelectedFilePath', null);
       frappe.events.trigger('reload-main-window');
       remote.getCurrentWindow().close();
+    },
+    changeDbType(value) {
+      config.set('dbType', value); 
+      frappe.events.trigger('reload-main-window');
+      this.AccountingSettings.update('dbType', value)
+      remote.getCurrentWindow().close();  
     }
   },
   computed: {
@@ -82,6 +151,14 @@ export default {
       let meta = frappe.getMeta('SystemSettings');
       return meta.getQuickEditFields();
     },
+    // dbServerCredentials() {
+    //   return {
+    //     db_name: this.AccdbName,
+    //     username: this.dbUserName,
+    //     password: this.dbUserPassword,
+    //     host: this.host
+    //   };
+    // },
     dbPath() {
       return frappe.db.dbPath;
     },

@@ -1,20 +1,19 @@
 <template>
-  <div
-    class="py-10 flex-1 bg-white window-drag"
-    :class="{ 'pointer-events-none': loadingDatabase }"
-  >
-    <div class="w-full">
+  <div class="py-10 flex-1 bg-white">
+    <div class="w-full" :class="{ 'pointer-events-none': loadingDatabase }">
       <div class="px-12">
         <h1 class="text-2xl font-semibold">
-          {{ _('Welcome to Small BM') }}
+          {{ _('Bienvenido a Small BM') }}
         </h1>
         <p class="text-gray-600 text-base" v-if="!showFiles">
           {{
-            _('Create a new file or select an existing one from your computer')
+            _(
+              'Crea un nuevo archivo de base de datos o carga uno existente desde tu computadora.'
+            )
           }}
         </p>
         <p class="text-gray-600 text-base" v-if="showFiles">
-          {{ _('Select a file to load the company transactions') }}
+          {{ _('Elige un archivo para cargar la información de tu negocio.') }}
         </p>
       </div>
       <div class="px-12 mt-10 window-no-drag" v-if="!showFiles">
@@ -36,14 +35,14 @@
               <template
                 v-if="loadingDatabase && fileSelectedFrom === 'New File'"
               >
-                {{ _('Loading...') }}
+                {{ _('Cargando...') }}
               </template>
               <template v-else>
-                {{ _('New File') }}
+                {{ _('Archivo Nuevo') }}
               </template>
             </div>
             <div class="mt-2 text-sm text-gray-600 text-center">
-              {{ _('Create a new file and store it in your computer.') }}
+              {{ _('Crea un nuevo archivo para guardar en tu computadora.') }}
             </div>
           </div>
           <div
@@ -61,14 +60,43 @@
               <template
                 v-if="loadingDatabase && fileSelectedFrom === 'Existing File'"
               >
-                {{ _('Loading...') }}
+                {{ _('Cargando...') }}
               </template>
               <template v-else>
-                {{ _('Existing File') }}
+                {{ _('Archivo Existente') }}
               </template>
             </div>
             <div class="mt-2 text-sm text-gray-600 text-center">
-              {{ _('Load an existing .db file from your computer.') }}
+              {{ _('Carga un archivo .db desde tu computadora.') }}
+            </div>
+          </div>
+          <div
+            @click="remoteDatabase"
+            class="ml-6 w-1/2 border rounded-xl flex flex-col items-center py-8 px-5 cursor-pointer hover:shadow"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-green-200 relative flex-center"
+            >
+              <div class="w-12 h-12 rounded-full bg-green-500 flex-center">
+                <feather-icon name="upload" class="w-4 h-4 text-white" />
+              </div>
+            </div>
+            <div class="mt-5 font-medium">
+              <template
+                v-if="loadingDatabase && fileSelectedFrom === 'Remote Database'"
+              >
+                {{ _('Cargando...') }}
+              </template>
+              <template v-else>
+                {{ _('Base de datos central') }}
+              </template>
+            </div>
+            <div class="mt-2 text-sm text-gray-600 text-center">
+              {{
+                _(
+                  'Configura los parametros de conexión hacia tu base de datos.'
+                )
+              }}
             </div>
           </div>
         </div>
@@ -77,7 +105,7 @@
           class="text-brand text-sm mt-4 inline-block cursor-pointer"
           @click="showFiles = true"
         >
-          Select from existing files
+          Elige de los archivos que existen
         </a>
       </div>
 
@@ -110,10 +138,16 @@
             class="text-brand text-sm cursor-pointer"
             @click="showFiles = false"
           >
-            Select file manually
+            Elegir archivo manualmente
           </a>
         </div>
       </div>
+    </div>
+    <div
+      v-if="loadingDatabase && fileSelectedFrom === 'Remote Database'"
+      class="flex content-center m-auto"
+    >
+      <RemoteDatabase @on-connect="value => connectToDatabase(value)" />
     </div>
   </div>
 </template>
@@ -121,15 +155,23 @@
 import fs from 'fs';
 import config from '@/config';
 import { DateTime } from 'luxon';
+import RemoteDatabase from '@/pages/RemoteDatabase/RemoteDatabase.vue';
+import VueTailwindModal from 'vue-tailwind-modal';
 
 import {
   createNewDatabase,
   loadExistingDatabase,
-  connectToLocalDatabase
+  connectToLocalDatabase,
+  connectToDatabaseServer,
+  openRemoteDatabase
 } from '@/utils';
 
 export default {
   name: 'DatabaseSelector',
+  components: {
+    RemoteDatabase,
+    VueTailwindModal
+  },
   data() {
     return {
       loadingDatabase: false,
@@ -141,27 +183,44 @@ export default {
   mounted() {
     this.files = config.get('files', []);
     this.showFiles = false; //this.files.length > 0;
+    this.dbType = config.get('dbType', null);
   },
   methods: {
     async newDatabase() {
       this.fileSelectedFrom = 'New File';
       let filePath = await createNewDatabase();
+      config.set('dbType', 'local');
       this.connectToDatabase(filePath);
     },
     async existingDatabase() {
       this.fileSelectedFrom = 'Existing File';
       let filePath = await loadExistingDatabase();
+      config.set('dbType', 'local');
       this.connectToDatabase(filePath);
+    },
+    async remoteDatabase() {
+      this.fileSelectedFrom = 'Remote Database';
+      this.loadingDatabase = true;
+      config.set('dbType', 'server');
     },
     async selectFile(file) {
       this.fileSelectedFrom = file;
       await this.connectToDatabase(file.filePath);
     },
-    async connectToDatabase(filePath) {
-      this.loadingDatabase = true;
-      await connectToLocalDatabase(filePath);
-      this.loadingDatabase = false;
-      this.$emit('database-connect');
+    async connectToDatabase(options) {
+      this.dbType = config.get('dbType', null);
+      if (this.dbType === 'local') {
+        let filePath = options.filePath;
+        this.loadingDatabase = true;
+        await connectToLocalDatabase(filePath);
+        this.loadingDatabase = false;
+        this.$emit('database-connect');
+      } else if (this.dbType === 'server') {
+        this.loadingDatabase = true;
+        await connectToDatabaseServer(options);
+        this.loadingDatabase = false;
+        this.$emit('database-connect');
+      }
     },
     getFileLastModified(filePath) {
       let stats = fs.statSync(filePath);
