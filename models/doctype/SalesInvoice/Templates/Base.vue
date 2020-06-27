@@ -3,7 +3,7 @@ import frappe from 'frappejs';
 export default {
   name: 'Base',
   props: ['doc', 'printSettings'],
-  data: () => ({ party: null, companyAddress: null }),
+  data: () => ({ party: null, companyAddress: null, VoucherType: null }),
   methods: {
     format(row, fieldname) {
       let value = row.get(fieldname);

@@ -36,7 +36,7 @@
             <div class="py-2 text-2x1 text-base">
               {{ frappe.format(doc.date, 'Date') }}
             </div>
-                        <div class="py-1 text-left text-lg font-semibold">
+            <div class="py-1 text-left text-lg font-semibold">
               {{
                 { customer: 'Cliente', supplier: 'Proveedor' }[
                   partyField.fieldname
@@ -49,7 +49,9 @@
               <p v-if="partyDoc && partyDoc.businessName">
                 Razón Social: {{ partyDoc.businessName }}
               </p>
-              <p v-if="partyDoc && partyDoc.addressDisplay">{{ partyDoc.addressDisplay }}</p>
+              <p v-if="partyDoc && partyDoc.addressDisplay">
+                {{ partyDoc.addressDisplay }}
+              </p>
             </div>
           </div>
           <div class="w-1/2">
@@ -65,12 +67,11 @@
               <br />
               {{ doc.voucherSerie }}
               <br />
-              <span class='text-sm ml-1' v-if="voucherTypeDoc.code === '04'">
+              <span class="text-sm ml-1" v-if="voucherTypeDoc.code === '04'">
                 NCF MODIFICADO: {{ doc.affectedSerie }}
               </span>
             </div>
             <br />
-
 
             <div
               v-if="partyDoc && partyDoc.gstin"
@@ -154,7 +155,9 @@ export default {
   },
   data() {
     return {
-      accountingSettings: null
+      accountingSettings: null,
+      partyDoc: null,
+      voucherTypeDoc: null
     };
   },
   computed: {
@@ -163,16 +166,6 @@ export default {
     },
     address() {
       return this.printSettings && this.printSettings.getLink('address');
-    },
-    partyDoc() {
-      console.log('partyfield: ', this.partyField.fieldname);
-      return this.doc.getLink(this.partyField.fieldname);
-    },
-    voucherTypeDoc() {
-      console.log('voucherTypefield: ', this.voucherTypeField.fieldname);
-      let result = this.doc.getLink(this.voucherTypeField.fieldname);
-      console.log('link vouchertype: ', result);
-      return this.doc.getLink(this.voucherTypeField.fieldname);
     },
     partyField() {
       let fieldname = {
@@ -203,9 +196,13 @@ export default {
     }
   },
   async mounted() {
+    console.log('mounted:', this.partyField.fieldname);
+    console.log('mounted: ', this.voucherTypeField.fieldname);
     this.accountingSettings = await frappe.getSingle('AccountingSettings');
     await this.doc.loadLink(this.partyField.fieldname);
+    this.partyDoc = this.doc.getLink(this.partyField.fieldname);
     await this.doc.loadLink(this.voucherTypeField.fieldname);
+    this.voucherTypeDoc = this.doc.getLink(this.voucherTypeField.fieldname);
   }
 };
 </script>

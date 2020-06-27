@@ -117,7 +117,7 @@ class Stock {
 
     const items = await frappe.db.getAll({
       doctype: 'Item',
-      fields: ['name', 'unit', 'min']
+      fields: ['name', 'unit', 'min', 'stock']
     });
 
     const taxes = await frappe.db.getAll({
@@ -188,30 +188,30 @@ class Stock {
           return acc;
         }, 0);
 
-        let prevAdjust = adjustItemsPrev
-          .filter(p => p.item === item.name)
-          .reduce((acc, p) => {
-            acc = acc + p.quantity;
-            return acc;
-          }, 0); 
-
-
-      report.name = item.name;
-      report.unit = item.unit;
-
-      report.prevQuantity = prevBuy - prevSell + prevAdjust;
-
-      report.buy = purchaseItems
-        .filter(p => p.item === item.name)
-        .reduce((acc, p) => {
-          acc = acc + p.quantity;
-          return acc;
-        }, 0) + adjustsItems
+      let prevAdjust = adjustItemsPrev
         .filter(p => p.item === item.name)
         .reduce((acc, p) => {
           acc = acc + p.quantity;
           return acc;
         }, 0);
+
+      report.name = item.name;
+      report.unit = item.unit;
+
+      report.prevQuantity = prevBuy - prevSell + prevAdjust;
+      report.buy =
+        purchaseItems
+          .filter(p => p.item === item.name)
+          .reduce((acc, p) => {
+            acc = acc + p.quantity;
+            return acc;
+          }, 0) +
+        adjustsItems
+          .filter(p => p.item === item.name)
+          .reduce((acc, p) => {
+            acc = acc + p.quantity;
+            return acc;
+          }, 0);
 
       report.sell = saleItems
         .filter(s => s.item === item.name)
@@ -221,6 +221,14 @@ class Stock {
         }, 0);
 
       let balance = report.buy + report.prevQuantity - report.sell;
+      if (item.stock != balance) {
+        
+        frappe.getDoc('Item', item.name).then(itemDoc => {
+          itemDoc.set('stock', balance);
+          itemDoc.update();
+        });
+
+      }
       let color = 'green';
       if (item.min > balance) {
         color = 'red';

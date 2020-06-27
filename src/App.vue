@@ -71,19 +71,12 @@ export default {
     RemoteDatabase
   },
   async mounted() {
-    console.log(
-      'Actual Path: ',
-      this.$route.path,
-      '\nTrue?',
-      this.$route.path.startsWith('/remote-database')
-    );
-
     let dbType = config.get('dbType', null);
     console.log('App dbType: ', dbType);
     if (!dbType) {
       this.activeScreen = 'DatabaseSelector';
     } else {
-      if (this.dbType === 'local') {
+      if (dbType === 'local') {
         let lastSelectedFilePath = config.get('lastSelectedFilePath', null);
         await connectToLocalDatabase(lastSelectedFilePath);
       } else {

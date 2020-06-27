@@ -172,7 +172,7 @@ module.exports = {
       }
     }
   ],
-  quickEditFields: ['rate', 'unit', 'itemType', 'tax', 'stock', 'min', 'description'],
+  quickEditFields: ['rate', 'unit', 'itemType', 'tax', 'min', 'description'],
   actions: [
     {
       label: _('Vender'),

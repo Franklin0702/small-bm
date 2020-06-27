@@ -3,7 +3,6 @@
     <FormControl
       :df="AccountingSettings.meta.getField('dbType')"
       :show-label="true"
-      @change="changeDbType"
       :value="AccountingSettings.dbType"
     />
 
@@ -80,6 +79,10 @@
             "
             placeholder="****"
           />
+
+          <Button class="text-sm" @click="changeServer">
+            {{ _('Guardar') }}
+          </Button>
         </div>
       </div>
     </div>
@@ -124,8 +127,7 @@ export default {
   data() {
     return {
       companyName: null,
-      doc: null,
-
+      doc: null
     };
   },
   async mounted() {
@@ -135,15 +137,16 @@ export default {
   },
   methods: {
     changeFile() {
+      this.AccountingSettings.update('dbType', 'local');
+      config.set('dbType', 'local');
       config.set('lastSelectedFilePath', null);
       frappe.events.trigger('reload-main-window');
       remote.getCurrentWindow().close();
     },
-    changeDbType(value) {
-      config.set('dbType', value); 
+    changeServer(value) {
+      this.AccountingSettings.update('dbType', value);
       frappe.events.trigger('reload-main-window');
-      this.AccountingSettings.update('dbType', value)
-      remote.getCurrentWindow().close();  
+      remote.getCurrentWindow().close();
     }
   },
   computed: {
